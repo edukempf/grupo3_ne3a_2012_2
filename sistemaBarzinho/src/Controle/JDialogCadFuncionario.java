@@ -5,7 +5,7 @@
 package Controle;
 
 import DAO.FuncionarioDAO;
-import Modelo.Funcionario;
+import Modelo.Funcionario; 
 import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
