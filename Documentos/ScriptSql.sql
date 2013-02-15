@@ -1,10 +1,11 @@
 ﻿DROP DATABASE IF EXISTS aluno;
 CREATE DATABASE IF NOT EXISTS aluno ;
+
 USE aluno;
 
 DROP TABLE IF EXISTS Comidas;
 CREATE TABLE Comidas
-		(id INT NOT NULL AUTO_INCREMENT,         
+		(id INT NOT NULL AUTO_INCREMENT,
 		nome VARCHAR(50) NOT NULL,
     quantidade INT(3) NOT NULL,
 		tipo ENUM('Kg','g') NOT NULL,
@@ -19,7 +20,7 @@ CREATE TABLE Funcionario
 		cpf VARCHAR(11) UNIQUE NOT NULL,
     rg VARCHAR(15) UNIQUE NOT NULL,
 		data_nascimento DATE NOT NULL,
-    tipo ENUM('Solteiro','Casado','Viúvo','Divorsiado') NOT NULL,
+    estadocivil ENUM('Solteiro','Casado','Viúvo','Divorsiado') NOT NULL,
 		funcao VARCHAR(40) NOT NULL,
 		PRIMARY KEY (id))
 ENGINE = InnoDB;
