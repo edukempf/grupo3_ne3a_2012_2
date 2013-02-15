@@ -324,6 +324,9 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JDialog dialog = new JDialogConComidas(null, true);
+        dialog.setLocation(getX()+50, getY()+50);
+        dialog.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
