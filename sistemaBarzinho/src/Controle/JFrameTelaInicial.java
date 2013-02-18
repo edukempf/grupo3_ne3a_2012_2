@@ -4,6 +4,8 @@
  */
 package Controle;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author a899321
@@ -26,6 +28,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -63,6 +67,12 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Página Principal do Sistema");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/logo.png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel2.setText("Seja Bem Vindo ao Sistema para Barzinhos");
 
         jMenu1.setMnemonic('c');
         jMenu1.setText("Cadastro");
@@ -257,6 +267,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
                 jMenuItem10MousePressed(evt);
             }
         });
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem10);
 
         jMenuBar1.add(jMenu6);
@@ -267,62 +282,74 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 15, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-    
+        new JDialogCadBebidas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-
+        new JDialogCadFuncionario(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        
+        new JDialogCadComidas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-
+        //new JDialogCadPedidos(this, true).setVisible(true); 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-
+        //new JDialogCadPratos(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-
+        new JDialogConBebidas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-
+        new JDialogConFuncionario(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-       
+        new JDialogConComidas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-
+        // new JDialogConPedidos(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-
+       //new JDialogConPratos(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       
+                JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja reiniciar\n "
+                + "a base de dados do sistema e \n apagar todos os dados armazenados?",
+                "Aviso", JOptionPane.OK_CANCEL_OPTION);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        
+         new JDialogConfiguraBD(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -330,12 +357,16 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
-        new JDialogAjuda(this, true).setVisible(true);
+       
     }//GEN-LAST:event_jMenuItem4MousePressed
 
     private void jMenuItem10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem10MousePressed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+         new JDialogAjuda(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,6 +403,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
