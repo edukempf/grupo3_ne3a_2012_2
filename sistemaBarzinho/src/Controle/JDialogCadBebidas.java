@@ -214,16 +214,14 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         bebida.setQtde(Integer.parseInt(jTextFieldQtde.getText()));
         bebida.setTipo(jComboBoxBebida.getSelectedItem().toString());
         bebida.setDataValidade(new Date(jTextFieldDataValidade.getText()));
+        bebida.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
 
-
-        bebida.setNome(jTextFieldNome.getText());
-        bebida.setTipo(jComboBoxBebida.getSelectedItem().toString());
         try {
             BebidaDAO.insert(bebida);
             JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "erro ao inserir!");
+            JOptionPane.showMessageDialog(null, "Erro ao inserir!");
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_jButton5ActionPerformed
