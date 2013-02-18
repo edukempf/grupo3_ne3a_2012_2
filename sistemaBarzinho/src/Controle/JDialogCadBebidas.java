@@ -203,6 +203,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         jTextFieldNome.setText("");
         jTextFieldQtde.setText("");
+        jComboBoxBebida.getSelectedItem();
         jTextFieldPreco.setText("");
         jTextFieldDataValidade.setText("");
     }//GEN-LAST:event_jButton8ActionPerformed
