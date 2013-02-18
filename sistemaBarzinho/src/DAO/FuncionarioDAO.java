@@ -25,6 +25,7 @@ public class FuncionarioDAO extends DBConnection {
     private static String sqlDelete = "DELETE FROM Funcionario WHERE id = ?";
     private static String sqlFind = "SELECT id, nome, cpf, rg, data_nascimento, `estadocivil`, funcao FROM Funcionario WHERE id = ?";
     private static String sqlList = "SELECT id, nome, cpf, rg, data_nascimento, `estadocivil`, funcao FROM Funcionario";
+    private static String sqlListPorNome = "SELECT id, nome, cpf, rg, data_nascimento, `estadocivil`, funcao FROM Funcionario WHERE nome LIKE ?";
     private static ResultSet rs;
 
     public static void insert(Funcionario funcionario) throws SQLException {
@@ -56,7 +57,7 @@ public class FuncionarioDAO extends DBConnection {
             ps.setString(5, funcionario.getEstadoCivil());
             ps.setString(6, funcionario.getFuncao());
             ps.setInt(7, funcionario.getCodFuncionario());
-            
+
             ps.execute();
             System.out.println(funcionario.getNome());
         } finally {
@@ -131,5 +132,37 @@ public class FuncionarioDAO extends DBConnection {
             rs.close();
             closeConnect(conn);
         }
+    }
+
+    public static ArrayList<Funcionario> findPorNome(String nome) throws SQLException {
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        try {
+            conn = connect();
+            ps = conn.prepareStatement(sqlListPorNome);
+            ps.setString(1, nome);
+            rs = ps.executeQuery();
+            Funcionario funcionario = null;
+
+            while (rs.next()) {
+                funcionario = new Funcionario();
+                funcionario.setCodFuncionario(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCpf(rs.getString("cpf"));
+                funcionario.setRg(rs.getString("rg"));
+                funcionario.setDataNasc(rs.getDate("data_nascimento"));
+                funcionario.setFuncao(rs.getString("funcao"));
+                funcionario.setEstadoCivil(rs.getString("estadocivil"));
+                funcionarios.add(funcionario);
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            ps.close();
+            rs.close();
+            closeConnect(conn);
+        }
+                  return funcionarios;
     }
 }

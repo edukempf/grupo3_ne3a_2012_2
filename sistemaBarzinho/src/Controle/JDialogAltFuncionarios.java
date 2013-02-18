@@ -4,6 +4,7 @@
  */
 package Controle;
 
+import Modelo.Funcionario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ public class JDialogAltFuncionarios extends javax.swing.JDialog {
     /**
      * Creates new form JDialogAltFuncionarios
      */
-    public JDialogAltFuncionarios(java.awt.Frame parent, boolean modal) {
+    public JDialogAltFuncionarios(java.awt.Frame parent, boolean modal,Funcionario funcionario) {
         super(parent, modal);
         initComponents();
     }
@@ -344,7 +345,7 @@ public class JDialogAltFuncionarios extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogAltFuncionarios dialog = new JDialogAltFuncionarios(new javax.swing.JFrame(), true);
+                JDialogAltFuncionarios dialog = new JDialogAltFuncionarios(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
