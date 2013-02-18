@@ -217,7 +217,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
 
         jLabel9.setText("Tipo:");
 
-        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Tipo", "Gramas", "Kg", " " }));
+        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Tipo", "g", "Kg", " " }));
 
         jLabel10.setText("Validade:");
 
@@ -325,17 +325,13 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Comida bebida = new Comida();
-        bebida.setNome(jTextFieldNome.getText());
-        bebida.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
-        bebida.setTipo(jComboBoxComida.getSelectedItem().toString());
-        bebida.setDataValidade(new Date(jTextFieldValidade.getText()));
-
-
-        bebida.setNome(jTextFieldNome.getText());
-        bebida.setTipo(jComboBoxComida.getSelectedItem().toString());
+        Comida comida = new Comida();
+        comida.setNome(jTextFieldNome.getText());
+        comida.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
+        comida.setTipo(jComboBoxComida.getSelectedItem().toString());
+        comida.setDataValidade(new Date(jTextFieldValidade.getText()));
         try {
-            ComidaDAO.insert(bebida);
+            ComidaDAO.insert(comida);
             JOptionPane.showMessageDialog(null, " Comida cadastrada com sucesso");
 
         } catch (Exception ex) {
