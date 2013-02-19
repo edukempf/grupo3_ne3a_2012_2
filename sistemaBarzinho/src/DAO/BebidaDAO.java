@@ -25,6 +25,7 @@ public class BebidaDAO extends DBConnection{
     private static String sqlDelete = "DELETE FROM Bebidas WHERE id = ?";
     private static String sqlFind = "SELECT id, nome,quantidade,data_validade,`tipo`,preco FROM Bebidas WHERE id = ?";
     private static String sqlList = "SELECT id, nome,quantidade,data_validade,`tipo`,preco FROM Bebidas";
+   private static String sqlListPorNome = "SELECT id, nome,quantidade,data_validade,`tipo`,preco FROM Bebidas WHERE nome LIKE ?";
     private static ResultSet rs;
     
     public static void insert(Bebida bebida) throws SQLException {
@@ -123,6 +124,36 @@ public class BebidaDAO extends DBConnection{
             rs.close();
             closeConnect(conn);
         }
+    }
+    public static ArrayList<Bebida> findPorNome(String nome) throws SQLException {
+        ArrayList<Bebida> bebidas = new ArrayList<>();
+        try {
+            conn = connect();
+            ps = conn.prepareStatement(sqlListPorNome);
+            ps.setString(1, nome);
+            rs = ps.executeQuery();
+            Bebida bebida = null;
+
+            while (rs.next()) {
+                bebida = new Bebida();
+                bebida.setId(rs.getInt("id"));
+                bebida.setNome(rs.getString("nome"));
+                bebida.setQtde(rs.getInt("quantidade"));
+                bebida.setTipo(rs.getString("tipo"));
+                bebida.setPreco(rs.getDouble("preco"));
+                bebida.setDataValidade(rs.getDate("data_validade"));
+                bebidas.add(bebida);
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            ps.close();
+            rs.close();
+            closeConnect(conn);
+        }
+                  return bebidas;
     }
     
 }
