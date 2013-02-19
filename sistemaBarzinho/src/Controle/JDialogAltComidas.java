@@ -11,9 +11,14 @@ public class JDialogAltComidas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogAltComidas
      */
-    public JDialogAltComidas(java.awt.Frame parent, boolean modal) {
+    public JDialogAltComidas(java.awt.Frame parent, boolean modal,Comida comida) {
         super(parent, modal);
         initComponents();
+        jTextFieldCodigo.setText(comida.getId()+"");
+        jTextFieldNome.setText(comida.getNome()+"");
+        jTextFieldQtde.setText(comida.getQuantidade()+"");
+        jComboBoxComida.setSelectedItem(comida.getTipo());
+        jTextFieldValidade.setText(comida.getDataValidade()+"");
     }
 
     /**
@@ -69,7 +74,12 @@ public class JDialogAltComidas extends javax.swing.JDialog {
 
         jLabel8.setText("Quantidade:");
 
-        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Tipo", "Gramas", "Kg", " " }));
+        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Tipo", "g", "Kg", " " }));
+        jComboBoxComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxComidaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Tipo:");
 
@@ -189,7 +199,7 @@ public class JDialogAltComidas extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldValidade, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addComponent(jTextFieldValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -208,7 +218,11 @@ public class JDialogAltComidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        jTextFieldNome.setText("");
+        jTextFieldQtde.setText("");
+        jTextFieldValidade.setText("");
+        jTextFieldNome.setText("");
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -220,7 +234,7 @@ public class JDialogAltComidas extends javax.swing.JDialog {
         comida.setTipo(jComboBoxComida.getSelectedItem().toString());
         comida.setDataValidade(new Date(jTextFieldValidade.getText()));
         try {
-            ComidaDAO.insert(comida);
+            ComidaDAO.update(comida);
             JOptionPane.showMessageDialog(null, " Comida atualizada com sucesso");
 
         } catch (Exception ex) {
@@ -233,6 +247,10 @@ public class JDialogAltComidas extends javax.swing.JDialog {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jComboBoxComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxComidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxComidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,7 +282,7 @@ public class JDialogAltComidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogAltComidas dialog = new JDialogAltComidas(new javax.swing.JFrame(), true);
+                JDialogAltComidas dialog = new JDialogAltComidas(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
