@@ -17,6 +17,7 @@ public class ComidaDAO extends DBConnection {
     private static String sqlDelete = "DELETE FROM Comidas WHERE id = ?";
     private static String sqlFind = "SELECT id, nome,quantidade,data_validade,`tipo` FROM Comidas WHERE id = ?";
     private static String sqlList = "SELECT id, nome,quantidade,data_validade,`tipo` FROM Comidas";
+    private static String sqlListPorNome = "SELECT id,nome,quantidade,data_validade,`tipo` FROM Comidas WHERE nome LIKE ?";
     private static ResultSet rs;
 
     public static void insert(Comida comida) throws SQLException {
@@ -77,15 +78,18 @@ public class ComidaDAO extends DBConnection {
                 comida.setNome(rs.getString("nome"));
                 comida.setQuantidade(rs.getInt("quantidade"));
                 comida.setDataValidade(rs.getDate("data_validade"));
+                comida.setTipo(rs.getString("tipo"));
                 comidas.add(comida);
             }
 
-            return comidas;
 
+        }catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             ps.close();
             rs.close();
             closeConnect(conn);
+            return comidas;
         }
     }
 
@@ -111,5 +115,36 @@ public class ComidaDAO extends DBConnection {
             rs.close();
             closeConnect(conn);
         }
+    }
+    public static ArrayList<Comida> findPorNome(String nome) throws SQLException {
+        ArrayList<Comida> comidas = new ArrayList<>();
+        try {
+            conn = connect();
+            ps = conn.prepareStatement(sqlListPorNome);
+            ps.setString(1, nome);
+            rs = ps.executeQuery();
+            Comida comida = null;
+
+            while (rs.next()) {
+                System.out.println("a");
+                comida = new Comida();
+                comida.setId(rs.getInt("id"));
+                comida.setNome(rs.getString("nome"));
+                comida.setQuantidade(rs.getInt("quantidade"));
+                comida.setTipo(rs.getString("tipo"));
+                comida.setDataValidade(rs.getDate("data_validade"));
+                
+                comidas.add(comida);
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            ps.close();
+            rs.close();
+            closeConnect(conn);
+        }
+                  return comidas;
     }
 }
