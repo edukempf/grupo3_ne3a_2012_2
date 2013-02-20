@@ -188,6 +188,38 @@ table {
 
 img{
     float: left;
-    width: 200px;
-    height: 200px;
+    width: 500px;
+    height: 350px;
+}
+
+DIV.dcu {
+    border:solid 1px #7F9FBF;
+    background:url(imagens/background_dcu.png);
+}
+DIV.dcu:hover {
+    border:solid 1px red;
+}
+.dcu li, p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.dcu li:hover, p.fluxos_secundarios:hover {
+    border:solid 1px #1E90FF;
+    width: auto;
+}
+.dcu h3 {
+    text-align: center;
+}
+.dcu h4, ol, p.fluxos_secundarios {
+    border: 1px;
+    margin-right:5%;
+    margin-left:5%;
+    margin-top: 0;
+}
+.dcu a {
+    azimuth: right;
+}
+.dcu p.img  {
+    text-indent: 20px;
+    color: red;
 }
