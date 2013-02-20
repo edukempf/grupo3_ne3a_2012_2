@@ -3,38 +3,135 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="estilo01.css" rel="stylesheet" type="text/css" />
-        <title>Home- Sistema para Barzinhos</title>
+        <title> Contato- Sistema para Barzinhos</title>
     </head>
     <body>
         <div id="page">
             <div id="header" align="center">
-           
-               
+
+
             </div>
             <div id="menu" align="center">
                 <ul>
-                    <li><a href="home.jsp">Home</a></li>
-                    <li><a href="desevolvedores.html">Desenvolvedores</a></li>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="desenvolvedores.html">Desenvolvedores</a></li>
                     <li  class="itemAtual"><a href="contato.html">Contato</a></li>
                 </ul>
             </div>
             <div id="content" align="center">
                 <div id="conteudo" align="center">
-                    <h1>Mensagem</h1>
-                    <p>Porque ainda que a figueira não floresça, nem haja fruto na vide;
-                        ainda que decepcione o produto da oliveira, e os campos não produzam mantimento;
-                        ainda que as ovelhas da malhada sejam arrebatadas, e nos currais não haja gado;
-                        Todavia eu me alegrarei no SENHOR; exultarei no Deus da minha salvação.
-                        <i><b>Habacuque 3: 17-18</b></i>
-                    </p>
-                    <br />
-                    <br />
-                    <h1>&Uacute;ltimas Noticias</h1>
-                    <div class="post">
-                        <h2 class="title"></h2>
-                        <br /><br />
-                       
-                    </div>
+                  
+                    <table>
+                        <tr>
+                            <h2>Fale Conosco</h2>
+                        </tr>
+                        <tr>
+                            <td>
+                        <tr>
+                            <td>Nome:</td>
+                            <td>
+                                <input type="text" name="nome" size="29" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>E-Mail:</td>
+                            <td>
+                                <input type="text" name="email" size="29" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Assunto:</td>
+                            <td> <select size="1" name="assunto" >
+                                    <option value="0"> </option>
+                                    <option value="Dúvida">Dúvida</option>
+                                    <option value="Sugestão">Sugestão</option>
+                                    <option value="Reclamação">Reclamação</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mensagem:</td>
+                            <td><textarea rows="4" name="mensagem" cols="30"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td> <button name="enviar" value="insert" type="button">Enviar</button>
+                                <button name="limpar" value="limpar" type="button">Limpar</button>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    
+                    <table>
+                        <tr>
+                        <h2>Avaliação dos Serviços</h2>
+                        </tr>
+                        <tr>
+                            <td>
+                        <tr>
+                            <td>Local:</td>
+                            <td><select size="1" name="local">
+                                    <option value=" "> </option>
+                                    <option value="Excelente">Excelente</option>
+                                    <option value="Muito Bom">Muito Bom</option>
+                                    <option value="Bom">Bom</option>
+                                    <option value="Ruim">Ruim</option>
+                                    <option value="Péssimo">Péssimo</option>
+                                </select></td>
+
+                        </tr>
+                        <tr>
+                            <td>Nome:</td>
+                            <td><input type="text" name="nome" size="29" maxlength="100" /></td>
+                            
+                        </tr>
+                        <tr>
+                            <td> E-mail:</td>
+                            <td><input type="text" name="email" size="29" maxlength="100" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ambiente:</td>
+                            <td><select size="1" name="ambiente">
+                                <option value=" "> </option>
+                                <option value="Excelente">Excelente</option>
+                                <option value="Muito Bom">Muito Bom</option>
+                                <option value="Bom">Bom</option>
+                                <option value="Ruim">Ruim</option>
+                                <option value="Péssimo">Péssimo</option>
+                            </select></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Atendimento:</td>
+                            <td><select size="1" name="atendimento">
+                                <option value=" "> </option>
+                                <option value="Excelente">Excelente</option>
+                                <option value="Muito Bom">Muito Bom</option>
+                                <option value="Bom">Bom</option>
+                                <option value="Ruim">Ruim</option>
+                                <option value="Péssimo">Péssimo</option>
+                            </select></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Comidas:</td>
+                            <td><select size="1" name="comida">
+                                <option value=" "> </option>
+                                <option value="Excelente">Excelente</option>
+                                <option value="Muito Bom">Muito Bom</option>
+                                <option value="Bom">Bom</option>
+                                <option value="Ruim">Ruim</option>
+                                <option value="Péssimo">Péssimo</option>
+                            </select></td>
+                            
+                        </tr>
+                        <tr>
+                            <td> <button name="enviar" value="insert" type="button">Enviar</button>
+                                <button name="limpar" value="limpar" type="button">Limpar</button>
+                        </tr>
+                    </table>
+                    
                 </div>
             </div>
         </div>
