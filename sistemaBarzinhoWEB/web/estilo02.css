@@ -1,0 +1,139 @@
+/********Principal**********/
+body {
+    margin:0;
+    padding:0;
+    width:100%;
+    background:#dde3e1 url(imagens/main_bg.gif) top center repeat-x fixed;
+    font-family: Verdana,sans-serif,Arial;
+    font-size: 13px;
+    color: #363636;
+}
+.principal {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    width: 798px;
+}
+.principal h2 {
+    background:url(imagens/background_h2.jpg) -32px no-repeat;
+    text-align: center;
+    text-decoration: underline;
+    color: #1E90FF;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-size: xx-large;
+}
+p.paginas {
+    text-align: right;
+    border:solid 1px #7F9FBF;
+    width: 798px;;
+}
+p.paginas img{
+    width: 20px;
+}
+#index h4 {
+    margin-bottom: 0;
+}
+#index p {
+    text-indent: 30px;
+}
+
+/******Descricao******/
+
+#descricao p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/******Indice******/
+#indice a {
+    color: #363636;
+    text-decoration: none;
+}
+#indice li {
+    list-style:url('imagens/marcador.png');
+    font-size: 15px;
+}
+#indice li:hover {
+    list-style:url('imagens/marcador_hover.png');
+    background-color: #CDCDC1;
+    font-size: 18px;
+}
+#indice ul {
+    border: 1px;
+    margin-left:10%;
+}
+
+/********Casos de uso********/
+DIV.dcu {
+    border:solid 1px #7F9FBF;
+    background:url(imagens/background_dcu.png);
+}
+DIV.dcu:hover {
+    border:solid 1px red;
+}
+.dcu li, p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.dcu li:hover, p.fluxos_secundarios:hover {
+    border:solid 1px #1E90FF;
+    width: auto;
+}
+.dcu h3 {
+    text-align: center;
+}
+.dcu h4, ol, p.fluxos_secundarios {
+    border: 1px;
+    margin-right:5%;
+    margin-left:5%;
+    margin-top: 0;
+}
+.dcu a {
+    azimuth: right;
+}
+.dcu p.img  {
+    text-indent: 20px;
+    color: red;
+}
+
+/****Contato*****/
+.text {
+    font:normal 11px Verdana,sans-serif,Arial;
+    color: #363636;
+    line-height:1.5em;
+    padding:5px;
+    margin:0;
+}
+.red {
+    color: red;
+}
+.paginas a, img {
+    border: 0;
+}
+
+.paginas a:hover, img:hover {
+    background-color: #CDCDC1;
+}
+div#formulario-contato, div#sobre-desenvolvedor {
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+}
+
+/*****Sobre Desenvolvedor*****/
+
+p#img-desenvolvedor, p#email-contato{
+    text-align: center;
+
+}
+p#img-desenvolvedor img{
+    border: 3px solid #1E90FF;
+
+}
+
+/*****Rodape*****/
+p.rodape ,a {
+    text-align: center;
+    text-decoration: none;
+}
