@@ -17,6 +17,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     color: #FFFFFF;
+    text-align: center;
 }
 
 /*Menu*/
@@ -24,6 +25,7 @@ body {
     width: 960px;
     height: 40px;
     margin: 0 auto;
+    text-align: center;
     border-width: 7px 0px;
     margin-bottom: 15px;
     padding: 10px;
@@ -117,6 +119,7 @@ body {
     background-repeat: no-repeat;
     text-align: left;
     padding: 25px;
+    text-align: center;
 
 }
 #conteudo {
@@ -125,7 +128,7 @@ body {
     margin:0 auto;
     padding:10px 10px 10px;
     border:0px ;
-    text-align:left;
+    text-align:center;
 }
 
 select {
