@@ -186,6 +186,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         jTextFieldNome.setText("");
+        criaTabela();
 
     }//GEN-LAST:event_jButton8ActionPerformed
 

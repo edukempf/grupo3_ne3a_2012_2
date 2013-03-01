@@ -9,7 +9,6 @@ import Modelo.Bebida;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Eduardo
@@ -19,15 +18,15 @@ public class JDialogAltBebidas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogAltBebidas
      */
-    public JDialogAltBebidas(java.awt.Frame parent, boolean modal,Bebida bebida) {
+    public JDialogAltBebidas(java.awt.Frame parent, boolean modal, Bebida bebida) {
         super(parent, modal);
         initComponents();
-        jTextFieldCodigo.setText(bebida.getId()+"");
-        jTextFieldNome.setText(bebida.getNome()+"");
-        jTextFieldQtde.setText(bebida.getQtde()+"");
-        jTextFieldPreco.setText(bebida.getPreco()+"");
-        jTextFieldValidade.setText(bebida.getDataValidade()+"");
-         jComboBoxBebida.setSelectedItem(bebida.getTipo());
+        jTextFieldCodigo.setText(bebida.getId() + "");
+        jTextFieldNome.setText(bebida.getNome() + "");
+        jTextFieldQtde.setText(bebida.getQtde() + "");
+        jTextFieldPreco.setText(bebida.getPreco() + "");
+        jTextFieldValidade.setText(bebida.getDataValidade() + "");
+        jComboBoxBebida.setSelectedItem(bebida.getTipo());
     }
 
     /**
@@ -162,13 +161,15 @@ public class JDialogAltBebidas extends javax.swing.JDialog {
         jTextFieldQtde.setText("");
         jTextFieldPreco.setText("");
         jTextFieldValidade.setText("");
-        
+        jComboBoxBebida.setSelectedIndex(0);
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int opcao = JOptionPane.showConfirmDialog(this, "Bebiida já Existente! Deseja Substitui-la?", "Confirmação de atualização", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+        int opcao = JOptionPane.showConfirmDialog(this, "Bebida já Existente! Deseja Substitui-la?", "Confirmação de atualização", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
             Bebida bebida = new Bebida();
+            bebida.setId(Integer.parseInt(jTextFieldCodigo.getText()));
             bebida.setNome(jTextFieldNome.getText());
             bebida.setQtde(Integer.parseInt(jTextFieldQtde.getText()));
             bebida.setTipo(jComboBoxBebida.getSelectedItem().toString());
@@ -184,6 +185,7 @@ public class JDialogAltBebidas extends javax.swing.JDialog {
                 System.out.println(ex.toString());
             }
         }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -220,7 +222,7 @@ public class JDialogAltBebidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogAltBebidas dialog = new JDialogAltBebidas(new javax.swing.JFrame(), true,null);
+                JDialogAltBebidas dialog = new JDialogAltBebidas(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

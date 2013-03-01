@@ -25,13 +25,11 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     private DefaultTableModel model;
 
     private void criaTabela() {
-        model = new DefaultTableModel(new String[]{"Codigo", "Nome", "RG", "CPF", "Data Nascimento", "Estado Civil", "Função"}, 0){
-
+        model = new DefaultTableModel(new String[]{"Codigo", "Nome", "RG", "CPF", "Data Nascimento", "Estado Civil", "Função"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-            
         };
         jTable1.setModel(model);
     }
@@ -39,7 +37,7 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            ArrayList<Funcionario> lista = FuncionarioDAO.findPorNome("%"+jTextField1.getText()+"%");
+            ArrayList<Funcionario> lista = FuncionarioDAO.findPorNome("%" + jTextField1.getText() + "%");
             for (Funcionario funcionario : lista) {
                 model.addRow(new Object[]{funcionario.getCodFuncionario(),
                             funcionario.getNome(),
@@ -203,25 +201,25 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-    
-    private Funcionario getFuncionarioSelecionado(){
+
+    private Funcionario getFuncionarioSelecionado() {
         Funcionario funcionario = new Funcionario();
         int linha = jTable1.getSelectedRow();
         int coluna = 0;
-        String codigo =  model.getValueAt(linha, coluna).toString();
+        String codigo = model.getValueAt(linha, coluna).toString();
         try {
-            funcionario=FuncionarioDAO.find(Integer.parseInt(codigo));
+            funcionario = FuncionarioDAO.find(Integer.parseInt(codigo));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return funcionario;
     }
-    
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Funcionario funcionario=getFuncionarioSelecionado();
+        Funcionario funcionario = getFuncionarioSelecionado();
         if (funcionario != null) {
-            int opcao=JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
-            if(opcao==JOptionPane.YES_OPTION){
+            int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
                 try {
                     FuncionarioDAO.delete(funcionario.getCodFuncionario());
                     preenchetabela();
@@ -241,16 +239,17 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
-        if (evt.getClickCount()==2){
-            JDialog dialog = new JDialogAltFuncionarios(null, true,getFuncionarioSelecionado());
-        dialog.setLocation(getX()+50, getY()+50);
-        dialog.setVisible(true);
+        if (evt.getClickCount() == 2) {
+            JDialog dialog = new JDialogAltFuncionarios(null, true, getFuncionarioSelecionado());
+            dialog.setLocation(getX() + 50, getY() + 50);
+            dialog.setVisible(true);
         };
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
+        criaTabela();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -282,11 +281,9 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 JDialogConFuncionario dialog = new JDialogConFuncionario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

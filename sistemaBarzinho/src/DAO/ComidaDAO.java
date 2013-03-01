@@ -23,12 +23,14 @@ public class ComidaDAO extends DBConnection {
     public static void insert(Comida comida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getNome());
             ps.setInt(2, comida.getQuantidade());
             ps.setString(3, Utilitarios.dateToString(comida.getDataValidade()));
             ps.setString(4, comida.getTipo());
             ps.execute();
+            conn.commit();
 
         } finally {
             ps.close();
@@ -39,6 +41,7 @@ public class ComidaDAO extends DBConnection {
     public static void update(Comida comida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlUpdate, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getNome());
             ps.setInt(2, comida.getQuantidade());
@@ -46,6 +49,7 @@ public class ComidaDAO extends DBConnection {
             ps.setString(4, comida.getTipo());
             ps.setInt(5, comida.getId());
             ps.execute();
+            conn.commit();
         } finally {
             ps.close();
             closeConnect(conn);
@@ -55,9 +59,11 @@ public class ComidaDAO extends DBConnection {
     public static void delete(int idComida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlDelete);
             ps.setInt(1, idComida);
             ps.execute();
+            conn.commit();
         } finally {
             ps.close();
             closeConnect(conn);

@@ -168,6 +168,7 @@ public class JDialogAltComidas extends javax.swing.JDialog {
         jTextFieldQtde.setText("");
         jTextFieldValidade.setText("");
         jTextFieldNome.setText("");
+        jComboBoxComida.setSelectedIndex(0);
         
     }//GEN-LAST:event_jButton8ActionPerformed
 

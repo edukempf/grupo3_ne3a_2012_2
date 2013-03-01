@@ -154,6 +154,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jComboBoxBebida.getSelectedItem();
         jTextFieldPreco.setText("");
         jTextFieldDataValidade.setText("");
+        jComboBoxBebida.setSelectedIndex(0);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

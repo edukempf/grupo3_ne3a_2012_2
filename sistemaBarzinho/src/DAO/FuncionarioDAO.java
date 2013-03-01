@@ -31,6 +31,7 @@ public class FuncionarioDAO extends DBConnection {
     public static void insert(Funcionario funcionario) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, funcionario.getNome());
             ps.setString(2, funcionario.getCpf());
@@ -39,6 +40,7 @@ public class FuncionarioDAO extends DBConnection {
             ps.setString(5, funcionario.getEstadoCivil());
             ps.setString(6, funcionario.getFuncao());
             ps.execute();
+            conn.commit();
 
         } finally {
             ps.close();
@@ -49,6 +51,7 @@ public class FuncionarioDAO extends DBConnection {
     public static void update(Funcionario funcionario) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlUpdate, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, funcionario.getNome());
             ps.setString(2, funcionario.getCpf());
@@ -59,6 +62,7 @@ public class FuncionarioDAO extends DBConnection {
             ps.setInt(7, funcionario.getCodFuncionario());
 
             ps.execute();
+            conn.commit();
             System.out.println(funcionario.getNome());
         } finally {
             ps.close();
@@ -69,9 +73,11 @@ public class FuncionarioDAO extends DBConnection {
     public static void delete(int idFunc) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlDelete);
             ps.setInt(1, idFunc);
             ps.execute();
+            conn.commit();
         } finally {
             ps.close();
             closeConnect(conn);

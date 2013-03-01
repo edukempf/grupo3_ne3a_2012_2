@@ -31,6 +31,7 @@ public class BebidaDAO extends DBConnection{
     public static void insert(Bebida bebida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, bebida.getNome());
             ps.setInt(2, bebida.getQtde());
@@ -38,6 +39,7 @@ public class BebidaDAO extends DBConnection{
             ps.setString(4, bebida.getTipo());
             ps.setDouble(5, bebida.getPreco());
             ps.execute();
+            conn.commit();
 
         } finally {
             ps.close();
@@ -48,6 +50,7 @@ public class BebidaDAO extends DBConnection{
     public static void update(Bebida bebida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlUpdate, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, bebida.getNome());
             ps.setInt(2, bebida.getQtde());
@@ -56,6 +59,7 @@ public class BebidaDAO extends DBConnection{
             ps.setDouble(5, bebida.getPreco());
             ps.setInt(6, bebida.getId());
             ps.execute();
+            conn.commit();
         } finally {
             ps.close();
             closeConnect(conn);
@@ -65,9 +69,11 @@ public class BebidaDAO extends DBConnection{
     public static void delete(int idBebida) throws SQLException {
         try {
             conn = connect();
+              conn.setAutoCommit(false);
             ps = conn.prepareStatement(sqlDelete);
             ps.setInt(1, idBebida);
             ps.execute();
+            conn.commit();
         } finally {
             ps.close();
             closeConnect(conn);

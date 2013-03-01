@@ -168,7 +168,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         jLabel4.setText("Estado Civil:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 234, -1, -1));
 
-        jComboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Solteiro ", "Casado", "Divorsiado", "Viúvo", " " }));
+        jComboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Estado Civil", "Solteiro ", "Casado", "Divorsiado", "Viúvo", " " }));
         jComboBoxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEstadoCivilActionPerformed(evt);
@@ -235,6 +235,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         jTextFieldFuncao.setText("");
         jTextFieldNome.setText("");
         jTextFieldRg.setText("");
+        jComboBoxEstadoCivil.setSelectedIndex(0);
         
     }//GEN-LAST:event_jButton6ActionPerformed
 

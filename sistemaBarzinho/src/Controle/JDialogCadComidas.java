@@ -297,6 +297,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jTextFieldQtde.setText("");
         jComboBoxComida.getSelectedItem();
         jTextFieldValidade.setText("");
+        jComboBoxComida.setSelectedIndex(0);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextFieldValidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValidadeActionPerformed
