@@ -1,13 +1,30 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
 
-public class Comida {
+@Entity
+public class Comida implements Serializable{
 
+    @Id
+    @GeneratedValue
     private int id;
+    
+    @Column(length=100)
     private String nome;
+    
+    @Column(length=5)
     private int quantidade;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataValidade;
+    
+    @Column(length=25)
     private String tipo;
 
     public Date getDataValidade() {

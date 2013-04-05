@@ -4,20 +4,44 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Eduardo
  */
-public class Funcionario {
+@Entity
+public class Funcionario implements Serializable{
+
+    @Id
+    @GeneratedValue
     private int codFuncionario;
+    
+    @Column(length=100)
     private String nome;
+    
+    @Column(length=11)
     private String cpf;
+    
+    @Column(length=20)
     private String rg;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNasc;
+    
+    @Column(length=15)
     private String estadoCivil;
+    
+    @Column(length=25)
     private String funcao;
+    
+    private double salario;
 
     public int getCodFuncionario() {
         return codFuncionario;
@@ -74,8 +98,13 @@ public class Funcionario {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
-    
-    
-    
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
     
 }
