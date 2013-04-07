@@ -6,6 +6,7 @@ package DAO;
 
 import Modelo.*;
 import java.util.Date;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -17,7 +18,15 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
  */
 
 
-public class DaoBasic {
+public class DaoBasic<T> {
+
+    
+    private Class classe;
+    public DaoBasic(Class classe) {
+        this.classe=classe;
+    }
+    
+    
     
     private static SessionFactory factory;
     private static Session session;
@@ -41,51 +50,45 @@ public class DaoBasic {
         return cfg;
     }
     
-    public static void persisteObjeto(Object o){
+    public void persisteObjeto(Object o){
         factory=getConfiguracaoHibernate().buildSessionFactory();
         session=factory.openSession();
         session.beginTransaction().begin();
-        session.persist(o);
+        session.saveOrUpdate(o);
         session.beginTransaction().commit();
         session.close();
     }
     
-    public static Object delete(int id){
+    public T delete(int id){
+        Object deletado= this.get(id);
         factory=getConfiguracaoHibernate().buildSessionFactory();
         session=factory.openSession();
         session.beginTransaction().begin();
+        session.delete(deletado);
+        session.beginTransaction().commit();
+        session.flush();
+        session.close();
+        System.out.println("++++++++");
+        return (T)deletado;
     }
     
-    
-    
-    public static void main(String[] args) {
-        
-        
-        Funcionario f=new Funcionario();
-        f.setCpf("111111111");
-        f.setDataNasc(new Date("12/12/2000"));
-        f.setEstadoCivil("Solteiro");
-        f.setFuncao("teste");
-        f.setNome("hahaha");
-        f.setRg("ssss");
-        f.setSalario(22);
-        
-        Bebida b=new Bebida();
-        b.setDataValidade(new Date("12/12/2012"));
-        b.setNome("bebida");
-        b.setPreco(12);
-        b.setQtde(12);
-        b.setTipo("suco");
-        
-        Comida c=new Comida();
-        c.setDataValidade(new Date("12/12/2000"));
-        c.setNome("sss");
-        c.setQuantidade(2);
-        c.setTipo("aaa");
-        
-        persisteObjeto(c);
-        
-      
+    public T get(int id){
+        factory=getConfiguracaoHibernate().buildSessionFactory();
+        session=factory.openSession();
+        session.beginTransaction().begin();
+        Object busca=session.get(this.classe, id);
+        session.close();
+        return (T) busca;
     }
+    
+    public List<T> lista(){
+        factory=getConfiguracaoHibernate().buildSessionFactory();
+        session=factory.openSession();
+        session.beginTransaction().begin();
+        List list = session.createCriteria(classe).list();
+        session.close();
+        return list;
+    }
+    
     
 }
