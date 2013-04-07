@@ -68,7 +68,6 @@ public class DaoBasic<T> {
         session.beginTransaction().commit();
         session.flush();
         session.close();
-        System.out.println("++++++++");
         return (T)deletado;
     }
     
