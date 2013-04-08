@@ -4,22 +4,30 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Eduardo
  */
 @Entity
-public class Bebida {
+@Table(name = "bebida")
+public class Bebida implements Serializable{
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(length=100)
     private String nome;
@@ -31,6 +39,10 @@ public class Bebida {
     private Date dataValidade;
     @Column(length=6,precision=2)   
     private  double preco;
+    @Transient
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPedido") 
+    private Pedido idPedido; 
 
     public int getId() {
         return id;
@@ -78,6 +90,14 @@ public class Bebida {
 
     public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
+    }
+
+    public Pedido getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedido idPedido) {
+        this.idPedido = idPedido;
     }
     
     

@@ -6,21 +6,29 @@ package Modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Eduardo
  */
 @Entity
+@Table(name = "funcionario")
 public class Funcionario implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int codFuncionario;
     
     @Column(length=100)
@@ -41,7 +49,17 @@ public class Funcionario implements Serializable{
     @Column(length=25)
     private String funcao;
     
+     @Column(length=6,precision=2)
     private double salario;
+    
+    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idMesa") 
+    private Mesa idMesa; 
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPedido") 
+    private Pedido idPedido; 
 
     public int getCodFuncionario() {
         return codFuncionario;
@@ -105,6 +123,22 @@ public class Funcionario implements Serializable{
 
     public void setSalario(double salario) {
         this.salario = salario;
+    }
+
+    public Mesa getIdMesa() {
+        return idMesa;
+    }
+
+    public void setIdMesa(Mesa idMesa) {
+        this.idMesa = idMesa;
+    }
+
+    public Pedido getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedido idPedido) {
+        this.idPedido = idPedido;
     }
     
 }
