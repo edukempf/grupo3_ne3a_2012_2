@@ -4,9 +4,7 @@
  */
 package DAO;
 
-import Modelo.Bebida;
-import Modelo.Comida;
-import Modelo.Funcionario;
+import Modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -26,6 +24,10 @@ public class HibernateConexao {
         cfg.addAnnotatedClass(Funcionario.class);
         cfg.addAnnotatedClass(Comida.class);
         cfg.addAnnotatedClass(Bebida.class);
+        cfg.addAnnotatedClass(Cliente.class);
+        cfg.addAnnotatedClass(Mesa.class);
+        cfg.addAnnotatedClass(Pedido.class);
+        cfg.addAnnotatedClass(Prato.class);
 
         cfg.setProperty("hibernate.connection.driver", "com.mysql.jdbc.Driver");
         cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/aluno");
