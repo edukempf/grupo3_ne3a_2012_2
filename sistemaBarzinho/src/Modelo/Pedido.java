@@ -4,28 +4,38 @@
  */
 package Modelo;
 
-import java.util.Date;
-import javax.persistence.Column;
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Juliana
  */
-public class Pedido {
+@Entity
+@Table(name = "pedido")
+public class Pedido implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-//    @OneToOne(Mesa) 
-    @Column(length = 5)
-    private int idMesa;
-//    @OneToOne(Funcionario)     
-    @Column(length = 5)
-    private int idFuncionario;
+    
+    @Transient
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idMesa") 
+    private Mesa idMesa;   
+    
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idFuncionario") 
+    private Funcionario idFuncionario;  
 
     public int getId() {
         return id;
@@ -35,21 +45,21 @@ public class Pedido {
         this.id = id;
     }
 
-    public int getIdMesa() {
+    public Mesa getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(int idMesa) {
+    public void setIdMesa(Mesa idMesa) {
         this.idMesa = idMesa;
     }
 
-    public int getIdFuncionario() {
+    public Funcionario getIdFuncionario() {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
+    public void setIdFuncionario(Funcionario idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
-    
+
     
 }
