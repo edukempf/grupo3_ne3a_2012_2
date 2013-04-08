@@ -123,7 +123,7 @@ public class ComidaDAO extends DBConnection {
         }
     }
     public static ArrayList<Comida> findPorNome(String nome) throws SQLException {
-        ArrayList<Comida> comidas = new ArrayList<>();
+        ArrayList<Comida> comidas = new ArrayList<Comida>();
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlListPorNome);

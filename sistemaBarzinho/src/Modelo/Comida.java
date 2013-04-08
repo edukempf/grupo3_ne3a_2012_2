@@ -15,11 +15,11 @@ import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "comida")
 public class Comida implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idComida")
     private int id;
     @Column(length = 100)
     private String nome;
@@ -82,5 +82,5 @@ public class Comida implements Serializable {
         this.idPrato = idPrato;
     }
 
-   
+    
 }

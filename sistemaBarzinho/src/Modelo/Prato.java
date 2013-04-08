@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,20 +23,20 @@ import javax.persistence.Transient;
  * @author Juliana
  */
 @Entity
-@Table(name = "prato")
 public class Prato implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idPrato")
     private int id;
     @Column(length = 100)
     private String nome;
     @Column(length = 6, precision = 2)
     private double preco;
-     @Transient
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idComida") 
-    private Comida ingredientes;
+    private List<Comida> ingredientes;
     @Column(length = 5)
     private int quantidadePorcoes;
     
@@ -62,11 +64,11 @@ public class Prato implements Serializable{
         this.preco = preco;
     }
 
-    public Comida getIngredientes() {
+    public List<Comida> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(Comida ingredientes) {
+    public void setIngredientes(List<Comida> ingredientes) {
         this.ingredientes = ingredientes;
     }
 

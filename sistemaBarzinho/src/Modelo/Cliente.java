@@ -23,12 +23,12 @@ import javax.persistence.Transient;
  * @author Juliana
  */
 @Entity
-@Table(name = "cliente")
 public class Cliente implements Serializable{
 
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idCliente")
     private int id;
     @Column(length = 100)
     private String nome;    

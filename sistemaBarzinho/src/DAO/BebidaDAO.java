@@ -81,7 +81,7 @@ public class BebidaDAO extends DBConnection{
     }
 
     public static ArrayList<Bebida> list() throws SQLException {
-        ArrayList<Bebida> bebidas = new ArrayList<>();
+        ArrayList<Bebida> bebidas = new ArrayList<Bebida>();
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlList);
@@ -132,7 +132,7 @@ public class BebidaDAO extends DBConnection{
         }
     }
     public static ArrayList<Bebida> findPorNome(String nome) throws SQLException {
-        ArrayList<Bebida> bebidas = new ArrayList<>();
+        ArrayList<Bebida> bebidas = new ArrayList<Bebida>();
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlListPorNome);

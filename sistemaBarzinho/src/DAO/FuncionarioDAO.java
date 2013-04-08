@@ -85,7 +85,7 @@ public class FuncionarioDAO extends DBConnection {
     }
 
     public static ArrayList<Funcionario> list() throws SQLException {
-        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlList);
@@ -141,7 +141,7 @@ public class FuncionarioDAO extends DBConnection {
     }
 
     public static ArrayList<Funcionario> findPorNome(String nome) throws SQLException {
-        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlListPorNome);

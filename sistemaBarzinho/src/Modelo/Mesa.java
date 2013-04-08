@@ -17,13 +17,14 @@ import javax.persistence.Table;
  * @author Juliana
  */
 @Entity
-@Table(name = "mesa")
 public class Mesa implements Serializable{
- @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idMesa")
     private int id;
-    @Column(length = 100)
+    @Column(length = 3)
     private int capacidade;    
+    private boolean ocupada;
 
     public int getId() {
         return id;
@@ -41,5 +42,12 @@ public class Mesa implements Serializable{
         this.capacidade = capacidade;
     }
 
+    public boolean isOcupada() {
+        return ocupada;
+    }
 
+    public void setOcupada(boolean ocupada) {
+        this.ocupada = ocupada;
+    }
+    
 }
