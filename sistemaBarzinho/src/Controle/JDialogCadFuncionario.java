@@ -36,22 +36,24 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
 
         jButtonPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextFieldRg = new javax.swing.JTextField();
         jTextFieldCPF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextFieldRg = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldDataNasc = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jComboBoxEstadoCivil = new javax.swing.JComboBox();
         jTextFieldFuncao = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Página de cadastro de Funcionários");
@@ -64,24 +66,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                 jButtonPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 130, -1));
+        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 130, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Funcionário");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 11, -1, -1));
-
-        jLabel10.setText("Nome:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 68, -1, -1));
-
-        jLabel13.setText("RG:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 110, -1, -1));
-
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 240, 25));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -133,40 +122,41 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                 .addGap(23, 23, 23))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 314, 520, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 520, -1));
 
-        jTextFieldCPF.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCPFActionPerformed(evt);
+                jTextFieldNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 240, 25));
 
-        jLabel14.setText("CPF:");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 153, -1, -1));
+        jLabel10.setText("Nome:");
+
+        jLabel13.setText("RG:");
 
         jTextFieldRg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldRgActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 240, 25));
+
+        jTextFieldCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCPFActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("CPF:");
 
         jLabel2.setText("Data de Nascimento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 194, -1, -1));
 
         jTextFieldDataNasc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDataNascActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 240, 22));
-
-        jLabel3.setText("Função:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 264, -1, -1));
-
-        jLabel4.setText("Estado Civil:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 234, -1, -1));
 
         jComboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Estado Civil", "Solteiro ", "Casado", "Divorsiado", "Viúvo", " " }));
         jComboBoxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
@@ -174,8 +164,72 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                 jComboBoxEstadoCivilActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 220, 24));
-        getContentPane().add(jTextFieldFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 240, -1));
+
+        jLabel4.setText("Estado Civil:");
+
+        jLabel3.setText("Função:");
+
+        jLabel5.setText("Salário:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldRg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldDataNasc, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, 0, 240, Short.MAX_VALUE))
+                .addGap(476, 476, 476))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel2)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel4)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jTextFieldRg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 480, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -293,7 +347,9 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldCPF;
     private javax.swing.JTextField jTextFieldDataNasc;
     private javax.swing.JTextField jTextFieldFuncao;
