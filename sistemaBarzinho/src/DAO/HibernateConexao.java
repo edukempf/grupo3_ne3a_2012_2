@@ -5,6 +5,7 @@
 package DAO;
 
 import Modelo.*;
+import java.util.Properties;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -14,10 +15,14 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author Eduardo
  */
 public class HibernateConexao {
+    
+    
 
-    private static SessionFactory factory;
+    private static final SessionFactory factory;
 
     private static AnnotationConfiguration getConfiguracaoHibernate() {
+        Properties prop=Utilitarios.PropertiesConexao.getProp();
+        
         AnnotationConfiguration cfg = new AnnotationConfiguration();
 
         cfg.addAnnotatedClass(Funcionario.class);
@@ -28,9 +33,9 @@ public class HibernateConexao {
         cfg.addAnnotatedClass(Prato.class);
 
         cfg.setProperty("hibernate.connection.driver", "com.mysql.jdbc.Driver");
-        cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/aluno");
-        cfg.setProperty("hibernate.connection.user", "root");
-        cfg.setProperty("hibernate.connection.password", "");
+        cfg.setProperty("hibernate.connection.url", "jdbc:mysql://"+prop.getProperty("host")+"/"+prop.getProperty("database"));
+        cfg.setProperty("hibernate.connection.user", prop.getProperty("login"));
+        cfg.setProperty("hibernate.connection.password", prop.getProperty("password"));
         cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         cfg.setProperty("hibernate.show_sql", "true");
         cfg.setProperty("hibernate.format_sql", "true");
@@ -39,8 +44,11 @@ public class HibernateConexao {
         return cfg;
     }
 
+    static{
+        factory=getConfiguracaoHibernate().buildSessionFactory();
+    }
+    
     public static Session iniciaConexao() {
-        factory = getConfiguracaoHibernate().buildSessionFactory();
         return factory.openSession();
     }
     
