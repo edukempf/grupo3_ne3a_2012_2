@@ -19,11 +19,34 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
     /**
      * Creates new form JDialogViewFuncionario
      */
-    public JDialogViewFuncionario(java.awt.Frame parent, boolean modal) {
+    private Funcionario func;
+    private FuncionarioDAO dao;
+    
+    public JDialogViewFuncionario(java.awt.Frame parent, boolean modal,Funcionario func) {
         super(parent, modal);
+        this.func=func;
         initComponents();
+        jLabelCPF.setText(func.getCpf());
+        jLabelDataNasc.setText(func.getDataNasc().toString());
+        jLabelFuncao.setText(func.getFuncao());
+        jLabelEstadoCivil.setText(func.getEstadoCivil());
+        jLabelNome.setText(func.getNome());
+        jLabelRG.setText(func.getRg());
+        jLabelSalario.setText(func.getSalario()+"");
     }
 
+    private void insereFuncionario(Funcionario func){
+        dao=new FuncionarioDAO();
+        try{
+            dao.persisteObjeto(func);
+            JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "erro ao inserir!");
+            System.out.println(ex.toString());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,9 +66,9 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
         jLabelSalario = new javax.swing.JLabel();
         jLabelFuncao = new javax.swing.JLabel();
         jLabelDataNasc = new javax.swing.JLabel();
@@ -84,27 +107,27 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButton5.setText("Salvar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonConfirmarActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
-        jButton10.setText("Fechar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonFecharActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
-        jButton4.setText("Editar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
@@ -114,11 +137,11 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,9 +149,9 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -158,35 +181,20 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(jLabelNome.getText());
-        funcionario.setRg(Integer.parseInt(jLabelRG.getText()));
-        funcionario.setCpf(Integer.parseInt(jLabelCPF.getText()));
-        funcionario.setDataNasc(new Date(jLabelDataNasc.getText()));
-        funcionario.setEstadoCivil(jLabelEstadoCivil.getText());
-        funcionario.setFuncao(jLabelFuncao.getText());
-        funcionario.setSalario(Double.parseDouble(jLabelSalario.getText()));
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        insereFuncionario(this.func);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-        try {
-            FuncionarioDAO.insert(funcionario);
-            JOptionPane.showMessageDialog(null, "Funcionário cadastrada com sucesso");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir!");
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JDialog dialog = new JDialogConFuncionario(null, true);
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        dispose();
+        JDialog dialog = new JDialogCadFuncionario(null, true,this.func);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +226,7 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewFuncionario dialog = new JDialogViewFuncionario(new javax.swing.JFrame(), true);
+                JDialogViewFuncionario dialog = new JDialogViewFuncionario(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -230,9 +238,9 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonFechar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
