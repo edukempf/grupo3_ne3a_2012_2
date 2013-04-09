@@ -29,10 +29,7 @@ public class Comida implements Serializable {
     private Date dataValidade;
     @Column(length = 25)
     private String tipo;
-    @Transient
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPrato")
-    private Prato idPrato;
+    
 
     public Date getDataValidade() {
         return dataValidade;
@@ -72,14 +69,6 @@ public class Comida implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Prato getIdPrato() {
-        return idPrato;
-    }
-
-    public void setIdPrato(Prato idPrato) {
-        this.idPrato = idPrato;
     }
 
     

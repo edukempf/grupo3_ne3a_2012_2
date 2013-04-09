@@ -39,10 +39,7 @@ public class Bebida implements Serializable{
     private Date dataValidade;
     @Column(length=6,precision=2)   
     private  double preco;
-    @Transient
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPedido") 
-    private Pedido idPedido; 
+    ; 
 
     public int getId() {
         return id;
@@ -92,14 +89,5 @@ public class Bebida implements Serializable{
         this.dataValidade = dataValidade;
     }
 
-    public Pedido getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
-    }
-    
-    
     
 }

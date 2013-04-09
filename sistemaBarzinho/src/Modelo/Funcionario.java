@@ -52,14 +52,6 @@ public class Funcionario implements Serializable{
      @Column(length=6,precision=2)
     private double salario;
     
-    @Transient
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idMesa") 
-    private Mesa idMesa; 
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPedido") 
-    private Pedido idPedido; 
 
     public int getCodFuncionario() {
         return codFuncionario;
@@ -125,20 +117,4 @@ public class Funcionario implements Serializable{
         this.salario = salario;
     }
 
-    public Mesa getIdMesa() {
-        return idMesa;
-    }
-
-    public void setIdMesa(Mesa idMesa) {
-        this.idMesa = idMesa;
-    }
-
-    public Pedido getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
-    }
-    
 }
