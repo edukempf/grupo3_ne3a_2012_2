@@ -16,7 +16,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateConexao {
 
     private static SessionFactory factory;
-    private static Session session;
 
     private static AnnotationConfiguration getConfiguracaoHibernate() {
         AnnotationConfiguration cfg = new AnnotationConfiguration();
@@ -24,7 +23,6 @@ public class HibernateConexao {
         cfg.addAnnotatedClass(Funcionario.class);
         cfg.addAnnotatedClass(Comida.class);
         cfg.addAnnotatedClass(Bebida.class);
-        cfg.addAnnotatedClass(Cliente.class);
         cfg.addAnnotatedClass(Mesa.class);
         cfg.addAnnotatedClass(Pedido.class);
         cfg.addAnnotatedClass(Prato.class);
@@ -46,7 +44,7 @@ public class HibernateConexao {
         return factory.openSession();
     }
     
-    public static void fechaConexao(){
+    public static void fechaConexao(Session session){
         session.close();
     }
 }

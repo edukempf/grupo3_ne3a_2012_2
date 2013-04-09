@@ -17,6 +17,11 @@ import org.hibernate.SessionFactory;
 
 
 public class DaoBasic<T> {
+
+    public DaoBasic() {
+    }
+    
+    
    
     private Class classe;
     public DaoBasic(Class classe) {
@@ -31,7 +36,7 @@ public class DaoBasic<T> {
         session.beginTransaction().begin();
         session.saveOrUpdate(o);
         session.beginTransaction().commit();
-        HibernateConexao.fechaConexao();
+        HibernateConexao.fechaConexao(session);
     }
     
     public T delete(int id){
@@ -40,7 +45,7 @@ public class DaoBasic<T> {
         session.beginTransaction().begin();
         session.delete(deletado);
         session.beginTransaction().commit();
-        HibernateConexao.fechaConexao();
+        HibernateConexao.fechaConexao(session);
         return (T)deletado;
     }
     
@@ -48,7 +53,7 @@ public class DaoBasic<T> {
         session=HibernateConexao.iniciaConexao();
         session.beginTransaction().begin();
         Object busca=session.get(this.classe, id);
-        HibernateConexao.fechaConexao();
+        HibernateConexao.fechaConexao(session);
         return (T) busca;
     }
     
@@ -56,7 +61,7 @@ public class DaoBasic<T> {
         session=HibernateConexao.iniciaConexao();
         session.beginTransaction().begin();
         List list = session.createCriteria(classe).list();
-        HibernateConexao.fechaConexao();
+        HibernateConexao.fechaConexao(session);
         return list;
     }
       
