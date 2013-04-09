@@ -289,7 +289,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        new JDialogCadFuncionario(this, true).setVisible(true);
+        new JDialogCadFuncionario(this, true,null).setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed

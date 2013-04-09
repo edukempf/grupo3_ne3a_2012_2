@@ -41,7 +41,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
@@ -71,11 +71,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="jButtonLimpar" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="jButtonSalvar" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="122" max="-2" attributes="0"/>
+                  <Component id="jButtonFechar" min="-2" pref="122" max="-2" attributes="0"/>
                   <EmptySpace pref="88" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -85,9 +85,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="27" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton3" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton6" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jButtonSalvar" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jButtonFechar" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jButtonLimpar" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -95,7 +95,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="jButtonLimpar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icones/limpar.png"/>
@@ -103,10 +103,10 @@
             <Property name="text" type="java.lang.String" value="Limpar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLimparActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icones/salvar.png"/>
@@ -114,10 +114,10 @@
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="jButtonFechar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icones/fechar.jpg"/>
@@ -125,7 +125,7 @@
             <Property name="text" type="java.lang.String" value="Fechar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -166,6 +166,7 @@
                       <Component id="jTextFieldDataNasc" alignment="1" max="32767" attributes="0"/>
                       <Component id="jTextFieldFuncao" alignment="1" max="32767" attributes="0"/>
                       <Component id="jComboBoxEstadoCivil" alignment="1" pref="240" max="32767" attributes="0"/>
+                      <Component id="jTextFieldSalario" alignment="0" pref="240" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="476" max="-2" attributes="0"/>
               </Group>
@@ -182,30 +183,36 @@
                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldDataNasc" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBoxEstadoCivil" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldSalario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jTextFieldNome" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldRg" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jTextFieldCPF" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                          <Component id="jTextFieldDataNasc" min="-2" pref="22" max="-2" attributes="0"/>
-                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                          <Component id="jComboBoxEstadoCivil" min="-2" pref="24" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFuncao" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -284,6 +291,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Sal&#xe1;rio:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldSalario">
         </Component>
       </SubComponents>
     </Container>

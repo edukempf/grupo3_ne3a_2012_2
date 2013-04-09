@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Eduardo
@@ -20,9 +19,20 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCadFuncionario
      */
-    public JDialogCadFuncionario(java.awt.Frame parent, boolean modal) {
+    
+    
+    public JDialogCadFuncionario(java.awt.Frame parent, boolean modal,Funcionario func) {
         super(parent, modal);
         initComponents();
+        if(func!=null){
+            jTextFieldCPF.setText(func.getCpf());
+            jTextFieldDataNasc.setText(func.getDataNasc().toString());
+            jTextFieldFuncao.setText(func.getFuncao());
+            jTextFieldNome.setText(func.getNome());
+            jTextFieldRg.setText(func.getRg());
+            jTextFieldSalario.setText(func.getSalario()+"");
+            jComboBoxEstadoCivil.setSelectedItem(func.getEstadoCivil());
+        }
     }
 
     /**
@@ -35,11 +45,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private void initComponents() {
 
         jButtonPesquisar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -54,6 +64,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jTextFieldSalario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Página de cadastro de Funcionários");
@@ -68,33 +79,33 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         });
         getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 130, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Funcionário");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 11, -1, -1));
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitle.setText("Cadastro de Funcionário");
+        getContentPane().add(jLabelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 11, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
-        jButton6.setText("Limpar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonLimparActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButton3.setText("Salvar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
-        jButton2.setText("Fechar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonFecharActionPerformed(evt);
             }
         });
 
@@ -104,11 +115,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,9 +127,9 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -192,7 +203,8 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                     .addComponent(jTextFieldCPF, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldDataNasc, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, 0, 240, Short.MAX_VALUE))
+                    .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, 0, 240, Short.MAX_VALUE)
+                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
                 .addGap(476, 476, 476))
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,27 +218,29 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel14)
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel2)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel4)
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel3)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldRg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 480, 270));
@@ -234,9 +248,31 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Funcionario getDadosDosCampos() {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCpf(jTextFieldCPF.getText());
+        funcionario.setDataNasc(new Date(jTextFieldDataNasc.getText()));
+        funcionario.setEstadoCivil(jComboBoxEstadoCivil.getSelectedItem().toString());
+        funcionario.setNome(jTextFieldNome.getText());
+        funcionario.setRg(jTextFieldRg.getText());
+        funcionario.setFuncao(jTextFieldFuncao.getText());
+        funcionario.setSalario(Double.parseDouble(jTextFieldSalario.getText()));
+        return funcionario;
+    }
+
+    private void limpaFormularioTodo() {
+        jTextFieldCPF.setText("");
+        jTextFieldDataNasc.setText("");
+        jTextFieldFuncao.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldRg.setText("");
+        jComboBoxEstadoCivil.setSelectedIndex(0);
+        jTextFieldSalario.setText("");
+    }
+
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         JDialog dialog = new JDialogConFuncionario(null, true);
-        dialog.setLocation(getX()+50, getY()+50);
+        dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -244,27 +280,16 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Funcionario funcionario=new Funcionario();
-        funcionario.setCpf(jTextFieldCPF.getText());
-        funcionario.setDataNasc(new Date(jTextFieldDataNasc.getText()));
-        funcionario.setEstadoCivil(jComboBoxEstadoCivil.getSelectedItem().toString());
-        funcionario.setNome(jTextFieldNome.getText());
-        funcionario.setRg(jTextFieldRg.getText());
-        funcionario.setFuncao(jTextFieldFuncao.getText());
-        try{
-            FuncionarioDAO.insert(funcionario);
-            JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "erro ao inserir!");
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        JDialog dialog = new JDialogViewFuncionario(null, true,this.getDadosDosCampos());
+        dialog.setLocation(getX() + 50, getY() + 50);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCPFActionPerformed
         // TODO add your handling code here:
@@ -282,16 +307,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoCivilActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         // TODO add your handling code here:
-        jTextFieldCPF.setText("");
-        jTextFieldDataNasc.setText("");
-        jTextFieldFuncao.setText("");
-        jTextFieldNome.setText("");
-        jTextFieldRg.setText("");
-        jComboBoxEstadoCivil.setSelectedIndex(0);
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
+        this.limpaFormularioTodo();
+
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,7 +343,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogCadFuncionario dialog = new JDialogCadFuncionario(new javax.swing.JFrame(), true);
+                JDialogCadFuncionario dialog = new JDialogCadFuncionario(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -335,12 +355,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxEstadoCivil;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -348,6 +367,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldCPF;
@@ -355,5 +375,6 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldFuncao;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldRg;
+    private javax.swing.JTextField jTextFieldSalario;
     // End of variables declaration//GEN-END:variables
 }
