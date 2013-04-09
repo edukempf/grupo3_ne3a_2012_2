@@ -31,7 +31,6 @@ public class Pedido implements Serializable {
     @Column(name = "idPedido")
     private int id;
     
-    @Transient
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idMesa") 
     private Mesa idMesa;   
