@@ -11,9 +11,17 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCadComidas
      */
-    public JDialogCadComidas(java.awt.Frame parent, boolean modal) {
+    public JDialogCadComidas(java.awt.Frame parent, boolean modal, Comida comida) {
+      
         super(parent, modal);
         initComponents();
+        if(comida!=null){
+            jTextFieldNome.setText(comida.getNome());
+            jTextFieldQtde.setText(comida.getQuantidade()+"");
+            jComboBoxComida.setSelectedItem(comida.getTipo());
+            jTextFieldValidade.setText(comida.getDataValidade().toString());
+            
+        }
     }
 
     /**
@@ -39,11 +47,11 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonPesquisar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -144,38 +152,38 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jLabel4.setText("Cadastro de Comidas");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 11, -1, -1));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
-        jButton4.setText("Pesquisar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 130, -1));
+        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 130, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
-        jButton8.setText("Limpar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonLimparActionPerformed(evt);
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButton5.setText("Salvar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
-        jButton10.setText("Fechar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonFecharActionPerformed(evt);
             }
         });
 
@@ -185,11 +193,11 @@ public class JDialogCadComidas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -197,9 +205,9 @@ public class JDialogCadComidas extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -291,6 +299,24 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private Comida getDadosDosCampos() {
+        Comida comida = new Comida();
+        comida.setNome(jTextFieldNome.getText());
+        comida.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
+        comida.setTipo(jComboBoxComida.getSelectedItem().toString());
+        comida.setDataValidade(new Date(jTextFieldValidade.getText()));
+
+        return comida;
+    }
+    
+    private void limpaFormularioTodo() {
+        jTextFieldNome.setText("");
+        jTextFieldQtde.setText("");
+        jComboBoxComida.setSelectedIndex(0);
+        jTextFieldValidade.setText("");
+
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -310,43 +336,31 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         JDialog dialog = new JDialogConComidas(null, true);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Comida comida = new Comida();
-        comida.setNome(jTextFieldNome.getText());
-        comida.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
-        comida.setTipo(jComboBoxComida.getSelectedItem().toString());
-        comida.setDataValidade(new Date(jTextFieldValidade.getText()));
-        try {
-            ComidaDAO.insert(comida);
-            JOptionPane.showMessageDialog(null, " Comida cadastrada com sucesso");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "erro ao inserir!");
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton10ActionPerformed
+        JDialog dialog = new JDialogViewComida(null, true, this.getDadosDosCampos()); 
+        dialog.setLocation(getX() + 50, getY() + 50);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        jTextFieldNome.setText("");
-        jTextFieldQtde.setText("");
-        jComboBoxComida.getSelectedItem();
-        jTextFieldValidade.setText("");
-        jComboBoxComida.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        this.limpaFormularioTodo();
+
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jTextFieldValidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValidadeActionPerformed
         // TODO add your handling code here:
@@ -386,7 +400,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogCadComidas dialog = new JDialogCadComidas(new javax.swing.JFrame(), true);
+                JDialogCadComidas dialog = new JDialogCadComidas(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -399,14 +413,14 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxComida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
