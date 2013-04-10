@@ -19,9 +19,30 @@ public class JDialogViewBebida extends javax.swing.JDialog {
     /**
      * Creates new form JDialogViewBebida
      */
-    public JDialogViewBebida(java.awt.Frame parent, boolean modal) {
+    private Bebida bebida;
+    private BebidaDAO dao;
+
+    public JDialogViewBebida(java.awt.Frame parent, boolean modal, Bebida bebida) {
         super(parent, modal);
+        this.bebida = bebida;
         initComponents();
+        jLNome.setText(bebida.getNome());
+        jLQdte.setText(bebida.getQtde() + "");
+        jLTipo.setText(bebida.getTipo());
+        jLPreco.setText(bebida.getPreco() + "");
+        jLDataValidade.setText(bebida.getDataValidade().toString());
+    }
+
+    private void insereBebida(Bebida bebida) {
+        dao = new BebidaDAO();
+        try {
+            dao.persisteObjeto(bebida);
+            JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
+            System.out.println(ex.toString());
+        }
     }
 
     /**
@@ -46,9 +67,9 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         jLTipo = new javax.swing.JLabel();
         jLPreco = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,27 +110,27 @@ public class JDialogViewBebida extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButton5.setText("Salvar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonConfirmarActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
-        jButton10.setText("Fechar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonFecharActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
-        jButton4.setText("Editar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
@@ -119,11 +140,11 @@ public class JDialogViewBebida extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -131,9 +152,9 @@ public class JDialogViewBebida extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -142,33 +163,20 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Bebida bebida = new Bebida();
-        bebida.setNome(jLNome.getText());
-        bebida.setQtde(Integer.parseInt(jLQdte.getText()));
-        bebida.setTipo(jLTipo.getText());
-        bebida.setDataValidade(new Date(jLDataValidade.getText()));
-        bebida.setPreco(Double.parseDouble(jLPreco.getText()));
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        insereBebida(this.bebida);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-        try {
-            BebidaDAO.insert(bebida);
-            JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir!");
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JDialog dialog = new JDialogConBebidas(null, true);
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        dispose();
+        JDialog dialog = new JDialogCadBebidas(null, true, this.bebida);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +208,8 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewBebida dialog = new JDialogViewBebida(new javax.swing.JFrame(), true);
+                
+                JDialogViewBebida dialog = new JDialogViewBebida(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -212,9 +221,9 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonFechar;
     private javax.swing.JLabel jLDataValidade;
     private javax.swing.JLabel jLNome;
     private javax.swing.JLabel jLPreco;

@@ -5,6 +5,7 @@
 package DAO;
 
 import Modelo.Bebida;
+import java.util.List;
 
 
 
@@ -13,7 +14,20 @@ import Modelo.Bebida;
  * @author Eduardo
  */
 public class BebidaDAO extends DaoBasic<Bebida> {
+
+    public BebidaDAO() {
+        super(Bebida.class);
+    }
     
-    
+    public List<Bebida> buscaPorNome(String nome){
+        session=HibernateConexao.iniciaConexao();
+        session.beginTransaction().begin();
+        List list = session.createQuery("from Bebida as f where f.nome like '%"+nome+"%'").list();
+        session.beginTransaction().commit();
+        HibernateConexao.fechaConexao(session);
+        return list;
+    }
     
 }
+    
+
