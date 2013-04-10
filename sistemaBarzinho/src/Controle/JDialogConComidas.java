@@ -15,6 +15,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
      * Creates new form JDialogConComidas
      */
     DefaultTableModel model;
+    private ComidaDAO dao = new ComidaDAO();
 
     private void criaTabela() {
         model = new DefaultTableModel(new String[]{"id", "nome", "quantidade", "tipo", "data_validade"}, 0) {
@@ -29,7 +30,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            ArrayList<Comida> lista = ComidaDAO.findPorNome("%" + jTextFieldNome.getText() + "%");
+            ArrayList<Comida> lista = (ArrayList<Comida>) dao.buscaPorNome(jTextFieldNome.getText());
             for (Comida comida : lista) {
                 model.addRow(new Object[]{comida.getId(),
                             comida.getNome(),
@@ -39,7 +40,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
 
             }
             jTable1.updateUI();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -60,52 +61,52 @@ public class JDialogConComidas extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jBView = new javax.swing.JButton();
-        jBEditar = new javax.swing.JButton();
+        jButtonRemover = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonView = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton11 = new javax.swing.JButton();
+        jButtonPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
-        jButton9.setText("Remover");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
+        jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButtonRemoverActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
-        jButton10.setText("Fechar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonFecharActionPerformed(evt);
             }
         });
 
-        jBView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/consultar.jpg"))); // NOI18N
-        jBView.setText("View");
-        jBView.addActionListener(new java.awt.event.ActionListener() {
+        jButtonView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/consultar.jpg"))); // NOI18N
+        jButtonView.setText("View");
+        jButtonView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBViewActionPerformed(evt);
+                jButtonViewActionPerformed(evt);
             }
         });
 
-        jBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
-        jBEditar.setText("Editar");
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
@@ -115,13 +116,13 @@ public class JDialogConComidas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton9)
+                .addComponent(jButtonRemover)
                 .addGap(18, 18, 18)
-                .addComponent(jBView, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addComponent(jButtonView, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(195, 195, 195))
         );
         jPanel2Layout.setVerticalGroup(
@@ -129,10 +130,10 @@ public class JDialogConComidas extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -184,14 +185,14 @@ public class JDialogConComidas extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 500, 120));
 
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
-        jButton11.setText("Pesquisar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButtonPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 122, 30));
+        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 122, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -202,42 +203,43 @@ public class JDialogConComidas extends javax.swing.JDialog {
         int coluna = 0;
         String codigo = model.getValueAt(linha, coluna).toString();
         try {
-            comida = ComidaDAO.find(Integer.parseInt(codigo));
-        } catch (SQLException ex) {
+            comida = dao.get(Integer.parseInt(codigo));
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return comida;
     }
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+
         Comida comida = getComidaSelecionada();
         if (comida != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Comida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    ComidaDAO.delete(comida.getId());
+                    dao.delete(comida.getId());
                     preenchetabela();
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma Comida!");
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
         preenchetabela();
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
@@ -248,28 +250,27 @@ public class JDialogConComidas extends javax.swing.JDialog {
         };
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void jBViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBViewActionPerformed
-//        int row = jTable1.getSelectedRow();
-//        if(row >= 0){
-//            ClienteController.setClienteCurrent(this.clienteTableModel.getClienteEntity(row));
-//            clienteView = new ClienteView(new Frame(), true);
-//            dispose();
-//            JDialogViewBebida.setLocationRelativeTo(null);
-//            clienteView.setVisible(true);
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Visualizar!");
-//        }
-    }//GEN-LAST:event_jBViewActionPerformed
-
-    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-       // try{
-            JDialog dialog = new JDialogAltComidas(null, true, getComidaSelecionada());
+    private void jButtonViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewActionPerformed
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            JDialog dialog = new JDialogViewComida(null, true, getComidaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
-       // }catch{
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Visualizar!");
+        }
+    }//GEN-LAST:event_jButtonViewActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            JDialog dialog = new JDialogCadComidas(null, true, getComidaSelecionada());
+            dialog.setLocation(getX() + 50, getY() + 50);
+            dialog.setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Editar!");
-        //}
-    }//GEN-LAST:event_jBEditarActionPerformed
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,11 +314,11 @@ public class JDialogConComidas extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBEditar;
-    private javax.swing.JButton jBView;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonRemover;
+    private javax.swing.JButton jButtonView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
