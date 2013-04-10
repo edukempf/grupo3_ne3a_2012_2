@@ -16,20 +16,19 @@ import org.hibernate.SessionFactory;
  */
 
 
-public class DaoBasic<T> {
+public abstract class DaoBasic<T> {
 
     public DaoBasic() {
     }
     
     
    
-    private Class classe;
+    protected Class classe;
     public DaoBasic(Class classe) {
         this.classe=classe;
     }
         
-    private static SessionFactory factory;
-    private static Session session;
+    protected static Session session;
     
     public void persisteObjeto(Object o){
         session=HibernateConexao.iniciaConexao();

@@ -7,7 +7,6 @@ package Controle;
 import DAO.FuncionarioDAO;
 import Modelo.Funcionario;
 import Utilitarios.Utilitarios;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -23,6 +22,7 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
      * Creates new form JDialogConFuncionario
      */
     private DefaultTableModel model;
+    private FuncionarioDAO dao = new FuncionarioDAO();
 
     private void criaTabela() {
         model = new DefaultTableModel(new String[]{"Codigo", "Nome", "RG", "CPF", "Data Nascimento", "Estado Civil", "Função"}, 0) {
@@ -37,19 +37,19 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            ArrayList<Funcionario> lista = FuncionarioDAO.findPorNome("%" + jTextField1.getText() + "%");
+            ArrayList<Funcionario> lista = (ArrayList<Funcionario>) dao.buscaPorNome(jTextField1.getText());
             for (Funcionario funcionario : lista) {
                 model.addRow(new Object[]{funcionario.getCodFuncionario(),
-                            funcionario.getNome(),
-                            funcionario.getRg(),
-                            funcionario.getCpf(),
-                            Utilitarios.dataISOtoBR(funcionario.getDataNasc().toString()),
-                            funcionario.getEstadoCivil(),
-                            funcionario.getFuncao()});
+                    funcionario.getNome(),
+                    funcionario.getRg(),
+                    funcionario.getCpf(),
+                    Utilitarios.dataISOtoBR(funcionario.getDataNasc().toString()),
+                    funcionario.getEstadoCivil(),
+                    funcionario.getFuncao()});
 
             }
             jTable1.updateUI();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -193,12 +193,12 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -221,8 +221,8 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
         int coluna = 0;
         String codigo = model.getValueAt(linha, coluna).toString();
         try {
-            funcionario = FuncionarioDAO.find(Integer.parseInt(codigo));
-        } catch (SQLException ex) {
+            funcionario = dao.get(Integer.parseInt(codigo));
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return funcionario;
@@ -234,9 +234,9 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    FuncionarioDAO.delete(funcionario.getCodFuncionario());
+                    dao.delete(funcionario.getCodFuncionario());
                     preenchetabela();
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -260,26 +260,25 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogAltFuncionarios(null, true, getFuncionarioSelecionado());
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            JDialog dialog = new JDialogCadFuncionario(null, true, getFuncionarioSelecionado());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Editar!");
         }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBViewActionPerformed
-        //        int row = jTable1.getSelectedRow();
-        //        if(row >= 0){
-            //            ClienteController.setClienteCurrent(this.clienteTableModel.getClienteEntity(row));
-            //            clienteView = new ClienteView(new Frame(), true);
-            //            dispose();
-            //            JDialogViewBebida.setLocationRelativeTo(null);
-            //            clienteView.setVisible(true);
-            //        }else{
-            //            JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Visualizar!");
-            //        }
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {            
+            JDialog dialog = new JDialogViewFuncionario(null, true, getFuncionarioSelecionado());
+            dialog.setLocation(getX() + 50, getY() + 50);
+            dialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Visualizar!");
+        }
     }//GEN-LAST:event_jBViewActionPerformed
 
     /**
