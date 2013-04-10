@@ -12,9 +12,10 @@ import javax.swing.table.DefaultTableModel;
 public class JDialogConBebidas extends javax.swing.JDialog {
 
     DefaultTableModel model;
+    private BebidaDAO dao = new BebidaDAO();
 
     private void criaTabela() {
-        model = new DefaultTableModel(new String[]{"id", "nome", "quantidade", "tipo", "preco","data_validade"}, 0) {
+        model = new DefaultTableModel(new String[]{"id", "nome", "quantidade", "tipo", "preco", "data_validade"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -24,9 +25,10 @@ public class JDialogConBebidas extends javax.swing.JDialog {
     }
 
     private void preenchetabela() {
+
         model.setNumRows(0);
         try {
-            ArrayList<Bebida> lista = BebidaDAO.findPorNome("%" + jTextFieldNome.getText() + "%");
+            ArrayList<Bebida> lista = (ArrayList<Bebida>) dao.buscaPorNome(jTextFieldNome.getText());
             for (Bebida bebida : lista) {
                 model.addRow(new Object[]{bebida.getId(),
                             bebida.getNome(),
@@ -37,12 +39,10 @@ public class JDialogConBebidas extends javax.swing.JDialog {
 
             }
             jTable1.updateUI();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
-    
 
     public JDialogConBebidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -203,13 +203,14 @@ public class JDialogConBebidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private Bebida getBebidaSelecionada() {
+
         Bebida bebida = new Bebida();
         int linha = jTable1.getSelectedRow();
         int coluna = 0;
         String codigo = model.getValueAt(linha, coluna).toString();
         try {
-            bebida = BebidaDAO.find(Integer.parseInt(codigo));
-        } catch (SQLException ex) {
+            bebida = dao.get(Integer.parseInt(codigo));
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return bebida;
@@ -221,14 +222,14 @@ public class JDialogConBebidas extends javax.swing.JDialog {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Bebida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    BebidaDAO.delete(bebida.getId());
+                    dao.delete(bebida.getId());
                     preenchetabela();
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma Bebida!");
+            JOptionPane.showMessageDialog(null, "Selecione uma bebida!");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -252,23 +253,22 @@ public class JDialogConBebidas extends javax.swing.JDialog {
 
     private void jBViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBViewActionPerformed
         int row = jTable1.getSelectedRow();
-        if(row >= 0){
-            ClienteController.setClienteCurrent(this.clienteTableModel.getClienteEntity(row));
-            clienteView = new ClienteView(new Frame(), true);
-            dispose();
-            JDialogViewBebida.setLocationRelativeTo(null);
-            clienteView.setVisible(true);
-        }else{
+        if (row >= 0) {            
+            JDialog dialog = new JDialogViewBebida(null, true, getBebidaSelecionada());
+            dialog.setLocation(getX() + 50, getY() + 50);
+            dialog.setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Visualizar!");
         }
     }//GEN-LAST:event_jBViewActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogAltBebidas(null, true, getBebidaSelecionada());
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            JDialog dialog = new JDialogCadBebidas(null, true, getBebidaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor Selecione uma linha da Tabela para Editar!");
         }
     }//GEN-LAST:event_jBEditarActionPerformed
