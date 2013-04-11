@@ -9,7 +9,7 @@ import java.util.Properties;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-
+ 
 /**
  *
  * @author Eduardo

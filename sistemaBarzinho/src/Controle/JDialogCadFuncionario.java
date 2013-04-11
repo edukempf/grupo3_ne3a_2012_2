@@ -204,12 +204,12 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldRg, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, 0, 240, Short.MAX_VALUE)
                     .addComponent(jFormattedTextFieldCPF)
                     .addComponent(jFormattedTextFieldSalario)
-                    .addComponent(jFormattedTextFieldDataNasc))
+                    .addComponent(jFormattedTextFieldDataNasc)
+                    .addComponent(jTextFieldRg))
                 .addGap(476, 476, 476))
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,7 +267,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         funcionario.setSalario(Double.parseDouble(jFormattedTextFieldSalario.getText().replace(",", ".")));
         if (this.func != null) {
             funcionario.setCodFuncionario(func.getCodFuncionario());
-        
+
         }
         return funcionario;
     }
@@ -298,14 +298,17 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
             erros.append("CPF informado é inválido\n");
             jFormattedTextFieldCPF.setBackground(Color.red);
         }
-        if (jFormattedTextFieldDataNasc.getText() == null || jFormattedTextFieldDataNasc.getText().replaceAll("/", "").trim().equals("")) {
+        if (!(jFormattedTextFieldDataNasc.getText() == null || jFormattedTextFieldDataNasc.getText().replaceAll("/", "").trim().equals(""))) {
+            if (new Date().before(new Date(jFormattedTextFieldDataNasc.getText()))) {
+                erros.append("Data de nascimento informada é inválida!\n");
+                jFormattedTextFieldDataNasc.setBackground(Color.red);
+            }
+
+        } else {
             erros.append("Data de nascimento é obrigatória!\n");
             jFormattedTextFieldDataNasc.setBackground(Color.red);
         }
-        if (new Date().before(new Date(jFormattedTextFieldDataNasc.getText()))) {
-            erros.append("Data de nascimento informada é inválida!\n");
-            jFormattedTextFieldDataNasc.setBackground(Color.red);
-        }
+
         if (jFormattedTextFieldSalario.getText() == null || jFormattedTextFieldSalario.getText().equals("")) {
             erros.append("Salario é obrigatório!\n");
             jFormattedTextFieldSalario.setBackground(Color.red);

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Eduardo
  */
 public class JDialogConFuncionario extends javax.swing.JDialog {
-
+ 
     /**
      * Creates new form JDialogConFuncionario
      */
