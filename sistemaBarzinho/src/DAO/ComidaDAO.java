@@ -10,7 +10,7 @@ public class ComidaDAO extends DaoBasic<Comida> {
     }
     
     public List<Comida> buscaPorNome(String nome){
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         List list = session.createQuery("from Comida as f where f.nome like '%"+nome+"%'").list();
         session.beginTransaction().commit();

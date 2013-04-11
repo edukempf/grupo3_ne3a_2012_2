@@ -31,36 +31,36 @@ public abstract class DaoBasic<T> {
     protected static Session session;
     
     public void persisteObjeto(Object o){
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         session.saveOrUpdate(o);
         session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
+        session.close();
     }
     
     public T delete(int id){
         Object deletado= this.get(id);
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         session.delete(deletado);
         session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
+        session.close();
         return (T)deletado;
     }
     
     public T get(int id){
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         Object busca=session.get(this.classe, id);
-        HibernateConexao.fechaConexao(session);
+        session.close();
         return (T) busca;
     }
     
     public List<T> lista(){
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         List list = session.createCriteria(classe).list();
-        HibernateConexao.fechaConexao(session);
+        session.close();
         return list;
     }
       

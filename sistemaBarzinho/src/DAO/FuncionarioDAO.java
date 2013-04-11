@@ -4,8 +4,11 @@
  */
 package DAO;
 
+import static DAO.DaoBasic.session;
 import Modelo.Funcionario;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 
 
 
@@ -18,13 +21,14 @@ public class FuncionarioDAO extends DaoBasic<Funcionario> {
     public FuncionarioDAO() {
         super(Funcionario.class);
     }
+//    private String sqlBuscaPorNome="from Funcionario as f where f.nome like :nome";
     
     public List<Funcionario> buscaPorNome(String nome){
-        session=HibernateConexao.iniciaConexao();
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
-        List list = session.createQuery("from Funcionario as f where f.nome like '%"+nome+"%'").list();
-        session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
+//        Query query=session.createSQLQuery(sqlBuscaPorNome).setParameter("nome", nome);
+        List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
+        session.close();
         return list;
     }
     
