@@ -5,6 +5,7 @@
 package DAO;
 import Modelo.Pedido;
 import java.util.List;
+import org.hibernate.criterion.Restrictions;
 /**
  *
  * @author Ligue01
@@ -14,12 +15,12 @@ public class PedidoDAO extends DaoBasic<Pedido>{
         super(Pedido.class);
     }
     
-    public List<Pedido> buscaPorNome(String nome){
-        session=HibernateConexao.iniciaConexao();
+       public List<Pedido> buscaPorNome(String nome){
+        session=HibernateConexao.getSession();
         session.beginTransaction().begin();
-        List list = session.createQuery("from Pedido as p where p.nome like '%"+nome+"%'").list();
-        session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
-        return list; 
+        List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
+        session.close(); 
+        return list;
     }
+    
 }

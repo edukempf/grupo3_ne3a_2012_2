@@ -4,8 +4,8 @@
  */
 package Controle;
 
-import DAO.PedidoDAO;
-import Modelo.Pedido;
+import DAO.PratoDAO;
+import Modelo.Prato;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -13,31 +13,34 @@ import javax.swing.JOptionPane;
  *
  * @author Ligue01
  */
-public class JDialogViewPedido extends javax.swing.JDialog {
+public class JDialogViewPrato extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDialogViewPedido
+     * Creates new form JDialogViewPrato
      */
-    private Pedido pedido;
-    private PedidoDAO dao;
-
-    public JDialogViewPedido(java.awt.Frame parent, boolean modal, Pedido pedido) {
+    
+    private Prato prato;
+    private PratoDAO dao;
+    
+    public JDialogViewPrato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.pedido = pedido;
+        this.prato = prato;
         initComponents();
-        jLMesa.setText(pedido.getIdMesa() + "");
-        jLGarcon.setText(pedido.getIdFuncionario() + "");
-        jLPratos.setText(pedido.getPratos().toString());
+        jLabelNome.setText(prato.getNome());
+        jLPreco.setText(prato.getPreco() + "");
+        jLabelPorcoes.setText(prato.getQuantidadePorcoes()+"");
+        jLabelIngredientes.setText(prato.getQuantidadePorcoes()+"");
+        
     }
 
-    private void inserePedido(Pedido pedido) {
-        dao = new PedidoDAO();
+    private void inserePrato( Prato prato) {
+        dao = new PratoDAO();
         try {
-            dao.persisteObjeto(pedido);
-            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
+            dao.persisteObjeto(prato);
+            JOptionPane.showMessageDialog(null, "Prato cadastrado com sucesso");
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir Pedido!");
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Prato!");
             System.out.println(ex.toString());
         }
     }
@@ -51,43 +54,42 @@ public class JDialogViewPedido extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelNome = new javax.swing.JLabel();
+        jLabelPreco = new javax.swing.JLabel();
+        jLabelPorcoes = new javax.swing.JLabel();
+        jLabelIngredientes = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLMesa = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLGarcon = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLPratos = new javax.swing.JLabel();
+        jLPorcao = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jLPreco = new javax.swing.JLabel();
+        jLIngredientes = new javax.swing.JLabel();
+        jLnome3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel19.setText("Dados de Pedidos");
+        jLabelNome.setText("Nome:");
+        getContentPane().add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
+
+        jLabelPreco.setText("Preço:");
+        getContentPane().add(jLabelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        jLabelPorcoes.setText("Porções:");
+        getContentPane().add(jLabelPorcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jLabelIngredientes.setText("Ingredientes:");
+        getContentPane().add(jLabelIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        jLabel19.setText("Dados de Pratos");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1, -1, -1));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 520, 10));
 
-        jLMesa.setText("Sem Informação");
-        getContentPane().add(jLMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
-
-        jLabel7.setText("Número da Mesa:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
-
-        jLabel8.setText("Garçon:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        jLGarcon.setText("Sem Informação");
-        getContentPane().add(jLGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
-
-        jLabel10.setText("Pratos:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        jLPratos.setText("Sem Informação");
-        getContentPane().add(jLPratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jLPorcao.setText("Sem Informação");
+        getContentPane().add(jLPorcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -139,13 +141,22 @@ public class JDialogViewPedido extends javax.swing.JDialog {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 520, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 520, -1));
+
+        jLPreco.setText("Sem Informação");
+        getContentPane().add(jLPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+
+        jLIngredientes.setText("Sem Informação");
+        getContentPane().add(jLIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
+
+        jLnome3.setText("Sem Informação");
+        getContentPane().add(jLnome3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        inserePedido(this.pedido);
+        inserePrato(this.prato);
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -154,7 +165,7 @@ public class JDialogViewPedido extends javax.swing.JDialog {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         dispose();
-        JDialog dialog = new JDialogCadPedidos(null, true, this.pedido);
+        JDialog dialog = new JDialogCadPedidos(null, true, this.prato);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
@@ -176,20 +187,20 @@ public class JDialogViewPedido extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewPedido dialog = new JDialogViewPedido(new javax.swing.JFrame(), true,null);
+                JDialogViewPrato dialog = new JDialogViewPrato(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -204,13 +215,15 @@ public class JDialogViewPedido extends javax.swing.JDialog {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JLabel jLGarcon;
-    private javax.swing.JLabel jLMesa;
-    private javax.swing.JLabel jLPratos;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLIngredientes;
+    private javax.swing.JLabel jLPorcao;
+    private javax.swing.JLabel jLPreco;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelIngredientes;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelPorcoes;
+    private javax.swing.JLabel jLabelPreco;
+    private javax.swing.JLabel jLnome3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
