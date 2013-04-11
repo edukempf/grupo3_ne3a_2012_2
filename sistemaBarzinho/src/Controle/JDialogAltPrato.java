@@ -5,28 +5,21 @@
 package Controle;
 
 import DAO.PedidoDAO;
-import Modelo.Mesa;
-import Modelo.Pedido;
+import Modelo.Prato;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ligue01
  */
-public class JDialogAltPedido extends javax.swing.JDialog {
+public class JDialogAltPrato extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDialogAltPedido
+     * Creates new form JDialogAltPrato
      */
-    public JDialogAltPedido(java.awt.Frame parent, boolean modal, Pedido pedido) {
-       
+    public JDialogAltPrato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jTextFieldId.setText(pedido.getId() + "");
-        jTextFieldMesa.setText(pedido.getIdMesa() + "");
-        jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario() + "");
-        //jListPrato.setSelectedIndex(pedido.getPratos() + "");
-        
     }
 
     /**
@@ -39,53 +32,69 @@ public class JDialogAltPedido extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldMesa = new javax.swing.JTextField();
-        jLabelMesa = new javax.swing.JLabel();
-        jLabelGarcon = new javax.swing.JLabel();
-        jComboBoxGarcon = new javax.swing.JComboBox();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabelNome = new javax.swing.JLabel();
+        jLabelPreco = new javax.swing.JLabel();
+        jTextFieldPreco = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListPrato = new javax.swing.JList();
-        jLabel8 = new javax.swing.JLabel();
+        jListComidas = new javax.swing.JList();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldQtde = new javax.swing.JTextField();
+        jLabelQtde = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabelMesa1 = new javax.swing.JLabel();
+        jLabelCodigo = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Editar Pedidos");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        jLabel4.setText("Editar Pratos");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
-        jTextFieldMesa.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMesaActionPerformed(evt);
+                jTextFieldNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 270, 25));
+        getContentPane().add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 361, 25));
 
-        jLabelMesa.setText("Número da Mesa:");
-        getContentPane().add(jLabelMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
+        jLabelNome.setText("Nome:");
+        getContentPane().add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 20));
 
-        jLabelGarcon.setText("Garçon:");
-        getContentPane().add(jLabelGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jLabelPreco.setText("Preço:");
+        getContentPane().add(jLabelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
-        jComboBoxGarcon.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Garçon responsável pelo atendimento", " " }));
-        getContentPane().add(jComboBoxGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 270, -1));
+        jTextFieldPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPrecoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 156, 25));
 
-        jListPrato.setModel(new javax.swing.AbstractListModel() {
+        jListComidas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jListPrato);
+        jScrollPane1.setViewportView(jListComidas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 270, 70));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 160, 80));
 
-        jLabel8.setText("Pratos:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        jLabel9.setText("Ingredientes:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+
+        jTextFieldQtde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldQtdeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 156, 25));
+
+        jLabelQtde.setText("Porções:");
+        getContentPane().add(jLabelQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -128,8 +137,8 @@ public class JDialogAltPedido extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 470, -1));
 
-        jLabelMesa1.setText("Código:");
-        getContentPane().add(jLabelMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 20));
+        jLabelCodigo.setText("Código:");
+        getContentPane().add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 20));
 
         jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
@@ -137,26 +146,35 @@ public class JDialogAltPedido extends javax.swing.JDialog {
                 jTextFieldIdActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 270, 25));
+        getContentPane().add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 100, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMesaActionPerformed
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldMesaActionPerformed
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
+
+    private void jTextFieldPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPrecoActionPerformed
+
+    private void jTextFieldQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldQtdeActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int opcao = JOptionPane.showConfirmDialog(this, "Pedido já Existente! Deseja Substitui-lo?", "Confirmação de atualização", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
-            Pedido pedido = new Pedido();
-            pedido.setId(Integer.parseInt(jTextFieldId.getText()));
-            pedido.setIdMesa(Integer.parseInt(jTextFieldMesa.getText()));
-            pedido.setIdFuncionario(jComboBoxGarcon.getSelectedItem().toString());
-            pedido.setPratos(jListPrato.getSelectedValuesList());
-            
+            Prato prato = new Prato();
+            prato.setId(Integer.parseInt(jTextFieldId.getText()));
+            prato.setNome(jTextFieldNome.getText());
+            prato.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
+            prato.setQuantidadePorcoes(Integer.parseInt(jTextFieldQtde.getText()));
+            prato.setPratos(jListPrato.getSelectedValuesList());
+
             try {
-                PedidoDAO.update(pedido);
+                PedidoDAO.update(prato);
                 JOptionPane.showMessageDialog(null, "Pedido alterado com sucesso");
 
             } catch (Exception ex) {
@@ -191,20 +209,20 @@ public class JDialogAltPedido extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogAltPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogAltPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogAltPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogAltPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogAltPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogAltPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogAltPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogAltPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogAltPedido dialog = new JDialogAltPedido(new javax.swing.JFrame(), true,null);
+                JDialogAltPrato dialog = new JDialogAltPrato(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -218,16 +236,18 @@ public class JDialogAltPedido extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBoxGarcon;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelGarcon;
-    private javax.swing.JLabel jLabelMesa;
-    private javax.swing.JLabel jLabelMesa1;
-    private javax.swing.JList jListPrato;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCodigo;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelPreco;
+    private javax.swing.JLabel jLabelQtde;
+    private javax.swing.JList jListComidas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JTextField jTextFieldMesa;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPreco;
+    private javax.swing.JTextField jTextFieldQtde;
     // End of variables declaration//GEN-END:variables
 }

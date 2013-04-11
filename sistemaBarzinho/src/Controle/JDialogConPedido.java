@@ -4,6 +4,8 @@
  */
 package Controle;
 
+
+import DAO.PedidoDAO;
 import Modelo.Pedido;
 import java.util.ArrayList;
 import javax.swing.JDialog;
@@ -77,7 +79,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Consultar Comidas");
+        jLabel4.setText("Consultar Pedidos");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 11, -1, -1));
 
         jLabel7.setText("Numero da Mesa:");
@@ -100,7 +102,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
         getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 122, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Comidas Encontradas pela Consulta");
+        jLabel1.setText("Pedidos Encontrados pela Consulta");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

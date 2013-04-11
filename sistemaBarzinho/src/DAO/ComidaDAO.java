@@ -2,6 +2,7 @@ package DAO;
 
 import Modelo.Comida;
 import java.util.List;
+import org.hibernate.criterion.Restrictions;
 
 public class ComidaDAO extends DaoBasic<Comida> {
 
@@ -9,13 +10,12 @@ public class ComidaDAO extends DaoBasic<Comida> {
         super(Comida.class);
     }
     
-    public List<Comida> buscaPorNome(String nome){
+     public List<Comida> buscaPorNome(String nome){
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
-        List list = session.createQuery("from Comida as f where f.nome like '%"+nome+"%'").list();
-        session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
-        return list; 
+        List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
+        session.close(); 
+        return list;
     }
     
 }
