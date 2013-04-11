@@ -6,7 +6,7 @@ package Controle;
 
 import DAO.FuncionarioDAO;
 import Modelo.Funcionario;
-import Utilitarios.Utilitarios;
+import Utils.Utilitarios;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -222,6 +222,7 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
         String codigo = model.getValueAt(linha, coluna).toString();
         try {
             funcionario = dao.get(Integer.parseInt(codigo));
+            System.out.println(funcionario.getCodFuncionario());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -253,7 +254,7 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogAltFuncionarios(null, true, getFuncionarioSelecionado());
+            JDialog dialog = new JDialogCadFuncionario(null, true, getFuncionarioSelecionado());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         };

@@ -2,7 +2,7 @@ package Controle;
 
 import DAO.ComidaDAO;
 import Modelo.Comida;
-import Utilitarios.Utilitarios;
+import Utils.Utilitarios;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JDialog;

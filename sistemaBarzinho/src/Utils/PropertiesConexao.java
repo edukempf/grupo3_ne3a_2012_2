@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utilitarios;
+package Utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ public class PropertiesConexao {
         Properties prop = new Properties();
         FileInputStream file = null;
         try {
-            file = new FileInputStream("./src/Utilitarios/conexao.properties");
+            file = new FileInputStream("./src/Utils/conexao.properties");
             prop.load(file);
         } catch (IOException ex) {
             Logger.getLogger(PropertiesConexao.class.getName()).log(Level.SEVERE, null, ex);

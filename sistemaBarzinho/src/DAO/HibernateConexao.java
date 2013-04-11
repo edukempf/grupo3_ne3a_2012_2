@@ -21,7 +21,7 @@ public class HibernateConexao {
     private static final SessionFactory factory;
 
     private static AnnotationConfiguration getConfiguracaoHibernate() {
-        Properties prop=Utilitarios.PropertiesConexao.getProp();
+        Properties prop=Utils.PropertiesConexao.getProp();
         
         AnnotationConfiguration cfg = new AnnotationConfiguration();
 

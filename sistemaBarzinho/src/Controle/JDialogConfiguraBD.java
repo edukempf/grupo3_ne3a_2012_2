@@ -13,7 +13,7 @@ public class JDialogConfiguraBD extends javax.swing.JDialog {
     public JDialogConfiguraBD(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Properties prop=Utilitarios.PropertiesConexao.getProp();
+        Properties prop=Utils.PropertiesConexao.getProp();
         jTextFieldDatabase.setText(prop.getProperty("database"));
         jTextFieldHost.setText(prop.getProperty("host"));
         jTextFieldLogin.setText(prop.getProperty("login"));
@@ -35,7 +35,7 @@ public class JDialogConfiguraBD extends javax.swing.JDialog {
         prop.setProperty("database", jTextFieldDatabase.getText());
         prop.setProperty("porta", jTextFieldPorta.getText());
         prop.setProperty("host", jTextFieldHost.getText());
-        x=Utilitarios.PropertiesConexao.saveProp(prop);
+        x=Utils.PropertiesConexao.saveProp(prop);
         return x;
     }
             
