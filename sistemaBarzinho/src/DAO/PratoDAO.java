@@ -3,13 +3,14 @@
  * and open the template in the editor.
  */
 package DAO;
+import Modelo.Comida;
 import Modelo.Prato;
 import java.util.List;
 /**
  *
  * @author Ligue01
  */
-public class PratoDAO {
+public class PratoDAO extends DaoBasic<Comida>{
      public PratoDAO() {
         super(Prato.class);
     }
