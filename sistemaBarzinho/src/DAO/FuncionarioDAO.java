@@ -28,7 +28,7 @@ public class FuncionarioDAO extends DaoBasic<Funcionario> {
         session.beginTransaction().begin();
 //        Query query=session.createSQLQuery(sqlBuscaPorNome).setParameter("nome", nome);
         List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
-        session.close();
+        session.close(); 
         return list;
     }
     

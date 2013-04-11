@@ -24,7 +24,7 @@ public class BebidaDAO extends DaoBasic<Bebida> {
         session.beginTransaction().begin();
         List list = session.createQuery("from Bebida as f where f.nome like '%"+nome+"%'").list();
         session.beginTransaction().commit();
-        HibernateConexao.fechaConexao(session);
+        HibernateConexao.fechaConexao(session); 
         return list;
     }
     

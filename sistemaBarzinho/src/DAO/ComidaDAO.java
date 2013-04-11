@@ -15,7 +15,7 @@ public class ComidaDAO extends DaoBasic<Comida> {
         List list = session.createQuery("from Comida as f where f.nome like '%"+nome+"%'").list();
         session.beginTransaction().commit();
         HibernateConexao.fechaConexao(session);
-        return list;
+        return list; 
     }
     
 }

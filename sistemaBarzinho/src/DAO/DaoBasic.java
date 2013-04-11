@@ -60,7 +60,7 @@ public abstract class DaoBasic<T> {
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
         List list = session.createCriteria(classe).list();
-        session.close();
+        session.close(); 
         return list;
     }
       
