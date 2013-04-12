@@ -28,7 +28,6 @@ public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idPedido")
     private int id;
     
     @OneToOne(cascade = CascadeType.ALL)
@@ -39,14 +38,12 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "idFuncionario") 
     private Funcionario idFuncionario;  
     
-    @Transient
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPrato")
+    @JoinColumn(name = "idPrato",referencedColumnName="id")
     private List<Prato> pratos;
     
-    @Transient
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idBebida")
+    @JoinColumn(name = "idBebida",referencedColumnName="id")
     private List<Bebida> bebidas;
 
     public int getId() {
