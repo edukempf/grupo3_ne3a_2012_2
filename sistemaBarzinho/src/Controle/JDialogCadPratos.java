@@ -5,8 +5,14 @@
 package Controle;
 
 import Modelo.Comida;
+import Modelo.Funcionario;
 import Modelo.Prato;
+import Utils.Data;
+import Utils.Utilitarios;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,18 +23,69 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCadPratos
      */
+    
+    private DefaultTableModel model;
+    
+    
+    List<Comida> listaComida;
     public JDialogCadPratos(java.awt.Frame parent, boolean modal, Prato prato) {
        super(parent, modal);
         initComponents();
-        if(prato!=null){
-            jTextFieldNome.setText(prato.getNome());
-            jTextFieldPreco.setText(prato.getQuantidade()+"");
-            jComboBoxComida.setSelectedItem(prato.getTipo());
-            jTextFieldQtde.setText(prato.getDataValidade().toString());
-            
-        }
+        criaTabela();
+        this.listaComida=new ArrayList<Comida>();
+//        if(prato!=null){
+//            jTextFieldNome.setText(prato.getNome());
+//            jTextFieldPreco.setText(prato.getQuantidade()+"");
+//            jComboBoxComida.setSelectedItem(prato.getTipo());
+//            jTextFieldQtde.setText(prato.getDataValidade().toString());
+//            
+//        }
     }
+    
+    private void criaTabela() {
+        model = new DefaultTableModel(new String[]{"Nome","Validade"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(model);
+    }
+    
+    private void preenchetabela() {
+        model.setNumRows(0);
+        try {
+            List<Comida> lista = this.listaComida ;
+            for (Comida c : lista) {
+                model.addRow(new Object[]{c.getNome(),
+                    Utilitarios.dataISOtoBR(c.getDataValidade().toString())});
 
+            }
+            jTable1.updateUI();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+    }
+    
+    private void deleteIngrediente(){
+        int linha = jTable1.getSelectedRow();
+        listaComida.remove(linha);
+        preenchetabela();
+    }
+    
+    private void getIngrediente() {
+        
+        new JDialogConComidas(null, true).setVisible(true);
+        Comida c = (Comida) Data.hash.remove("comida");
+        if (c == null) {
+            return;
+        }
+        listaComida.add(c);
+        preenchetabela();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,8 +104,10 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         jLabelQtde = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldPreco = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListComidas = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButtonAddIngrediente = new javax.swing.JButton();
+        jButtonExcluirIngrediente = new javax.swing.JButton();
         jButtonPesquisar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonLimpar = new javax.swing.JButton();
@@ -98,14 +157,36 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         });
         jPanel3.add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 156, 25));
 
-        jListComidas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jListComidas);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 160, -1));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 170, 120));
+
+        jButtonAddIngrediente.setText("Add Ingrediente");
+        jButtonAddIngrediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddIngredienteActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonAddIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+
+        jButtonExcluirIngrediente.setText("-- Ingrediente");
+        jButtonExcluirIngrediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirIngredienteActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonExcluirIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 230));
 
@@ -177,17 +258,17 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         Prato prato = new Prato();
         prato.setNome(jTextFieldNome.getText());
         prato.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
-        //prato.setIngredientes(Comida)(jListComidas.getSelectedValue().toString());
+        prato.setIngredientes(this.listaComida);
         prato.setQuantidadePorcoes(Integer.parseInt(jTextFieldQtde.getText()));
 
         return prato;
     }
     
     private void limpaFormularioTodo() {
-        jTextFieldNome.setText("");
-        jTextFieldPreco.setText("");
-        jListComidas.setSelectedIndex(0);
-        jTextFieldQtde.setText("");
+//        jTextFieldNome.setText("");
+//        jTextFieldPreco.setText("");
+//        jListComidas.setSelectedIndex(0);
+//        jTextFieldQtde.setText("");
 
     }
     
@@ -215,7 +296,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         dispose();
-        JDialog dialog = new JDialogViewComida(null, true, this.getDadosDosCampos());
+        JDialog dialog = new JDialogViewPrato(null, true, this.getDadosDosCampos());
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -223,6 +304,16 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    private void jButtonAddIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddIngredienteActionPerformed
+        // TODO add your handling code here:
+        getIngrediente();
+    }//GEN-LAST:event_jButtonAddIngredienteActionPerformed
+
+    private void jButtonExcluirIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirIngredienteActionPerformed
+        // TODO add your handling code here:
+        deleteIngrediente();
+    }//GEN-LAST:event_jButtonExcluirIngredienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,7 +345,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogCadPratos dialog = new JDialogCadPratos(new javax.swing.JFrame(), true);
+                JDialogCadPratos dialog = new JDialogCadPratos(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -266,6 +357,8 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddIngrediente;
+    private javax.swing.JButton jButtonExcluirIngrediente;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonPesquisar;
@@ -275,10 +368,10 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelPreco;
     private javax.swing.JLabel jLabelQtde;
-    private javax.swing.JList jListComidas;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldQtde;
