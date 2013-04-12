@@ -11,10 +11,12 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCadComidas
      */
+    private Comida comida;
     public JDialogCadComidas(java.awt.Frame parent, boolean modal, Comida comida) {
       
         super(parent, modal);
         initComponents();
+        this.comida=comida;
         if(comida!=null){
             jTextFieldNome.setText(comida.getNome());
             jTextFieldQtde.setText(comida.getQuantidade()+"");
@@ -300,13 +302,16 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
      private Comida getDadosDosCampos() {
-        Comida comida = new Comida();
-        comida.setNome(jTextFieldNome.getText());
-        comida.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
-        comida.setTipo(jComboBoxComida.getSelectedItem().toString());
-        comida.setDataValidade(new Date(jTextFieldValidade.getText()));
+        Comida comi = new Comida();
+        comi.setNome(jTextFieldNome.getText());
+        comi.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
+        comi.setTipo(jComboBoxComida.getSelectedItem().toString());
+        comi.setDataValidade(new Date(jTextFieldValidade.getText()));
+        if(this.comida!=null){
+            comi.setId(this.comida.getId());
+        }
 
-        return comida;
+        return comi;
     }
     
     private void limpaFormularioTodo() {

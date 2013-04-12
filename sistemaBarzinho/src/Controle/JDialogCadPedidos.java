@@ -158,7 +158,7 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
 
      private Pedido getDadosDosCampos() {
         Pedido pedido = new Pedido();
-        //pedido.setIdMesa(jTextFieldMesa.getText());
+        pedido.setIdMesa(jTextFieldMesa.getText());
         pedido.setIdFuncionario(jComboBoxGarcon.getSelectedItem().toString());
         pedido.setPratos((jListPrato.getSelectedValue().toString()));
         pedido.setPratos(jListPrato.getSelectedValuesList());

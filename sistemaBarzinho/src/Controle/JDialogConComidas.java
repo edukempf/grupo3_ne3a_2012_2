@@ -244,7 +244,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogAltComidas(null, true, getComidaSelecionada());
+            JDialog dialog = new JDialogCadComidas(null, true, getComidaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         };

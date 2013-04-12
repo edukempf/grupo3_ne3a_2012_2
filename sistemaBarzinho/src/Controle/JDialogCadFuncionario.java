@@ -22,6 +22,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
      * Creates new form JDialogCadFuncionario
      */
     private Funcionario func;
+    private FuncionarioDAO dao;
 
     public JDialogCadFuncionario(java.awt.Frame parent, boolean modal, Funcionario func) {
         super(parent, modal);
@@ -29,7 +30,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         this.func = func;
         if (func != null) {
             jFormattedTextFieldCPF.setText(func.getCpf());
-            jFormattedTextFieldDataNasc.setText(func.getDataNasc().toString());
+            jFormattedTextFieldDataNasc.setText(Utils.Utilitarios.formatDate(func.getDataNasc()));//formata a data para padrão
             jTextFieldFuncao.setText(func.getFuncao());
             jTextFieldNome.setText(func.getNome());
             jTextFieldRg.setText(func.getRg());
@@ -297,6 +298,12 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         if (!Utils.Utilitarios.validaCpf(jFormattedTextFieldCPF.getText())) {
             erros.append("CPF informado é inválido\n");
             jFormattedTextFieldCPF.setBackground(Color.red);
+        } else {
+            dao = new FuncionarioDAO();
+            if (dao.buscaSeCpfJaExiste(Utils.Utilitarios.tiraTudo(jFormattedTextFieldCPF.getText()))) {
+                erros.append("CPF informado já existe!\n");
+                jFormattedTextFieldCPF.setBackground(Color.red);
+            }
         }
         if (!(jFormattedTextFieldDataNasc.getText() == null || jFormattedTextFieldDataNasc.getText().replaceAll("/", "").trim().equals(""))) {
             if (new Date().before(new Date(jFormattedTextFieldDataNasc.getText()))) {
@@ -312,6 +319,11 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         if (jFormattedTextFieldSalario.getText() == null || jFormattedTextFieldSalario.getText().equals("")) {
             erros.append("Salario é obrigatório!\n");
             jFormattedTextFieldSalario.setBackground(Color.red);
+        } else {
+            if (Double.parseDouble(jFormattedTextFieldSalario.getText().replace(",", ".")) < 0) {
+                erros.append("Salario não pode ser negativo!\n");
+                jFormattedTextFieldSalario.setBackground(Color.red);
+            }
         }
         if (jTextFieldFuncao.getText() == null || jTextFieldFuncao.getText().equals("")) {
             erros.append("Funcao é obrigatória!\n");
