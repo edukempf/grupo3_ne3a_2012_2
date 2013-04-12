@@ -9,6 +9,7 @@ import Modelo.Funcionario;
 import Modelo.Prato;
 import Utils.Data;
 import Utils.Utilitarios;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
@@ -27,19 +28,19 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     private DefaultTableModel model;
     
     
-    List<Comida> listaComida;
+    private List<Comida> listaComida;
     public JDialogCadPratos(java.awt.Frame parent, boolean modal, Prato prato) {
        super(parent, modal);
         initComponents();
         criaTabela();
         this.listaComida=new ArrayList<Comida>();
-//        if(prato!=null){
-//            jTextFieldNome.setText(prato.getNome());
-//            jTextFieldPreco.setText(prato.getQuantidade()+"");
-//            jComboBoxComida.setSelectedItem(prato.getTipo());
-//            jTextFieldQtde.setText(prato.getDataValidade().toString());
-//            
-//        }
+        if(prato!=null){
+            jTextFieldNome.setText(prato.getNome());
+            jTextFieldPreco.setText(prato.getPreco()+"");
+            listaComida=prato.getIngredientes();
+            preenchetabela();
+            jTextFieldQtde.setText(prato.getQuantidadePorcoes()+"");
+        }
     }
     
     private void criaTabela() {
@@ -265,10 +266,11 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     }
     
     private void limpaFormularioTodo() {
-//        jTextFieldNome.setText("");
-//        jTextFieldPreco.setText("");
-//        jListComidas.setSelectedIndex(0);
-//        jTextFieldQtde.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldPreco.setText("");
+        jTextFieldQtde.setText("");
+        this.listaComida=new ArrayList<Comida>();
+        preenchetabela();
 
     }
     
