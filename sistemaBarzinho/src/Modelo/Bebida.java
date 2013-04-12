@@ -27,7 +27,6 @@ public class Bebida implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idBebida")
     private int id;
     @Column(length=100)
     private String nome;
