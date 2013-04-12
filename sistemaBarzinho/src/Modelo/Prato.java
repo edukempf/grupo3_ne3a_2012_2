@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.annotations.LazyCollection;
 
 /**
  *
@@ -27,15 +29,12 @@ public class Prato implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idPrato")
     private int id;
     @Column(length = 100)
     private String nome;
     @Column(length = 6, precision = 2)
     private double preco;
-    @Transient
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idComida") 
+    @OneToMany(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
     private List<Comida> ingredientes;
     @Column(length = 5)
     private int quantidadePorcoes;

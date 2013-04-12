@@ -5,9 +5,14 @@
 package Controle;
 
 import DAO.PratoDAO;
+import Modelo.Comida;
 import Modelo.Prato;
+import Utils.Utilitarios;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,16 +26,47 @@ public class JDialogViewPrato extends javax.swing.JDialog {
     
     private Prato prato;
     private PratoDAO dao;
+    private DefaultTableModel model;
+    List<Comida> listaComida;
     
-    public JDialogViewPrato(java.awt.Frame parent, boolean modal) {
+    private void criaTabela() {
+        model = new DefaultTableModel(new String[]{"Nome","Validade"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(model);
+    }
+    
+    private void preenchetabela() {
+        model.setNumRows(0);
+        try {
+            List<Comida> lista = this.listaComida ;
+            for (Comida c : lista) {
+                model.addRow(new Object[]{c.getNome(),
+                    Utilitarios.dataISOtoBR(c.getDataValidade().toString())});
+
+            }
+            jTable1.updateUI();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+    }
+    
+    
+    public JDialogViewPrato(java.awt.Frame parent, boolean modal,Prato prato) {
         super(parent, modal);
         this.prato = prato;
         initComponents();
-        jLabelNome.setText(prato.getNome());
-        jLPreco.setText(prato.getPreco() + "");
-        jLabelPorcoes.setText(prato.getQuantidadePorcoes()+"");
-        jLabelIngredientes.setText(prato.getQuantidadePorcoes()+"");
-        
+        criaTabela();
+        jTextFieldNome.setText(prato.getNome());
+        jTextFieldPreco.setText(prato.getPreco()+"");
+        jTextFieldQtde.setText(prato.getQuantidadePorcoes()+"");
+        this.listaComida= prato.getIngredientes();
+        preenchetabela();
     }
 
     private void inserePrato( Prato prato) {
@@ -54,42 +90,29 @@ public class JDialogViewPrato extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelNome = new javax.swing.JLabel();
-        jLabelPreco = new javax.swing.JLabel();
-        jLabelPorcoes = new javax.swing.JLabel();
-        jLabelIngredientes = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLPorcao = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
-        jLPreco = new javax.swing.JLabel();
-        jLIngredientes = new javax.swing.JLabel();
-        jLnome3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabelNome = new javax.swing.JLabel();
+        jLabelPreco = new javax.swing.JLabel();
+        jTextFieldQtde = new javax.swing.JTextField();
+        jLabelQtde = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldPreco = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelNome.setText("Nome:");
-        getContentPane().add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
-
-        jLabelPreco.setText("Preço:");
-        getContentPane().add(jLabelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-
-        jLabelPorcoes.setText("Porções:");
-        getContentPane().add(jLabelPorcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
-
-        jLabelIngredientes.setText("Ingredientes:");
-        getContentPane().add(jLabelIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
-
         jLabel19.setText("Dados de Pratos");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1, -1, -1));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 520, 10));
-
-        jLPorcao.setText("Sem Informação");
-        getContentPane().add(jLPorcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -138,19 +161,67 @@ public class JDialogViewPrato extends javax.swing.JDialog {
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 520, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 520, 100));
 
-        jLPreco.setText("Sem Informação");
-        getContentPane().add(jLPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLIngredientes.setText("Sem Informação");
-        getContentPane().add(jLIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
+        jTextFieldNome.setEditable(false);
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 390, 25));
 
-        jLnome3.setText("Sem Informação");
-        getContentPane().add(jLnome3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+        jLabelNome.setText("Nome:");
+        jPanel3.add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 20));
+
+        jLabelPreco.setText("Preço:");
+        jPanel3.add(jLabelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jTextFieldQtde.setEditable(false);
+        jTextFieldQtde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldQtdeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 156, 25));
+
+        jLabelQtde.setText("Porções:");
+        jPanel3.add(jLabelQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        jLabel9.setText("Ingredientes:");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
+
+        jTextFieldPreco.setEditable(false);
+        jTextFieldPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPrecoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 156, 25));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setEnabled(false);
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 200, 140));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,6 +240,18 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
+
+    private void jTextFieldQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldQtdeActionPerformed
+
+    private void jTextFieldPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +283,7 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewPrato dialog = new JDialogViewPrato(new javax.swing.JFrame(), true);
+                JDialogViewPrato dialog = new JDialogViewPrato(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -215,16 +298,18 @@ public class JDialogViewPrato extends javax.swing.JDialog {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JLabel jLIngredientes;
-    private javax.swing.JLabel jLPorcao;
-    private javax.swing.JLabel jLPreco;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabelIngredientes;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelNome;
-    private javax.swing.JLabel jLabelPorcoes;
     private javax.swing.JLabel jLabelPreco;
-    private javax.swing.JLabel jLnome3;
+    private javax.swing.JLabel jLabelQtde;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPreco;
+    private javax.swing.JTextField jTextFieldQtde;
     // End of variables declaration//GEN-END:variables
 }
