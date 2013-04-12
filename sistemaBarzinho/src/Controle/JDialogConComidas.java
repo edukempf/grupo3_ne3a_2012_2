@@ -2,6 +2,7 @@ package Controle;
 
 import DAO.ComidaDAO;
 import Modelo.Comida;
+import Utils.Data;
 import Utils.Utilitarios;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class JDialogConComidas extends javax.swing.JDialog {
      */
     DefaultTableModel model;
     private ComidaDAO dao = new ComidaDAO();
+
+    
 
     private void criaTabela() {
         model = new DefaultTableModel(new String[]{"id", "nome", "quantidade", "tipo", "data_validade"}, 0) {
@@ -50,6 +53,14 @@ public class JDialogConComidas extends javax.swing.JDialog {
         initComponents();
         criaTabela();
     }
+    
+    private void carregaDados() {
+        int linha = jTable1.getSelectedRow();
+        if (linha == -1) {
+            return;
+        }
+        Data.hash.put("comida", getComidaSelecionada());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +83,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonPesquisar = new javax.swing.JButton();
+        jButtonSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -134,10 +146,10 @@ public class JDialogConComidas extends javax.swing.JDialog {
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, -1, 80));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Consultar Comidas");
@@ -193,6 +205,14 @@ public class JDialogConComidas extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 122, 30));
+
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -272,6 +292,12 @@ public class JDialogConComidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        // TODO add your handling code here:
+        carregaDados();
+        dispose();
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +344,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonRemover;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JButton jButtonView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
