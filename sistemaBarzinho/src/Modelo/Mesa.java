@@ -23,14 +23,10 @@ import javax.persistence.Transient;
 public class Mesa implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idMesa")
     private int id;
     @Column(length = 3)
     private int capacidade;    
     private boolean ocupada;
-    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
-    private Funcionario responsavel;
 
     public int getId() {
         return id;
