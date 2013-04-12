@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -38,12 +42,12 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "idFuncionario") 
     private Funcionario idFuncionario;  
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPrato",referencedColumnName="id")
+    @OneToMany(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
+    @IndexColumn(name="id")   
     private List<Prato> pratos;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idBebida",referencedColumnName="id")
+    @OneToMany(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
+    @IndexColumn(name="id")   
     private List<Bebida> bebidas;
 
     public int getId() {

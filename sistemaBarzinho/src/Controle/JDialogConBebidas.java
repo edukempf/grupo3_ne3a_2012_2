@@ -2,6 +2,7 @@ package Controle;
 
 import DAO.BebidaDAO;
 import Modelo.Bebida;
+import Utils.Data;
 import Utils.Utilitarios;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class JDialogConBebidas extends javax.swing.JDialog {
 
-    DefaultTableModel model;
+    private DefaultTableModel model;
     private BebidaDAO dao = new BebidaDAO();
 
     private void criaTabela() {
@@ -52,6 +53,14 @@ public class JDialogConBebidas extends javax.swing.JDialog {
 
     }
 
+     private void carregaDados() {
+        int linha = jTable1.getSelectedRow();
+        if (linha == -1) {
+            return;
+        }
+        Data.hash.put("bebida", getBebidaSelecionada());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +82,7 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         jBEditar = new javax.swing.JButton();
         jBView = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButtonSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -195,6 +205,14 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 51, -1, -1));
 
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -273,6 +291,12 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBEditarActionPerformed
 
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        // TODO add your handling code here:
+        carregaDados();
+        dispose();
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -320,6 +344,7 @@ public class JDialogConBebidas extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;

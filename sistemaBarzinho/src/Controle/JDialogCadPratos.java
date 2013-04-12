@@ -26,6 +26,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
      */
     
     private DefaultTableModel model;
+    private Prato prato;
     
     
     private List<Comida> listaComida;
@@ -34,6 +35,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         initComponents();
         criaTabela();
         this.listaComida=new ArrayList<Comida>();
+        this.prato=prato;
         if(prato!=null){
             jTextFieldNome.setText(prato.getNome());
             jTextFieldPreco.setText(prato.getPreco()+"");
@@ -256,13 +258,16 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private Prato getDadosDosCampos() {
-        Prato prato = new Prato();
-        prato.setNome(jTextFieldNome.getText());
-        prato.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
-        prato.setIngredientes(this.listaComida);
-        prato.setQuantidadePorcoes(Integer.parseInt(jTextFieldQtde.getText()));
+        Prato p = new Prato();
+        p.setNome(jTextFieldNome.getText());
+        p.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
+        p.setIngredientes(this.listaComida);
+        p.setQuantidadePorcoes(Integer.parseInt(jTextFieldQtde.getText()));
+        if(this.prato!=null){
+            p.setId(this.prato.getId());
+        }
 
-        return prato;
+        return p;
     }
     
     private void limpaFormularioTodo() {
