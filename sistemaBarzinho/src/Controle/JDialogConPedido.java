@@ -225,7 +225,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogAltPedido(null, true, getPedidoSelecionado());
+            JDialog dialog = new JDialogCadPedidos(null, true, getPedidoSelecionado());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         };
@@ -256,7 +256,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
     private void jButtonViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewActionPerformed
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
-            JDialog dialog = new JDialogViewComida(null, true, getPedidoSelecionado());
+            JDialog dialog = new JDialogViewPedido(null, true, getPedidoSelecionado());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {
@@ -267,7 +267,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
-            JDialog dialog = new JDialogCadComidas(null, true, getPedidoSelecionado());
+            JDialog dialog = new JDialogCadPedidos(null, true, getPedidoSelecionado());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {
@@ -305,7 +305,7 @@ public class JDialogConPedido extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConPedido dialog = new JDialogConPedido(new javax.swing.JFrame(), true);
+                JDialogCadPedidos dialog = new JDialogCadPedidos(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
