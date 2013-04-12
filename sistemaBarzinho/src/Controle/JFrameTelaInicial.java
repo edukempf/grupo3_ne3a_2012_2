@@ -4,6 +4,16 @@
  */
 package Controle;
 
+import Controle.JDialogAjuda;
+import Controle.JDialogCadBebidas;
+import Controle.JDialogCadComidas;
+import Controle.JDialogCadFuncionario;
+import Controle.JDialogCadPedidos;
+import Controle.JDialogCadPratos;
+import Controle.JDialogConBebidas;
+import Controle.JDialogConComidas;
+import Controle.JDialogConFuncionario;
+import Controle.JDialogConfiguraBD;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -21,7 +31,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
     public JFrameTelaInicial() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+        //setExtendedState(MAXIMIZED_BOTH);
 
         looks = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : looks) {
@@ -47,9 +57,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jSeparator14 = new javax.swing.JToolBar.Separator();
@@ -149,7 +157,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/bebidas.png"))); // NOI18N
-        jButton1.setToolTipText("Cadastrar Pessoa (formulário simples)");
+        jButton1.setToolTipText("Cadastrar Bebidas");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
         jButton1.setFocusable(false);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,8 +177,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/usuario.png"))); // NOI18N
-        jButton2.setToolTipText("Cadastrar Pessoa (formulário longo em abas)");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/funcionarios.png"))); // NOI18N
+        jButton2.setToolTipText("Cadastrar Funcionários");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
         jButton2.setFocusable(false);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -186,26 +198,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton2);
 
-        jButton3.setToolTipText("Cadastrar Pessoa (relacionamento 1:N com entidade fraca Telefone)");
-        jButton3.setFocusable(false);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton3);
-
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/comidas.png"))); // NOI18N
-        jButton4.setToolTipText("Cadastrar Evento (relacionamento N:N com entidade Pessoa)");
+        jButton4.setToolTipText("Cadastrar Comidas");
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -224,24 +220,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton4);
 
-        jButton11.setToolTipText("Cadstrar Cidade (mini-cadastro)");
-        jButton11.setFocusable(false);
-        jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton11MouseEntered(evt);
-            }
-        });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton11);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/listar.jpg"))); // NOI18N
-        jButton5.setToolTipText("Pesquisar Pessoa");
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
+        jButton5.setToolTipText("Cadastrar Pedidos");
+        jButton5.setBorder(null);
+        jButton5.setBorderPainted(false);
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -257,8 +239,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton5);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pratos.png"))); // NOI18N
-        jButton6.setToolTipText("Pesquisar Conta");
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/prato.png"))); // NOI18N
+        jButton6.setToolTipText("Cadastrar Pratos");
+        jButton6.setBorder(null);
+        jButton6.setBorderPainted(false);
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -276,7 +260,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jSeparator14);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/reiniciar.png"))); // NOI18N
-        jButton7.setToolTipText("Configurar Persistência");
+        jButton7.setToolTipText("Reiniciar Persistência");
+        jButton7.setBorder(null);
+        jButton7.setBorderPainted(false);
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -294,6 +280,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/conf.png"))); // NOI18N
         jButton8.setToolTipText("Reiniciar Persistência");
+        jButton8.setBorder(null);
+        jButton8.setBorderPainted(false);
         jButton8.setFocusable(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -311,7 +299,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jSeparator15);
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/calcular.png"))); // NOI18N
-        jButton9.setToolTipText("Sobre");
+        jButton9.setToolTipText("Calcular Conta");
+        jButton9.setBorder(null);
+        jButton9.setBorderPainted(false);
         jButton9.setFocusable(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -328,7 +318,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jButton9);
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/emitirConta.png"))); // NOI18N
-        jButton10.setToolTipText("Manual");
+        jButton10.setToolTipText("Emitir Conta");
+        jButton10.setBorder(null);
+        jButton10.setBorderPainted(false);
         jButton10.setFocusable(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -345,6 +337,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jButton10);
 
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mesa.png"))); // NOI18N
+        jButton12.setToolTipText("Liberar Mesa");
+        jButton12.setBorder(null);
+        jButton12.setBorderPainted(false);
         jButton12.setFocusable(false);
         jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -352,6 +347,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jSeparator16);
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/ajuda.png"))); // NOI18N
+        jButton13.setToolTipText("Ajuda");
+        jButton13.setBorder(null);
+        jButton13.setBorderPainted(false);
         jButton13.setFocusable(false);
         jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -364,6 +362,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jToolBar1.add(jSeparator2);
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.jpg"))); // NOI18N
+        jButton15.setToolTipText("Sair");
+        jButton15.setBorder(null);
+        jButton15.setBorderPainted(false);
         jButton15.setFocusable(false);
         jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -374,7 +375,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton15);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, -1));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 50));
 
         jMenu1.setMnemonic('c');
         jMenu1.setText("Cadastro");
@@ -413,7 +414,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu1.add(jSeparator5);
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/listar.jpg"))); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
         jMenuItem9.setText("Pedidos");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -424,7 +425,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu1.add(jSeparator6);
 
         jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pratos.png"))); // NOI18N
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/prato.png"))); // NOI18N
         jMenuItem15.setText("Pratos");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,7 +451,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu2.add(jSeparator7);
 
         jMenuItem19.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/usuario.png"))); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/funcionarios.png"))); // NOI18N
         jMenuItem19.setText("Funcionários");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,7 +474,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu2.add(jSeparator10);
 
         jMenuItem20.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/listar.jpg"))); // NOI18N
+        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
         jMenuItem20.setText("Pedidos");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,7 +485,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu2.add(jSeparator11);
 
         jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pratos.png"))); // NOI18N
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/prato.png"))); // NOI18N
         jMenuItem14.setText("Pratos ");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -583,10 +584,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new JDialogCadBebidas(this, true, null).setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         new JDialogCadFuncionario(this, true, null).setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
@@ -676,18 +673,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        
-    }//GEN-LAST:event_jButton3MouseEntered
-
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
-        //jLabelStatus.setText("Barra de Status");
-    }//GEN-LAST:event_jButton3MouseExited
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
         
     }//GEN-LAST:event_jButton4MouseEntered
@@ -699,14 +684,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new JDialogCadComidas(this, true, null).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseEntered
-       
-    }//GEN-LAST:event_jButton11MouseEntered
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        
-    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
         
@@ -767,6 +744,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton15ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new JDialogCadBebidas(this, true, null).setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     private void mudarThema() {
         try {
             UIManager.setLookAndFeel(looks[jComboBoxLookAndFeel.getSelectedIndex()].getClassName());
@@ -813,12 +794,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
