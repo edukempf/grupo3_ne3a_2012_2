@@ -14,18 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import org.hibernate.annotations.LazyCollection;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Juliana
  */
 @Entity
-public class Prato implements Serializable{
+public class Prato implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,11 +33,11 @@ public class Prato implements Serializable{
     private String nome;
     @Column(length = 6, precision = 2)
     private double preco;
-    @OneToMany(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comida> ingredientes;
     @Column(length = 5)
     private int quantidadePorcoes;
-    
+
     public int getId() {
         return id;
     }
@@ -78,6 +77,4 @@ public class Prato implements Serializable{
     public void setQuantidadePorcoes(int quantidadePorcoes) {
         this.quantidadePorcoes = quantidadePorcoes;
     }
-
-    
 }

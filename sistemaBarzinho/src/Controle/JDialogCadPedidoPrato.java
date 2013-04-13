@@ -6,12 +6,14 @@ package Controle;
 
 import DAO.FuncionarioDAO;
 import DAO.MesaDAO;
+import DAO.PedidoPratoDAO;
 import Modelo.Bebida;
 import Modelo.Funcionario;
 import Modelo.Mesa;
-import Modelo.Pedido;
+import Modelo.PedidoPrato;
 import Modelo.Prato;
 import Utils.Data;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -21,58 +23,35 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ligue01
  */
-public class JDialogCadPedidos extends javax.swing.JDialog {
+public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDialogCadPedidos
+     * Creates new form JDialogCadPedidoPrato
      */
-    private DefaultTableModel modelBebidas; 
-    private DefaultTableModel modelPratos; 
+    private PedidoPrato pedido;
+    private DefaultTableModel modelPratos;
     private DefaultComboBoxModel modelCombo;
-    private List<Bebida> listaBebidas;
     private List<Prato> listaPratos;
-    FuncionarioDAO daoFunc;
-    MesaDAO daoMesa;
-    
+    private FuncionarioDAO daoFunc;
+    private MesaDAO daoMesa;
+
     private void criaTabelas() {
-        modelBebidas = new DefaultTableModel(new String[]{"Nome","Preço"}, 0) {
+        modelPratos = new DefaultTableModel(new String[]{"Nome", "Preço"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        modelPratos = new DefaultTableModel(new String[]{"Nome","Preço"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        jTableBebidas.setModel(modelBebidas);
         jTablePratos.setModel(modelPratos);
     }
-    
-    private void preenchetabelaBebida() {
-        modelBebidas.setNumRows(0);
-        try {
-            List<Bebida> lista = this.listaBebidas ;
-            for (Bebida b : lista) {
-                modelBebidas.addRow(new Object[]{b.getNome(),
-                    b.getPreco()+""});
 
-            }
-            jTableBebidas.updateUI();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
     private void preenchetabelaPrato() {
         modelPratos.setNumRows(0);
         try {
-            List<Prato> lista2 = this.listaPratos ;
-            for (Prato p : lista2) {
-                modelBebidas.addRow(new Object[]{p.getNome(),
-                    p.getPreco()+""});
+            List<Prato> lista = this.listaPratos;
+            for (Prato p : lista) {
+                modelPratos.addRow(new Object[]{p.getNome(),
+                            p.getPreco() + ""});
 
             }
             jTablePratos.updateUI();
@@ -80,81 +59,66 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
             ex.printStackTrace();
         }
     }
-    
-    public void preencheComboBoxFuncionario(){
-        daoFunc=new FuncionarioDAO();
-        List<Funcionario> funcionarios=daoFunc.lista();
-        String[] nomeFunc=new String[funcionarios.size()];
-        for(int i=0;i<funcionarios.size();i++){
-            nomeFunc[i]=funcionarios.get(i).getCodFuncionario()+" - "+funcionarios.get(i).getNome();
+
+    public void preencheComboBoxFuncionario() {
+        daoFunc = new FuncionarioDAO();
+        List<Funcionario> funcionarios = daoFunc.lista();
+        String[] nomeFunc = new String[funcionarios.size()];
+        for (int i = 0; i < funcionarios.size(); i++) {
+            nomeFunc[i] = funcionarios.get(i).getCodFuncionario() + " - " + funcionarios.get(i).getNome();
         }
-        modelCombo= new DefaultComboBoxModel(nomeFunc);
+        modelCombo = new DefaultComboBoxModel(nomeFunc);
         jComboBoxGarcon.setModel(modelCombo);
         jComboBoxGarcon.updateUI();
     }
-    
-    public void preencheComboBoxMesa(){
-        daoMesa=new MesaDAO();
-        List<Mesa> mesas=daoMesa.lista();
-        String[] lista=new String[mesas.size()];
-        for(int i=0;i<mesas.size();i++){
-            lista[i]="Mesa - "+mesas.get(i).getId();
+
+    public void preencheComboBoxMesa() {
+        daoMesa = new MesaDAO();
+        List<Mesa> mesas = daoMesa.lista();
+        String[] lista = new String[mesas.size()];
+        for (int i = 0; i < mesas.size(); i++) {
+            lista[i] = "Mesa - " + mesas.get(i).getId();
         }
-        modelCombo= new DefaultComboBoxModel(lista);
+        modelCombo = new DefaultComboBoxModel(lista);
         jComboBoxMesa.setModel(modelCombo);
         jComboBoxMesa.updateUI();
     }
-    
+
     private void getPrato() {
-        
-        new JDialogConComidas(null, true).setVisible(true);
+
+        new JDialogConPratos(null, true).setVisible(true);
         Prato p = (Prato) Data.hash.remove("prato");
         if (p == null) {
             return;
         }
         listaPratos.add(p);
         preenchetabelaPrato();
-        
+
     }
-    
-    private void getBebida() {
-        
-        new JDialogConComidas(null, true).setVisible(true);
-        Bebida b = (Bebida) Data.hash.remove("bebida");
-        if (b == null) {
-            return;
-        }
-        listaBebidas.add(b);
-        preenchetabelaBebida();
-        
-    }
-    
-    private void deletePrato(){
+
+    private void deletePrato() {
         int linha = jTablePratos.getSelectedRow();
         listaPratos.remove(linha);
         preenchetabelaPrato();
     }
-    
-    private void deleteBebida(){
-        int linha = jTableBebidas.getSelectedRow();
-        listaBebidas.remove(linha);
-        preenchetabelaBebida();
-    }
-    
-    public JDialogCadPedidos(java.awt.Frame parent, boolean modal, Pedido pedido) {
-       super(parent, modal);
+
+    public JDialogCadPedidoPrato(java.awt.Frame parent, boolean modal, PedidoPrato pedido) {
+        super(parent, modal);
         initComponents();
+        this.pedido=pedido;
         criaTabelas();
+        this.listaPratos = new ArrayList<Prato>();
         preencheComboBoxFuncionario();
         preencheComboBoxMesa();
-        if(pedido!=null){
-//            jTextFieldMesa.setText(pedido.getIdMesa()+"");
-//            jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario());
-//            jListPrato.getSelectedValuesList();
-            
+        if (pedido != null) {
+            jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario() + " - " + pedido.getIdFuncionario().getNome());
+            jComboBoxMesa.setSelectedItem("Mesa - " + pedido.getIdMesa().getId());
+            this.listaPratos=pedido.getPratos();
+            preenchetabelaPrato();
+
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,13 +133,8 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
         jLabelMesa = new javax.swing.JLabel();
         jComboBoxGarcon = new javax.swing.JComboBox();
         jLabelGarcon = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableBebidas = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePratos = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jButtonAddBebida = new javax.swing.JButton();
-        jButtonRemoveBebida = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButtonAddPrato = new javax.swing.JButton();
         jButtonRemovePrato = new javax.swing.JButton();
@@ -205,21 +164,6 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
         jLabelGarcon.setText("Garçon:");
         jPanel3.add(jLabelGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jTableBebidas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTableBebidas);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 160, 110));
-
         jTablePratos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -233,28 +177,7 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTablePratos);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 150, 110));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonAddBebida.setText("add");
-        jButtonAddBebida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddBebidaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAddBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 163, -1, -1));
-
-        jButtonRemoveBebida.setText("remove");
-        jButtonRemoveBebida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRemoveBebidaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonRemoveBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 163, -1, -1));
-
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 190, 220));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 320, 110));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pratos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -265,7 +188,7 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
                 jButtonAddPratoActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonAddPrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 165, -1, -1));
+        jPanel4.add(jButtonAddPrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
         jButtonRemovePrato.setText("remove");
         jButtonRemovePrato.addActionListener(new java.awt.event.ActionListener() {
@@ -273,9 +196,9 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
                 jButtonRemovePratoActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonRemovePrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 165, -1, -1));
+        jPanel4.add(jButtonRemovePrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, 220));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 370, 220));
 
         jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 270, -1));
@@ -349,23 +272,25 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private Pedido getDadosDosCampos() {
-        Pedido pedido = new Pedido();
-//        pedido.setIdMesa(jTextFieldMesa.getText());
-//        pedido.setIdFuncionario(jComboBoxGarcon.getSelectedItem().toString());
-//        pedido.setPratos((jListPrato.getSelectedValue().toString()));
-//        pedido.setPratos(jListPrato.getSelectedValuesList());
+    private PedidoPrato getDadosDosCampos() {
+        PedidoPrato ped = new PedidoPrato();
+        ped.setIdMesa(daoMesa.get(Integer.parseInt(jComboBoxMesa.getSelectedItem().toString().substring(jComboBoxMesa.getSelectedItem().toString().lastIndexOf(" ") + 1, jComboBoxMesa.getSelectedItem().toString().length()))));
+        ped.setIdFuncionario(daoFunc.get(Integer.parseInt(jComboBoxGarcon.getSelectedItem().toString().substring(0, jComboBoxGarcon.getSelectedItem().toString().indexOf(" ")))));
+        ped.setPratos(this.listaPratos);
+        if(this.pedido!=null){
+            ped.setId(this.pedido.getId());
+        }
 
-        return pedido;
+        return ped;
     }
-    
+
     private void limpaFormularioTodo() {
-//        jTextFieldMesa.setText("");
-//        jComboBoxGarcon.setSelectedIndex(0);
-//        jListPrato.setSelectedIndex(0);
-
+        jComboBoxMesa.setSelectedIndex(0);
+        jComboBoxGarcon.setSelectedIndex(0);
+        listaPratos.removeAll(listaPratos);
+        preenchetabelaPrato();
     }
-    
+
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         JDialog dialog = new JDialogConComidas(null, true);
         dialog.setLocation(getX() + 50, getY() + 50);
@@ -378,7 +303,7 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         dispose();
-        JDialog dialog = new JDialogViewPedido(null, true, this.getDadosDosCampos());
+        JDialog dialog = new JDialogViewPedidoPrato(null, true, this.getDadosDosCampos());
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -392,20 +317,10 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
         getPrato();
     }//GEN-LAST:event_jButtonAddPratoActionPerformed
 
-    private void jButtonAddBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBebidaActionPerformed
-        // TODO add your handling code here:
-        getBebida();
-    }//GEN-LAST:event_jButtonAddBebidaActionPerformed
-
     private void jButtonRemovePratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemovePratoActionPerformed
         // TODO add your handling code here:
         deletePrato();
     }//GEN-LAST:event_jButtonRemovePratoActionPerformed
-
-    private void jButtonRemoveBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveBebidaActionPerformed
-        // TODO add your handling code here:
-        deleteBebida();
-    }//GEN-LAST:event_jButtonRemoveBebidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,20 +339,20 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogCadPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogCadPedidoPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogCadPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogCadPedidoPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogCadPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogCadPedidoPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogCadPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogCadPedidoPrato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogCadPedidos dialog = new JDialogCadPedidos(new javax.swing.JFrame(), true,null);
+                JDialogCadPedidoPrato dialog = new JDialogCadPedidoPrato(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -450,12 +365,10 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonAddBebida;
     private javax.swing.JButton jButtonAddPrato;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonPesquisar;
-    private javax.swing.JButton jButtonRemoveBebida;
     private javax.swing.JButton jButtonRemovePrato;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxGarcon;
@@ -463,13 +376,10 @@ public class JDialogCadPedidos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelGarcon;
     private javax.swing.JLabel jLabelMesa;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTableBebidas;
     private javax.swing.JTable jTablePratos;
     // End of variables declaration//GEN-END:variables
 }

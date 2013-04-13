@@ -8,7 +8,6 @@ import DAO.PratoDAO;
 import Modelo.Comida;
 import Modelo.Prato;
 import Utils.Utilitarios;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;

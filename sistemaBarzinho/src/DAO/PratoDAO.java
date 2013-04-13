@@ -18,6 +18,7 @@ public class PratoDAO extends DaoBasic<Prato>{
       public List<Prato> buscaPorNome(String nome){
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
+//        Query query=session.createSQLQuery("select f from Funcionario as f where f.nome like \"%:nome%\"").setParameter("nome", nome);
         List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
         session.close(); 
         return list;
