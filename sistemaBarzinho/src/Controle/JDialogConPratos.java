@@ -274,11 +274,12 @@ public class JDialogConPratos extends javax.swing.JDialog {
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
 
         Prato prato = getPratoSelecionado();
+        prato.setIngredientes(null);
         if (prato != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Prato?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    dao.delete(prato.getId());
+                    dao.delete(prato);
                     preenchetabela();
                 } catch (Exception ex) {
                     ex.printStackTrace();
