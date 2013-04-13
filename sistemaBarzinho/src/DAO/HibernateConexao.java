@@ -27,8 +27,9 @@ public class HibernateConexao {
         cfg.addAnnotatedClass(Comida.class);
         cfg.addAnnotatedClass(Bebida.class);
         cfg.addAnnotatedClass(Mesa.class);
-        cfg.addAnnotatedClass(Pedido.class);
         cfg.addAnnotatedClass(Prato.class);
+        cfg.addAnnotatedClass(PedidoBebida.class);
+        cfg.addAnnotatedClass(PedidoPrato.class);
         cfg.setProperty("hibernate.connection.driver", "com.mysql.jdbc.Driver");
         cfg.setProperty("hibernate.connection.url", "jdbc:mysql://" + prop.getProperty("host") + "/" + prop.getProperty("database"));
         cfg.setProperty("hibernate.connection.user", prop.getProperty("login"));

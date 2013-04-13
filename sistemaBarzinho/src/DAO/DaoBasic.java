@@ -38,14 +38,12 @@ public abstract class DaoBasic<T> {
         session.close();
     }
     
-    public T delete(int id){
-        Object deletado= this.get(id);
+    public void delete(Object deletar){
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
-        session.delete(deletado);
+        session.delete(deletar);
         session.beginTransaction().commit();
         session.close();
-        return (T)deletado;
     }
     
     public T get(int id){
