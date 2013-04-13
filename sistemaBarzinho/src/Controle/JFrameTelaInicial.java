@@ -8,7 +8,7 @@ import Controle.JDialogAjuda;
 import Controle.JDialogCadBebidas;
 import Controle.JDialogCadComidas;
 import Controle.JDialogCadFuncionario;
-import Controle.JDialogCadPedidos;
+import Controle.JDialogCadPedidoPrato;
 import Controle.JDialogCadPratos;
 import Controle.JDialogConBebidas;
 import Controle.JDialogConComidas;
@@ -593,7 +593,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        //new JDialogCadPedidos(this, true).setVisible(true); 
+        //new JDialogCadPedidoPrato(this, true).setVisible(true); 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
@@ -690,7 +690,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5MouseEntered
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new JDialogCadPedidos(this, true, null).setVisible(true);
+        new JDialogCadPedidoPrato(this, true, null).setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
