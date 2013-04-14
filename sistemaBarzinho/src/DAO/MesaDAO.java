@@ -6,6 +6,7 @@ package DAO;
 
 import Modelo.Mesa;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -18,10 +19,11 @@ public class MesaDAO extends DaoBasic<Mesa>{
         super(Mesa.class);
     }
     
-     public List<Mesa> buscaPorNome(String nome){
+     public List<Mesa> buscaMesa(int cod){
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
-        List list = session.createCriteria(classe).add(Restrictions.like("nome", "%"+nome+"%")).list();
+        Query query=session.createQuery("from Mesa as m where m.id = :nmesa").setParameter("nmesa", cod);
+        List list=query.list();
         session.close(); 
         return list;
     }

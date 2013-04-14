@@ -235,7 +235,7 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    dao.delete(funcionario.getCodFuncionario());
+                    dao.delete(funcionario);
                     preenchetabela();
                 } catch (Exception ex) {
                     ex.printStackTrace();

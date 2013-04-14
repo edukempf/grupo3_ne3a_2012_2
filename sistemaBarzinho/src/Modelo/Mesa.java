@@ -22,7 +22,7 @@ public class Mesa implements Serializable{
     private int id;
     @Column(length = 3)
     private int capacidade;    
-    private boolean status;
+    private Boolean status;
 
     public int getId() {
         return id;

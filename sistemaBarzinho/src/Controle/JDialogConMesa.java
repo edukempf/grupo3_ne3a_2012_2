@@ -16,10 +16,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Juliana
  */
-public class JDialogConMesas extends javax.swing.JDialog {
+public class JDialogConMesa extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDialogConMesas
+     * Creates new form JDialogConMesa
      */
     private DefaultTableModel model;
     private MesaDAO dao = new MesaDAO();
@@ -38,11 +38,23 @@ public class JDialogConMesas extends javax.swing.JDialog {
 
         model.setNumRows(0);
         try {
-            ArrayList<Mesa> lista = (ArrayList<Mesa>) dao.buscaPorNome(jTextFieldNome.getText());
+            ArrayList<Mesa> lista ;
+            if (!jTextFieldNome.getText().equals("")) {
+                lista = (ArrayList<Mesa>) dao.buscaMesa(Integer.parseInt(jTextFieldNome.getText()));
+
+            }else{
+                lista= (ArrayList<Mesa>)dao.lista();
+            }
             for (Mesa mesa : lista) {
+                String status;
+                if (mesa.isStatus()) {
+                    status = "Ocupada";
+                } else {
+                    status = "Livre";
+                }
                 model.addRow(new Object[]{mesa.getId(),
                             mesa.getCapacidade(),
-                            mesa.getStatus()});
+                            status});
 
             }
             jTable1.updateUI();
@@ -51,7 +63,7 @@ public class JDialogConMesas extends javax.swing.JDialog {
         }
     }
 
-    public JDialogConMesas(java.awt.Frame parent, boolean modal) {
+    public JDialogConMesa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         criaTabela();
@@ -59,13 +71,13 @@ public class JDialogConMesas extends javax.swing.JDialog {
 
     }
 
-     private void carregaDados() {
+    private void carregaDados() {
         int linha = jTable1.getSelectedRow();
         if (linha == -1) {
             return;
         }
-        Data.hash.put("Mesa", getBebidaSelecionada());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +94,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButtonSelecionar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -138,13 +149,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Mesas Encontradas pela Consulta");
-
-        jButtonSelecionar.setText("Selecionar");
-        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelecionarActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -232,9 +236,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(10, 10, 10)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(430, 430, 430)
-                            .addComponent(jButtonSelecionar))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -256,9 +257,7 @@ public class JDialogConMesas extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addGap(11, 11, 11)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(8, 8, 8)
-                    .addComponent(jButtonSelecionar)
-                    .addGap(17, 17, 17)
+                    .addGap(48, 48, 48)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -266,7 +265,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private Mesa getMesaSelecionada() {
 
         Mesa mesa = new Mesa();
@@ -281,7 +279,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
         return mesa;
     }
 
-    
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
@@ -294,17 +291,11 @@ public class JDialogConMesas extends javax.swing.JDialog {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            JDialog dialog = new JDialogCadMesas(null, true, getMesaSelecionada());
+            JDialog dialog = new JDialogCadMesa(null, true, getMesaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         };
     }//GEN-LAST:event_jTable1MousePressed
-
-    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
-        // TODO add your handling code here:
-        carregaDados();
-        dispose();
-    }//GEN-LAST:event_jButtonSelecionarActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         Mesa mesa = getMesaSelecionada();
@@ -312,7 +303,7 @@ public class JDialogConMesas extends javax.swing.JDialog {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Mesa?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    dao.delete(mesa.getId());
+                    dao.delete(mesa);
                     preenchetabela();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -330,7 +321,7 @@ public class JDialogConMesas extends javax.swing.JDialog {
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
-            JDialog dialog = new JDialogCadMesas(null, true, getMesaSelecionada());
+            JDialog dialog = new JDialogCadMesa(null, true, getMesaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {
@@ -341,7 +332,7 @@ public class JDialogConMesas extends javax.swing.JDialog {
     private void jBViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBViewActionPerformed
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
-            JDialog dialog = new JDialogViewMesas(null, true, getMesaSelecionada());
+            JDialog dialog = new JDialogViewMesa(null, true, getMesaSelecionada());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {
@@ -366,20 +357,20 @@ public class JDialogConMesas extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogConMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogConMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogConMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogConMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogConMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogConMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogConMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogConMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConMesas dialog = new JDialogConMesas(new javax.swing.JFrame(), true);
+                JDialogConMesa dialog = new JDialogConMesa(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -396,7 +387,6 @@ public class JDialogConMesas extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
