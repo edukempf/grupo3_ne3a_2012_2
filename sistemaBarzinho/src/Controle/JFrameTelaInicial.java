@@ -4,6 +4,7 @@
  */
 package Controle;
 
+import DAO.HibernateConexao;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -22,11 +23,20 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
     public JFrameTelaInicial() {
         initComponents();
-        //setExtendedState(MAXIMIZED_BOTH);
-
+        setExtendedState(MAXIMIZED_BOTH);
+        HibernateConexao.getSession();
         looks = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : looks) {
             jComboBoxLookAndFeel.addItem(lookAndFeelInfo.getClassName());
+        }
+    }
+    
+    private void reiniciaBanco(){
+        int op=JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja reiniciar\n "
+                + "a base de dados do sistema e \n apagar todos os dados armazenados?",
+                "Aviso", JOptionPane.OK_CANCEL_OPTION);
+        if(op==JOptionPane.OK_OPTION){
+            HibernateConexao.createSchema();
         }
     }
 
@@ -662,9 +672,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja reiniciar\n "
-                + "a base de dados do sistema e \n apagar todos os dados armazenados?",
-                "Aviso", JOptionPane.OK_CANCEL_OPTION);
+        reiniciaBanco();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
