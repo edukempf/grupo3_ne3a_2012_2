@@ -13,8 +13,9 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
  *
- * @author Eduardo
+ * @author Juliana
  */
+
 public class HibernateConexao {
 
     private static SessionFactory factory;

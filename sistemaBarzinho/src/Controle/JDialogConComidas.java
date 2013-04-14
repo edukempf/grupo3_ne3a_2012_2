@@ -4,12 +4,15 @@ import DAO.ComidaDAO;
 import Modelo.Comida;
 import Utils.Data;
 import Utils.Utilitarios;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Juliana
+ */
 public class JDialogConComidas extends javax.swing.JDialog {
 
     /**
@@ -244,7 +247,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma Comida!");
+            JOptionPane.showMessageDialog(null, "Por favor Selecione uma Comida!");
         }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 

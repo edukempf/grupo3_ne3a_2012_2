@@ -3,9 +3,10 @@ package Controle;
 
 import java.util.Properties;
 
+
 /**
  *
- * @author Eduardo
+ * @author Juliana
  */
 public class JDialogConfiguraBD extends javax.swing.JDialog {
 

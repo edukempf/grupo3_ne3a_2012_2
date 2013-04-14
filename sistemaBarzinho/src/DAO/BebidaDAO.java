@@ -8,11 +8,9 @@ import Modelo.Bebida;
 import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
-
-
 /**
  *
- * @author Eduardo
+ * @author Juliana
  */
 public class BebidaDAO extends DaoBasic<Bebida> {
 

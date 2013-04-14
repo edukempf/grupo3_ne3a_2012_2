@@ -5,15 +5,11 @@
 package Modelo;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
@@ -26,7 +22,7 @@ public class Mesa implements Serializable{
     private int id;
     @Column(length = 3)
     private int capacidade;    
-    private boolean ocupada;
+    private boolean status;
 
     public int getId() {
         return id;
@@ -44,12 +40,12 @@ public class Mesa implements Serializable{
         this.capacidade = capacidade;
     }
 
-    public boolean isOcupada() {
-        return ocupada;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
 }

@@ -4,6 +4,10 @@ import Modelo.Comida;
 import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ *
+ * @author Juliana
+ */
 public class ComidaDAO extends DaoBasic<Comida> {
 
     public ComidaDAO() {

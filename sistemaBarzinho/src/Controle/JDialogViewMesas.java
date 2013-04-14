@@ -4,44 +4,39 @@
  */
 package Controle;
 
-import DAO.BebidaDAO;
-import Modelo.Bebida;
+import DAO.MesaDAO;
+import Modelo.Mesa;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author Juliana
  */
-
-public class JDialogViewBebida extends javax.swing.JDialog {
+public class JDialogViewMesas extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDialogViewBebida
+     * Creates new form JDialogViewMesas
      */
-    private Bebida bebida;
-    private BebidaDAO dao;
+    private Mesa mesa;
+    private MesaDAO dao;
 
-    public JDialogViewBebida(java.awt.Frame parent, boolean modal, Bebida bebida) {
+    public JDialogViewMesas(java.awt.Frame parent, boolean modal, Mesa mesa) {
         super(parent, modal);
-        this.bebida = bebida;
+        this.mesa = mesa;
         initComponents();
-        jLNome.setText(bebida.getNome());
-        jLQdte.setText(bebida.getQtde() + "");
-        jLTipo.setText(bebida.getTipo());
-        jLPreco.setText(bebida.getPreco() + "");
-        jLDataValidade.setText(bebida.getDataValidade().toString());
+        jLCapacidade.setText(mesa.getCapacidade()+"");
+        jLStatus.setText(mesa.getStatus().toString());
     }
 
-    private void insereBebida(Bebida bebida) {
-        dao = new BebidaDAO();
+    private void insereBebida(Mesa mesa) {
+        dao = new MesaDAO();
         try {
-            dao.persisteObjeto(bebida);
-            JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
+            dao.persisteObjeto(mesa);
+            JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
             System.out.println(ex.toString());
         }
     }
@@ -55,18 +50,12 @@ public class JDialogViewBebida extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLNome = new javax.swing.JLabel();
-        jLQdte = new javax.swing.JLabel();
-        jLDataValidade = new javax.swing.JLabel();
-        jLTipo = new javax.swing.JLabel();
-        jLPreco = new javax.swing.JLabel();
+        jLCapacidade = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLStatus = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
@@ -75,39 +64,21 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setText("Nome:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
-
-        jLabel8.setText("Quantidade:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        jLabel9.setText("Preço:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-
-        jLabel1.setText("Validade:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
-        jLabel10.setText("Tipo:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
-
-        jLabel19.setText("Dados de Bebidas");
+        jLabel19.setText("Dados de Mesas");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1, -1, -1));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 520, 10));
 
-        jLNome.setText("Sem Informação");
-        getContentPane().add(jLNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jLCapacidade.setText("Sem Informação");
+        getContentPane().add(jLCapacidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        jLQdte.setText("Sem Informação");
-        getContentPane().add(jLQdte, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+        jLabel7.setText("Capacidade:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
 
-        jLDataValidade.setText("Sem Informação");
-        getContentPane().add(jLDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
+        jLabel8.setText("Status:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
-        jLTipo.setText("Sem Informação");
-        getContentPane().add(jLTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
-
-        jLPreco.setText("Sem Informação");
-        getContentPane().add(jLPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jLStatus.setText("Sem Informação");
+        getContentPane().add(jLStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -159,13 +130,13 @@ public class JDialogViewBebida extends javax.swing.JDialog {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 520, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 520, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        insereBebida(this.bebida);
+        insereBebida(this.mesa);
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -174,10 +145,10 @@ public class JDialogViewBebida extends javax.swing.JDialog {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         dispose();
-        JDialog dialog = new JDialogCadBebidas(null, true, this.bebida);
+        JDialog dialog = new JDialogCadMesas(null, true, this.mesa);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
@@ -197,21 +168,20 @@ public class JDialogViewBebida extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogViewBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogViewMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                JDialogViewBebida dialog = new JDialogViewBebida(new javax.swing.JFrame(), true,null);
+                JDialogViewMesas dialog = new JDialogViewMesas(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -226,17 +196,11 @@ public class JDialogViewBebida extends javax.swing.JDialog {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JLabel jLDataValidade;
-    private javax.swing.JLabel jLNome;
-    private javax.swing.JLabel jLPreco;
-    private javax.swing.JLabel jLQdte;
-    private javax.swing.JLabel jLTipo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLCapacidade;
+    private javax.swing.JLabel jLStatus;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables

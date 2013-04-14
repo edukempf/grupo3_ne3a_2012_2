@@ -6,13 +6,12 @@ package Controle;
 
 import DAO.ComidaDAO;
 import Modelo.Comida;
-import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Ligue01
+ * @author Juliana
  */
 public class JDialogViewComida extends javax.swing.JDialog {
 

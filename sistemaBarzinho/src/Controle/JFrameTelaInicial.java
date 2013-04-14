@@ -4,23 +4,14 @@
  */
 package Controle;
 
-import Controle.JDialogAjuda;
-import Controle.JDialogCadBebidas;
-import Controle.JDialogCadComidas;
-import Controle.JDialogCadFuncionario;
-import Controle.JDialogCadPedidoPrato;
-import Controle.JDialogCadPratos;
-import Controle.JDialogConBebidas;
-import Controle.JDialogConComidas;
-import Controle.JDialogConFuncionario;
-import Controle.JDialogConfiguraBD;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+
 /**
  *
- * @author a899321
+ * @author Juliana
  */
 public class JFrameTelaInicial extends javax.swing.JFrame {
 
@@ -81,7 +72,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jSeparator18 = new javax.swing.JPopupMenu.Separator();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jSeparator17 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
@@ -92,7 +87,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         jMenuItem20 = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jSeparator19 = new javax.swing.JPopupMenu.Separator();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
@@ -415,7 +413,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
-        jMenuItem9.setText("Pedidos");
+        jMenuItem9.setText("Pedidos Bebidas");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -423,6 +421,17 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem9);
         jMenu1.add(jSeparator6);
+
+        jMenuItem21.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
+        jMenuItem21.setText("Pedidos de Pratos");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem21);
+        jMenu1.add(jSeparator18);
 
         jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/prato.png"))); // NOI18N
@@ -433,6 +442,17 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem15);
+        jMenu1.add(jSeparator17);
+
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mesa.png"))); // NOI18N
+        jMenuItem11.setText("Mesa");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem11);
 
         jMenuBar1.add(jMenu1);
 
@@ -475,7 +495,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jMenuItem20.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
-        jMenuItem20.setText("Pedidos");
+        jMenuItem20.setText("Pedidos de Bebbidas");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem20ActionPerformed(evt);
@@ -483,6 +503,17 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem20);
         jMenu2.add(jSeparator11);
+
+        jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
+        jMenuItem13.setText("Pedidos de Pratos");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem13);
+        jMenu2.add(jSeparator19);
 
         jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/prato.png"))); // NOI18N
@@ -493,6 +524,16 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem14);
+
+        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mesa.png"))); // NOI18N
+        jMenuItem12.setText("Mesa");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem12);
 
         jMenuBar1.add(jMenu2);
 
@@ -593,7 +634,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        //new JDialogCadPedidoPrato(this, true).setVisible(true); 
+        new JDialogCadPedidoBebida(this, true, null).setVisible(true); 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
@@ -613,11 +654,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        // new JDialogConPedidos(this, true).setVisible(true);
+         new JDialogConPedidoBebida(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        //new JDialogConPratos(this, true).setVisible(true);
+        new JDialogConPratos(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -650,11 +691,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLookAndFeelActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        new JDialogCadFuncionario(this, true, null).setVisible(true);
+       // new JDialogCadFuncionario(this, true, null).setVisible(true);
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        //jLabelStatus.setText("Barra de Status");
+        jLabelStatus.setText("Barra de Status");
     }//GEN-LAST:event_jButton1MouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -666,7 +707,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseEntered
 
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        //jLabelStatus.setText("Barra de Status");
+       
     }//GEN-LAST:event_jButton2MouseExited
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -678,7 +719,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        //jLabelStatus.setText("Barra de Status");
+       jLabelStatus.setText("Barra de Status");
     }//GEN-LAST:event_jButton4MouseExited
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -747,6 +788,22 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         new JDialogCadBebidas(this, true, null).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        new JDialogConMesas(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        new JDialogCadMesas(this, true, null).setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        new JDialogCadPedidoPrato(this, true, null).setVisible(true); 
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void mudarThema() {
         try {
@@ -817,6 +874,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
@@ -825,6 +885,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -841,6 +902,9 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator14;
     private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JToolBar.Separator jSeparator16;
+    private javax.swing.JPopupMenu.Separator jSeparator17;
+    private javax.swing.JPopupMenu.Separator jSeparator18;
+    private javax.swing.JPopupMenu.Separator jSeparator19;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;

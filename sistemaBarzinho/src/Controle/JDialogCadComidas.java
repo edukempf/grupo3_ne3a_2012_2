@@ -7,6 +7,10 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Juliana
+ */
 public class JDialogCadComidas extends javax.swing.JDialog {
 
     /**
@@ -39,27 +43,27 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         StringBuilder erros = new StringBuilder("");
         this.setColorBG();
         if (jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")) {
-            erros.append("Nome é obrigatório!\n");
+            erros.append("O campo Nome é obrigatório!\n");
             jTextFieldNome.setBackground(Color.red);
         }
         if (jTextFieldQtde.getText() == null || jTextFieldQtde.getText().equals("")) {
-            erros.append("Quantidade é obrigatória!\n");
+            erros.append("O campo Quantidade é obrigatória!\n");
             jTextFieldQtde.setBackground(Color.red);
         } else {
             if (Integer.parseInt(jTextFieldQtde.getText()) < 0) {
-                erros.append("Quantidade não pode ser negativa!\n");
+                erros.append("O campo Quantidade não pode ser negativa!\n");
                 jTextFieldQtde.setBackground(Color.red);
             }
         }
 
         if (!(jFormattedTextFieldDataValidade.getText() == null || jFormattedTextFieldDataValidade.getText().replaceAll("/", "").trim().equals(""))) {
-            if (new Date().before(new Date(jFormattedTextFieldDataValidade.getText()))) {
+            if (new Date().after(new Date(jFormattedTextFieldDataValidade.getText()))) {
                 erros.append("Data de Validade informada é inválida!\n");
                 jFormattedTextFieldDataValidade.setBackground(Color.red);
             }
 
         } else {
-            erros.append("Data de Validade é obrigatória!\n");
+            erros.append("O campo Data de Validade é obrigatória!\n");
             jFormattedTextFieldDataValidade.setBackground(Color.red);
         }
 
@@ -275,7 +279,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 27, -1, 20));
 
         jLabel8.setText("Quantidade:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 77, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel10.setText("Validade:");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 117, -1, -1));
@@ -382,6 +386,8 @@ public class JDialogCadComidas extends javax.swing.JDialog {
             JDialog dialog = new JDialogViewComida(null, true, this.getDadosDosCampos());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, aux);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

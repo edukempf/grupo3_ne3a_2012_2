@@ -4,12 +4,15 @@ import DAO.BebidaDAO;
 import Modelo.Bebida;
 import Utils.Data;
 import Utils.Utilitarios;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Juliana
+ */
 public class JDialogConBebidas extends javax.swing.JDialog {
 
     private DefaultTableModel model;
@@ -247,7 +250,7 @@ public class JDialogConBebidas extends javax.swing.JDialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma bebida!");
+            JOptionPane.showMessageDialog(null, "Por favor Selecione uma bebida!");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 

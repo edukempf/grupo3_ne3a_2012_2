@@ -5,7 +5,12 @@ import Modelo.Bebida;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Juliana
+ */
 public class JDialogCadBebidas extends javax.swing.JDialog {
 
     private Bebida bebi;
@@ -36,30 +41,30 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         StringBuilder erros = new StringBuilder("");
         this.setColorBG();
         if (jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")) {
-            erros.append("Nome é obrigatório!\n");
+            erros.append("O campo Nome é Obrigatório!\n");
             jTextFieldNome.setBackground(Color.red);
         }
         if (jTextFieldQtde.getText() == null || jTextFieldQtde.getText().equals("")) {
-            erros.append("Quantidade é obrigatória!\n");
+            erros.append("O campo Quantidade é Obrigatória!\n");
             jTextFieldQtde.setBackground(Color.red);
         }else {
-            if (Double.parseDouble(jTextFieldQtde.getText().replace(",", ".")) < 0) {
-                erros.append("Quantidade não pode ser negativa!\n");
+            if (Integer.parseInt(jTextFieldQtde.getText()) < 0) {
+                erros.append("O campo Quantidade não pode ser negativa!\n");
                 jTextFieldQtde.setBackground(Color.red);
             }
         }
         if (jFormattedTextFieldPreco.getText() == null || jFormattedTextFieldPreco.getText().equals("")) {
-            erros.append("Preço é obrigatório!\n");
+            erros.append("O campo Preço é obrigatório!\n");
             jFormattedTextFieldPreco.setBackground(Color.red);
         } else {
-            if (Integer.parseInt(jTextFieldQtde.getText()) < 0) {
-                erros.append("Quantidade não pode ser negativa!\n");
-                jTextFieldQtde.setBackground(Color.red);
+            if (Double.parseDouble(jFormattedTextFieldPreco.getText().replace(",", ".")) < 0) {
+                erros.append("O campo Preço não pode ser negativo!\n");
+                jFormattedTextFieldPreco.setBackground(Color.red);
             }
         }
 
         if (!(jFormattedTextFieldDataValidade.getText() == null || jFormattedTextFieldDataValidade.getText().replaceAll("/", "").trim().equals(""))) {
-            if (new Date().before(new Date(jFormattedTextFieldDataValidade.getText()))) {
+            if (new Date().after(new Date(jFormattedTextFieldDataValidade.getText()))) {
                 erros.append("Data de Validade informada é inválida!\n");
                 jFormattedTextFieldDataValidade.setBackground(Color.red);
             }
@@ -102,7 +107,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -188,7 +193,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 13, 387, 25));
 
         jLabel7.setText("Nome:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 15, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 20));
 
         jLabel8.setText("Quantidade:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, -1, -1));
@@ -203,10 +208,10 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 61, -1, -1));
 
         jLabel9.setText("Preço:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 99, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 100, -1, -1));
 
         jLabel1.setText("Validade:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 152, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 148, -1, -1));
 
         try {
             jFormattedTextFieldDataValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -220,19 +225,19 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
 
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("*");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 10, 10));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 145, 10, 10));
 
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 10, 10));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 10, 10));
 
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("*");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 10, 10));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 99, 10, 10));
 
-        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel11.setText("*");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 10, 10));
+        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel13.setText("*");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 10, 10));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 210));
 
@@ -291,6 +296,8 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
             JDialog dialog = new JDialogViewBebida(null, true, this.getDadosDosCampos());
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, aux);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -350,8 +357,8 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextFieldPreco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
