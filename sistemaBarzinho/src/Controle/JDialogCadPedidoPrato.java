@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ligue01
+ * @author Juliana
  */
 public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 

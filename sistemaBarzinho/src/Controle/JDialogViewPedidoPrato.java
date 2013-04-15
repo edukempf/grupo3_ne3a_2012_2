@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ligue01
+ * @author Juliana
  */
 public class JDialogViewPedidoPrato extends javax.swing.JDialog {
 

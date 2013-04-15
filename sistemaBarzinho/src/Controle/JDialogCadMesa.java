@@ -5,7 +5,6 @@
 package Controle;
 
 import Modelo.Mesa;
-import java.awt.Button;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
@@ -13,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Eduardo
+ * @author Juliana
  */
 public class JDialogCadMesa extends javax.swing.JDialog {
 

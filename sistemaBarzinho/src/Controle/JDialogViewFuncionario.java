@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  
 /**
  *
- * @author Ligue01
+ * @author Juliana
  */
 public class JDialogViewFuncionario extends javax.swing.JDialog {
 

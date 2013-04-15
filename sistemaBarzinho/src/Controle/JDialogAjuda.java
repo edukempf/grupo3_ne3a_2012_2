@@ -1,5 +1,10 @@
 package Controle;
- 
+
+ /**
+ *
+ * @author Juliana
+ */
+
 public class JDialogAjuda extends javax.swing.JDialog {
 
     public JDialogAjuda(java.awt.Frame parent, boolean modal) {
