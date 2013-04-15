@@ -284,7 +284,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jLabel10.setText("Validade:");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 117, -1, -1));
 
-        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Tipo", "g", "Kg", " " }));
+        jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Grama", "Kilograma", " " }));
         jPanel3.add(jComboBoxComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 67, 153, -1));
 
         jLabel9.setText("Tipo:");

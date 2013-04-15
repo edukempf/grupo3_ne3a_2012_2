@@ -23,7 +23,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
     public JFrameTelaInicial() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+
         HibernateConexao.getSession();
         looks = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : looks) {
