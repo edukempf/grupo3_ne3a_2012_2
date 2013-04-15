@@ -236,7 +236,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         bebida.setNome(jTextFieldNome.getText());
         bebida.setQtde(Integer.parseInt(jTextFieldQtde.getText()));
         bebida.setTipo(jComboBoxBebida.getSelectedItem().toString());
-        bebida.setPreco(Double.parseDouble(jFormattedTextFieldPreco.getText()));
+        bebida.setPreco(Double.parseDouble(jFormattedTextFieldPreco.getText().replace(",", ".")));
         bebida.setDataValidade(new Date(jFormattedTextFieldDataValidade.getText()));
 
         if (this.bebi != null) {
