@@ -27,7 +27,7 @@ public class JDialogViewComida extends javax.swing.JDialog {
         jLNome.setText(comida.getNome());
         jLQdte.setText(comida.getQuantidade() + "");
         jLTipo.setText(comida.getTipo());
-        jLDataValidade.setText(comida.getDataValidade().toString());
+        jLDataValidade.setText(Utils.Utilitarios.formatDate(comida.getDataValidade()));
     }
 
     private void insereComida(Comida comida) {

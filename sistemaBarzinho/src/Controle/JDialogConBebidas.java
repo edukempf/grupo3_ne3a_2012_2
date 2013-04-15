@@ -247,7 +247,7 @@ public class JDialogConBebidas extends javax.swing.JDialog {
                     preenchetabela();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir bebida!\n"
-                            + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
+                            + "Certifique-se que a bebida não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();
                 }
             }

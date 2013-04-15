@@ -3,7 +3,10 @@ package Controle;
 import DAO.ComidaDAO;
 import Modelo.Comida;
 import java.awt.Color;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -26,7 +29,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         this.comi = comida;
         if (comida != null) {
             jTextFieldNome.setText(comida.getNome());
-            jTextFieldQtde.setText(comida.getQuantidade() + "");
+            jFormattedTextFieldQuant.setText(comida.getQuantidade() + "");
             jComboBoxComida.setSelectedItem(comida.getTipo());
             jFormattedTextFieldDataValidade.setText(Utils.Utilitarios.formatDate(comida.getDataValidade()));
         }
@@ -34,7 +37,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
 
     private void setColorBG() {
         jTextFieldNome.setBackground(Color.white);
-        jTextFieldQtde.setBackground(Color.white);
+        jFormattedTextFieldQuant.setBackground(Color.white);
         jComboBoxComida.setBackground(Color.white);
         jFormattedTextFieldDataValidade.setBackground(Color.white);
     }
@@ -46,13 +49,13 @@ public class JDialogCadComidas extends javax.swing.JDialog {
             erros.append("O campo Nome é obrigatório!\n");
             jTextFieldNome.setBackground(Color.red);
         }
-        if (jTextFieldQtde.getText() == null || jTextFieldQtde.getText().equals("")) {
+        if (jFormattedTextFieldQuant.getText() == null || jFormattedTextFieldQuant.getText().equals("")) {
             erros.append("O campo Quantidade é obrigatória!\n");
-            jTextFieldQtde.setBackground(Color.red);
+            jFormattedTextFieldQuant.setBackground(Color.red);
         } else {
-            if (Integer.parseInt(jTextFieldQtde.getText()) < 0) {
+            if (Integer.parseInt(jFormattedTextFieldQuant.getText()) < 0) {
                 erros.append("O campo Quantidade não pode ser negativa!\n");
-                jTextFieldQtde.setBackground(Color.red);
+                jFormattedTextFieldQuant.setBackground(Color.red);
             }
         }
 
@@ -105,8 +108,8 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jComboBoxComida = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
-        jTextFieldQtde = new javax.swing.JTextField();
         jFormattedTextFieldDataValidade = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldQuant = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -269,7 +272,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
                 jTextFieldNomeActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 25, 350, 25));
+        jPanel3.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 350, 25));
 
         jLabel7.setText("Nome:*");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 27, -1, 20));
@@ -286,20 +289,15 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jLabel9.setText("Tipo:");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 72, -1, -1));
 
-        jTextFieldQtde.setMaximumSize(new java.awt.Dimension(5, 5));
-        jTextFieldQtde.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldQtdeActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 70, 150, 25));
-
         try {
             jFormattedTextFieldDataValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel3.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 110, 150, 25));
+        jPanel3.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 25));
+
+        jFormattedTextFieldQuant.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jPanel3.add(jFormattedTextFieldQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 160, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 160));
 
@@ -312,7 +310,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private Comida getDadosDosCampos() {
         Comida comi = new Comida();
         comi.setNome(jTextFieldNome.getText());
-        comi.setQuantidade(Integer.parseInt(jTextFieldQtde.getText()));
+        comi.setQuantidade(Integer.parseInt(jFormattedTextFieldQuant.getText()));
         comi.setTipo(jComboBoxComida.getSelectedItem().toString());
         comi.setDataValidade(new Date(jFormattedTextFieldDataValidade.getText()));
         if (this.comi != null) {
@@ -324,7 +322,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
 
     private void limpaFormularioTodo() {
         jTextFieldNome.setText("");
-        jTextFieldQtde.setText("");
+        jFormattedTextFieldQuant.setText("");
         jComboBoxComida.setSelectedIndex(0);
         jFormattedTextFieldDataValidade.setText("");
 
@@ -375,10 +373,6 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         this.limpaFormularioTodo();
 
     }//GEN-LAST:event_jButtonLimparActionPerformed
-
-    private void jTextFieldQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldQtdeActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -437,6 +431,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxComida;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataValidade;
+    private javax.swing.JFormattedTextField jFormattedTextFieldQuant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -454,6 +449,5 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldQtde;
     // End of variables declaration//GEN-END:variables
 }

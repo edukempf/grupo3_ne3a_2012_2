@@ -207,6 +207,11 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
         jPanel3.add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 270, -1));
 
         jButton1.setText("Nova Mesa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 410, 360));
@@ -329,6 +334,12 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
         // TODO add your handling code here:
         deletePrato();
     }//GEN-LAST:event_jButtonRemovePratoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new JDialogCadMesa(null, true, null).setVisible(true);
+        preencheComboBoxMesa();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

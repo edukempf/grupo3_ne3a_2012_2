@@ -307,7 +307,7 @@ public class JDialogConMesa extends javax.swing.JDialog {
                     preenchetabela();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir Mesa!\n"
-                            + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
+                            + "Certifique-se que a mesa não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();
                 }
             }

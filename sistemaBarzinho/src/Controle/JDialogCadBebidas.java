@@ -97,13 +97,13 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jTextFieldNome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldQtde = new javax.swing.JTextField();
         jComboBoxBebida = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jFormattedTextFieldDataValidade = new javax.swing.JFormattedTextField();
         jFormattedTextFieldPreco = new javax.swing.JFormattedTextField();
+        jTextFieldQtde = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
 
         jFormattedTextField1.setText("jFormattedTextField1");
@@ -185,16 +185,13 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
                 jTextFieldNomeActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 13, 387, 25));
+        jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 387, 25));
 
         jLabel7.setText("Nome:*");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         jLabel8.setText("Quantidade:*");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        jTextFieldQtde.setMaximumSize(new java.awt.Dimension(5, 5));
-        jPanel1.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 56, 156, 25));
 
         jComboBoxBebida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refrigerante", "Suco", "Alcoolica" }));
         jComboBoxBebida.addActionListener(new java.awt.event.ActionListener() {
@@ -218,10 +215,13 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 145, 156, 29));
+        jPanel1.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 145, 160, 29));
 
-        jFormattedTextFieldPreco.setMaximumSize(new java.awt.Dimension(8, 8));
-        jPanel1.add(jFormattedTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 99, 156, 28));
+        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jPanel1.add(jFormattedTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 160, 30));
+
+        jTextFieldQtde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jPanel1.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 160, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 210));
 
@@ -349,6 +349,6 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldQtde;
+    private javax.swing.JFormattedTextField jTextFieldQtde;
     // End of variables declaration//GEN-END:variables
 }

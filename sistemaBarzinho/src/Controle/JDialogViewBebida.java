@@ -31,7 +31,7 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         jLQdte.setText(bebida.getQtde() + "");
         jLTipo.setText(bebida.getTipo());
         jLPreco.setText(bebida.getPreco() + "");
-        jLDataValidade.setText(bebida.getDataValidade().toString());
+        jLDataValidade.setText(Utils.Utilitarios.formatDate(bebida.getDataValidade()));
     }
 
     private void insereBebida(Bebida bebida) {

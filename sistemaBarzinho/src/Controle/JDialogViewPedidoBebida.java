@@ -134,7 +134,6 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
         jTablePratos = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jComboBoxMesa = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -224,9 +223,6 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
 
         jComboBoxMesa.setEnabled(false);
         jPanel3.add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 270, -1));
-
-        jButton1.setText("Nova Mesa");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -323,7 +319,6 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
