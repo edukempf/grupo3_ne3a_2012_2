@@ -4,14 +4,27 @@
  */
 package Controle;
 
+import DAO.BebidaDAO;
+import DAO.ComidaDAO;
 import DAO.FuncionarioDAO;
 import DAO.HibernateConexao;
+import DAO.MesaDAO;
+import DAO.PedidoBebidaDAO;
+import DAO.PedidoPratoDAO;
+import DAO.PratoDAO;
+import Modelo.Bebida;
+import Modelo.Comida;
 import Modelo.Funcionario;
+import Modelo.Mesa;
+import Modelo.PedidoBebida;
+import Modelo.PedidoPrato;
+import Modelo.Prato;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
 
 /**
  *
@@ -28,18 +41,18 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         initComponents();
 
 //        HibernateConexao.getSession();
-        HibernateConexao.createSchema();
+//        HibernateConexao.createSchema();
         looks = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : looks) {
             jComboBoxLookAndFeel.addItem(lookAndFeelInfo.getClassName());
         }
     }
-    
-    private void reiniciaBanco(){
-        int op=JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja reiniciar\n "
+
+    private void reiniciaBanco() {
+        int op = JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja reiniciar\n "
                 + "a base de dados do sistema e \n apagar todos os dados armazenados?",
                 "Aviso", JOptionPane.OK_CANCEL_OPTION);
-        if(op==JOptionPane.OK_OPTION){
+        if (op == JOptionPane.OK_OPTION) {
             HibernateConexao.createSchema();
         }
     }
@@ -659,15 +672,15 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        new JDialogCadPedidoBebida(this, true, null).setVisible(true); 
+        new JDialogCadPedidoBebida(this, true, null).setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        new JDialogCadPratos(this, true,null).setVisible(true);
+        new JDialogCadPratos(this, true, null).setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new JDialogConBebidas(this,true,false).setVisible(true);
+        new JDialogConBebidas(this, true, false).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -675,15 +688,15 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        new JDialogConComidas(this, true,false).setVisible(true);
+        new JDialogConComidas(this, true, false).setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-         new JDialogConPedidoBebida(this, true).setVisible(true);
+        new JDialogConPedidoBebida(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        new JDialogConPratos(this, true,false).setVisible(true);
+        new JDialogConPratos(this, true, false).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -714,7 +727,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLookAndFeelActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-       // new JDialogCadFuncionario(this, true, null).setVisible(true);
+        // new JDialogCadFuncionario(this, true, null).setVisible(true);
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
@@ -726,23 +739,19 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        
     }//GEN-LAST:event_jButton2MouseEntered
 
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-       
     }//GEN-LAST:event_jButton2MouseExited
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
-        
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-       jLabelStatus.setText("Barra de Status");
+        jLabelStatus.setText("Barra de Status");
     }//GEN-LAST:event_jButton4MouseExited
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -750,7 +759,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        
     }//GEN-LAST:event_jButton5MouseEntered
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -758,7 +766,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
-        
     }//GEN-LAST:event_jButton6MouseEntered
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -766,7 +773,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
-       
     }//GEN-LAST:event_jButton7MouseEntered
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -776,7 +782,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
-        
     }//GEN-LAST:event_jButton8MouseEntered
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -785,19 +790,15 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
-       
     }//GEN-LAST:event_jButton9MouseEntered
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseEntered
-        
     }//GEN-LAST:event_jButton10MouseEntered
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -821,7 +822,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        new JDialogCadPedidoPrato(this, true, null).setVisible(true); 
+        new JDialogCadPedidoPrato(this, true, null).setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
@@ -831,16 +832,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
-        FuncionarioDAO dao=new FuncionarioDAO();
-        Funcionario func=new Funcionario();
-        func.setCpf("08654683970");
-        func.setDataNasc(new Date("27/04/1992"));
-        func.setEstadoCivil("Solteiro");
-        func.setFuncao("Garcom");
-        func.setNome("Eduardo Kempf");
-        func.setRg("10.538.191-3");
-        func.setSalario(1000);
-        dao.persisteObjeto(func);
+        this.inseredados();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void mudarThema() {
@@ -954,4 +946,318 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
+
+    private void inseredados() {
+        // Insert Funcionários
+        FuncionarioDAO daoF = new FuncionarioDAO();
+        Funcionario func1 = new Funcionario();
+        func1.setCpf("08654683970");
+        func1.setDataNasc(new Date("27/04/1992"));
+        func1.setEstadoCivil("Solteiro");
+        func1.setFuncao("Garcom");
+        func1.setNome("Eduardo Kempf");
+        func1.setRg("10.538.191-3");
+        func1.setSalario(1000);
+        daoF.persisteObjeto(func1);
+
+
+        Funcionario func2 = new Funcionario();
+        func2.setCpf("08731628974");
+        func2.setDataNasc(new Date("21/08/1992"));
+        func2.setEstadoCivil("Solteira");
+        func2.setFuncao("Caixa");
+        func2.setNome("Juliana Iora");
+        func2.setRg("10.550.749-6");
+        func2.setSalario(1200);
+        daoF.persisteObjeto(func2);
+
+        Funcionario func3 = new Funcionario();
+        func3.setCpf("08731628974");
+        func3.setDataNasc(new Date("03/05/1989"));
+        func3.setEstadoCivil("Solteiro");
+        func3.setFuncao("Gerente");
+        func3.setNome("joão da Silva");
+        func3.setRg("05.480.749-2");
+        func3.setSalario(3000);
+        daoF.persisteObjeto(func3);
+
+        Funcionario func4 = new Funcionario();
+        func4.setCpf("01048437990");
+        func4.setDataNasc(new Date("13/04/1988"));
+        func4.setEstadoCivil("Solteiro");
+        func4.setFuncao("Garçon");
+        func4.setNome("Luiz Fernandodos Santos");
+        func4.setRg("9.777.688-1");
+        func4.setSalario(1000);
+        daoF.persisteObjeto(func4);
+
+        Funcionario func5 = new Funcionario();
+        func5.setCpf("01048437990");
+        func5.setDataNasc(new Date("13/04/1978"));
+        func5.setEstadoCivil("Casada");
+        func5.setFuncao("Cozinheira");
+        func5.setNome("Sofia Gomes");
+        func5.setRg("3.757.688-8");
+        func5.setSalario(1500);
+        daoF.persisteObjeto(func5);
+
+        // Insert Bebidas
+        BebidaDAO daoB = new BebidaDAO();
+        Bebida bebi1 = new Bebida();
+        bebi1.setNome("Coca Cola");
+        bebi1.setPreco(3.25);
+        bebi1.setQtde(1000);
+        bebi1.setTipo("Refrigerante");
+        bebi1.setDataValidade(new Date("27/04/2014"));
+        daoB.persisteObjeto(bebi1);
+
+        Bebida bebi2 = new Bebida();
+        bebi2.setNome("Cerveja");
+        bebi2.setPreco(4.80);
+        bebi2.setQtde(1000);
+        bebi2.setTipo("Alcoolica");
+        bebi2.setDataValidade(new Date("27/11/2013"));
+        daoB.persisteObjeto(bebi2);
+
+        Bebida bebi3 = new Bebida();
+        bebi3.setNome("Guaraná Antatica");
+        bebi3.setPreco(3.25);
+        bebi3.setQtde(800);
+        bebi3.setTipo("Refrigerante");
+        bebi3.setDataValidade(new Date("27/02/2014"));
+        daoB.persisteObjeto(bebi3);
+
+        Bebida bebi4 = new Bebida();
+        bebi4.setNome("Água com gás");
+        bebi4.setPreco(2.75);
+        bebi4.setQtde(500);
+        bebi4.setTipo("Refrigerante");
+        bebi4.setDataValidade(new Date("27/08/2013"));
+        daoB.persisteObjeto(bebi4);
+
+        Bebida bebi5 = new Bebida();
+        bebi5.setNome("Whisky");
+        bebi5.setPreco(3.25);
+        bebi5.setQtde(1000);
+        bebi5.setTipo("Alcoolica");
+        bebi5.setDataValidade(new Date("03/05/2016"));
+        daoB.persisteObjeto(bebi5);
+
+        // Insert Comidas
+        ComidaDAO daoC = new ComidaDAO();
+        Comida comi1 = new Comida();
+        comi1.setNome("Batata");
+        comi1.setQuantidade(30);
+        comi1.setTipo("Kilograma");
+        comi1.setDataValidade(new Date("27/04/2013"));
+        daoC.persisteObjeto(comi1);
+
+        Comida comi2 = new Comida();
+        comi2.setNome("Frango");
+        comi2.setQuantidade(15);
+        comi2.setTipo("Kilograma");
+        comi2.setDataValidade(new Date("22/04/2013"));
+        daoC.persisteObjeto(comi2);
+
+        Comida comi3 = new Comida();
+        comi3.setNome("Mussarela");
+        comi3.setQuantidade(15000);
+        comi3.setTipo("Grama");
+        comi3.setDataValidade(new Date("18/04/2013"));
+        daoC.persisteObjeto(comi3);
+
+        Comida comi4 = new Comida();
+        comi4.setNome("Presunto");
+        comi4.setQuantidade(10000);
+        comi4.setTipo("Grama");
+        comi4.setDataValidade(new Date("18/04/2013"));
+        daoC.persisteObjeto(comi4);
+
+        Comida comi5 = new Comida();
+        comi5.setNome("Bife");
+        comi5.setQuantidade(25);
+        comi5.setTipo("Kilograma");
+        comi5.setDataValidade(new Date("22/04/2013"));
+        daoC.persisteObjeto(comi5);
+
+
+        // Insert Mesas
+        MesaDAO daoM = new MesaDAO();
+        Mesa mes1 = new Mesa();
+        mes1.setCapacidade(4);
+        mes1.setStatus(true);
+        daoM.persisteObjeto(mes1);
+
+        Mesa mes2 = new Mesa();
+        mes2.setCapacidade(4);
+        mes2.setStatus(false);
+        daoM.persisteObjeto(mes2);
+
+        Mesa mes3 = new Mesa();
+        mes3.setCapacidade(6);
+        mes3.setStatus(true);
+        daoM.persisteObjeto(mes3);
+
+        Mesa mes4 = new Mesa();
+        mes4.setCapacidade(6);
+        mes4.setStatus(false);
+        daoM.persisteObjeto(mes4);
+
+        Mesa mes5 = new Mesa();
+        mes5.setCapacidade(8);
+        mes5.setStatus(false);
+        daoM.persisteObjeto(mes5);
+
+        // Insert Pratos
+        PratoDAO daoPr = new PratoDAO();
+        Prato prat1 = new Prato();
+        List<Comida> comI = new ArrayList<Comida>();
+        comI.add(comi1);
+        prat1.setNome("Porção de Batata");
+        prat1.setIngredientes(comI);
+        prat1.setQuantidadePorcoes(3);
+        prat1.setPreco(13.00);
+        daoPr.persisteObjeto(prat1);
+
+        Prato prat2 = new Prato();
+        List<Comida> comII = new ArrayList<Comida>();
+        comII.add(comi2);
+        prat2.setNome("Porção de Frango");
+        prat2.setIngredientes(comII);
+        prat2.setQuantidadePorcoes(5);
+        prat2.setPreco(16.00);
+        daoPr.persisteObjeto(prat2);
+
+        Prato prat3 = new Prato();
+        List<Comida> comIII = new ArrayList<Comida>();
+        comIII.add(comi1);
+        comIII.add(comi3);
+        comIII.add(comi4);
+        prat3.setNome("Batata Recheada");
+        prat3.setIngredientes(comIII);
+        prat3.setQuantidadePorcoes(3);
+        prat3.setPreco(13.00);
+        daoPr.persisteObjeto(prat3);
+
+        Prato prat4 = new Prato();
+        List<Comida> comIV = new ArrayList<Comida>();
+        comIV.add(comi2);
+        comIV.add(comi3);
+        comIV.add(comi4);
+        prat4.setNome("Lanche");
+        prat4.setIngredientes(comIV);
+        prat4.setQuantidadePorcoes(3);
+        prat4.setPreco(13.00);
+        daoPr.persisteObjeto(prat4);
+
+        Prato prat5 = new Prato();
+        prat5.setNome("Porção especial");
+        List<Comida> comV = new ArrayList<Comida>();
+        comV.add(comi1);
+        comV.add(comi3);
+        comV.add(comi4);
+        prat5.setIngredientes(comV);
+        prat5.setQuantidadePorcoes(3);
+        prat5.setPreco(13.00);
+        daoPr.persisteObjeto(prat5);
+
+        // Insert Pedidos Bebidas
+        PedidoBebidaDAO daoPB = new PedidoBebidaDAO();
+        PedidoBebida pb1 = new PedidoBebida();
+        List<Bebida> bebI = new ArrayList<Bebida>();
+        bebI.add(bebi1);
+        bebI.add(bebi2);
+        pb1.setBebidas(bebI);
+        pb1.setIdFuncionario(func5);
+        pb1.setIdMesa(mes5);
+        daoPB.persisteObjeto(pb1);
+
+        PedidoBebida pb2 = new PedidoBebida();
+        List<Bebida> bebII = new ArrayList<Bebida>();
+        bebII.add(bebi1);
+        bebII.add(bebi4);
+        pb2.setBebidas(bebII);
+        pb2.setIdFuncionario(func4);
+        pb2.setIdMesa(mes4);
+        daoPB.persisteObjeto(pb2);
+
+        PedidoBebida pb3 = new PedidoBebida();
+        List<Bebida> bebIII = new ArrayList<Bebida>();
+        bebIII.add(bebi2);
+        bebIII.add(bebi3);
+        pb3.setBebidas(bebIII);
+        pb3.setIdFuncionario(func2);
+        pb3.setIdMesa(mes2);
+        daoPB.persisteObjeto(pb3);
+
+        PedidoBebida pb4 = new PedidoBebida();
+        List<Bebida> bebIV = new ArrayList<Bebida>();
+        bebIII.add(bebi2);
+        bebIII.add(bebi5);
+        pb4.setBebidas(bebIV);
+        pb4.setIdFuncionario(func3);
+        pb4.setIdMesa(mes3);
+        daoPB.persisteObjeto(pb4);
+
+        PedidoBebida pb5 = new PedidoBebida();
+        List<Bebida> bebV = new ArrayList<Bebida>();
+        bebV.add(bebi1);
+        bebV.add(bebi2);
+        bebV.add(bebi3);
+        pb5.setBebidas(bebV);
+        pb5.setIdFuncionario(func1);
+        pb5.setIdMesa(mes5);
+        daoPB.persisteObjeto(pb5);
+
+        // Insert Pedidos Pratos
+        PedidoPratoDAO daoPP = new PedidoPratoDAO();
+        PedidoPrato pp1 = new PedidoPrato();
+        List<Prato> praI = new ArrayList<Prato>();
+        praI.add(prat1);
+        praI.add(prat2);
+        praI.add(prat3);
+        pp1.setPratos(praI);
+        pp1.setIdFuncionario(func5);
+        pp1.setIdMesa(mes5);
+        daoPP.persisteObjeto(pp1);
+
+        PedidoPrato pp2 = new PedidoPrato();
+        List<Prato> praII = new ArrayList<Prato>();
+        praII.add(prat1);
+        praII.add(prat3);
+        pp1.setPratos(praII);
+        pp2.setIdFuncionario(func4);
+        pp2.setIdMesa(mes4);
+        daoPP.persisteObjeto(pp2);
+
+        PedidoPrato pp3 = new PedidoPrato();
+        List<Prato> praIII = new ArrayList<Prato>();
+        praIII.add(prat1);
+        praIII.add(prat2);
+        pp1.setPratos(praIII);
+        pp3.setIdFuncionario(func2);
+        pp3.setIdMesa(mes2);
+        daoPP.persisteObjeto(pp3);
+
+        PedidoPrato pp4 = new PedidoPrato();
+        List<Prato> praIV = new ArrayList<Prato>();
+        praIV.add(prat1);
+        praIV.add(prat3);
+        pp1.setPratos(praIV);
+        pp4.setIdFuncionario(func3);
+        pp4.setIdMesa(mes3);
+        daoPP.persisteObjeto(pp4);
+
+        PedidoPrato pp5 = new PedidoPrato();
+        List<Prato> praV = new ArrayList<Prato>();
+        praV.add(prat1);
+        praV.add(prat2);
+        praV.add(prat3);
+        praV.add(prat4);
+        pp1.setPratos(praV);
+        pp5.setIdFuncionario(func1);
+        pp5.setIdMesa(mes5);
+        daoPP.persisteObjeto(pp5);
+
+    }
 }

@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Prato implements Serializable {
     private String nome;
     @Column(length = 6, precision = 2)
     private double preco;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)@Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Comida> ingredientes;
     @Column(length = 5)
     private int quantidadePorcoes;

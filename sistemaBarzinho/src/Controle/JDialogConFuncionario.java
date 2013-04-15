@@ -238,6 +238,8 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
                     dao.delete(funcionario);
                     preenchetabela();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir funcionario!\n"
+                            + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();
                 }
             }

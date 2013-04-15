@@ -306,6 +306,8 @@ public class JDialogConMesa extends javax.swing.JDialog {
                     dao.delete(mesa);
                     preenchetabela();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir Mesa!\n"
+                            + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();
                 }
             }

@@ -54,7 +54,7 @@ public class JDialogConPedidoPrato extends javax.swing.JDialog {
                 lista = (ArrayList<PedidoPrato>) dao.buscaPorMesa(Integer.parseInt(jTextFieldNome.getText()));
 
             }else{
-                lista= (ArrayList<PedidoPrato>)dao.lista();
+                lista= (ArrayList<PedidoPrato>)dao.buscaTodosPedidos();
             }
             double custoPedido = 0;
             System.out.println(lista.size());

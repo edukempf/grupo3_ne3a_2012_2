@@ -38,7 +38,7 @@ public class JDialogConPratos extends javax.swing.JDialog {
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            ArrayList<Prato> lista = (ArrayList<Prato>) dao.buscaPorNome(jTextFieldNome.getText());
+            ArrayList<Prato> lista = (ArrayList<Prato>) dao.buscaPorNome("%"+jTextFieldNome.getText()+"%");
             for (Prato prato : lista) {
                 model.addRow(new Object[]{prato.getId(),
                             prato.getNome(),
@@ -283,11 +283,13 @@ public class JDialogConPratos extends javax.swing.JDialog {
                     dao.delete(prato);
                     preenchetabela();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir prato!\n"
+                            + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma Prato!");
+            JOptionPane.showMessageDialog(null, "Selecione um Prato!");
         }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
