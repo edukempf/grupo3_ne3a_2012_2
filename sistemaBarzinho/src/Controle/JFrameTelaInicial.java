@@ -110,6 +110,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -596,6 +597,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem6);
+
+        jMenuItem22.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mais.gif"))); // NOI18N
+        jMenuItem22.setText("Inserções Válidas automaticamente");
+        jMenu4.add(jMenuItem22);
         jMenu4.add(jSeparator1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
@@ -894,6 +900,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

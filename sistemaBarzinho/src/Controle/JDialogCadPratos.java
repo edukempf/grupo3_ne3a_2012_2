@@ -175,13 +175,14 @@ public class JDialogCadPratos extends javax.swing.JDialog {
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 170, 120));
 
+        jButtonAddIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mais.gif"))); // NOI18N
         jButtonAddIngrediente.setText("Add Ingrediente");
         jButtonAddIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddIngredienteActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonAddIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        jPanel3.add(jButtonAddIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
 
         jButtonExcluirIngrediente.setText("-- Ingrediente");
         jButtonExcluirIngrediente.addActionListener(new java.awt.event.ActionListener() {
