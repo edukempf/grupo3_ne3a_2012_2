@@ -107,11 +107,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldQtde = new javax.swing.JTextField();
         jFormattedTextFieldDataValidade = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Produto");
@@ -273,15 +269,15 @@ public class JDialogCadComidas extends javax.swing.JDialog {
                 jTextFieldNomeActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 25, 361, 25));
+        jPanel3.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 25, 350, 25));
 
-        jLabel7.setText("Nome:");
+        jLabel7.setText("Nome:*");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 27, -1, 20));
 
-        jLabel8.setText("Quantidade:");
+        jLabel8.setText("Quantidade:*");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
-        jLabel10.setText("Validade:");
+        jLabel10.setText("Validade:*");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 117, -1, -1));
 
         jComboBoxComida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Grama", "Kilograma", " " }));
@@ -296,35 +292,19 @@ public class JDialogCadComidas extends javax.swing.JDialog {
                 jTextFieldQtdeActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 67, 156, 25));
+        jPanel3.add(jTextFieldQtde, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 70, 150, 25));
 
         try {
             jFormattedTextFieldDataValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel3.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 114, 156, -1));
-
-        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel11.setText("*");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 10, 10));
-
-        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel13.setText("*");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 10, 10));
-
-        jLabel14.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel14.setText("*");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 10, 10));
+        jPanel3.add(jFormattedTextFieldDataValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 110, 150, 25));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 160));
 
-        jLabel6.setText("Campo de Preenchimento Obrigatório");
+        jLabel6.setText("*Campo de Preenchimento Obrigatório");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
-
-        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel12.setText("*");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 10, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -375,10 +355,6 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
-
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         String aux = this.validaCampos();
         if (aux.equals("")) {
@@ -403,6 +379,10 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private void jTextFieldQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldQtdeActionPerformed
+
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -459,10 +439,6 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextFieldDataValidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

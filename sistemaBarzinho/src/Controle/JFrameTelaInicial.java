@@ -92,7 +92,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem19 = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
-        jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem18 = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         jMenuItem20 = new javax.swing.JMenuItem();
@@ -100,6 +99,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jSeparator19 = new javax.swing.JPopupMenu.Separator();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -490,7 +490,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem19);
         jMenu2.add(jSeparator8);
-        jMenu2.add(jSeparator9);
 
         jMenuItem18.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/comidas.png"))); // NOI18N
@@ -534,6 +533,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem14);
+        jMenu2.add(jSeparator9);
 
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mesa.png"))); // NOI18N
@@ -648,11 +648,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        //new JDialogCadPratos(this, true).setVisible(true);
+        new JDialogCadPratos(this, true,null).setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new JDialogConBebidas(this, true).setVisible(true);
+        new JDialogConBebidas(this,true).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
