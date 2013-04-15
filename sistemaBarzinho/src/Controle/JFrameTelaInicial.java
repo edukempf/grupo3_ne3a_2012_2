@@ -27,7 +27,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     public JFrameTelaInicial() {
         initComponents();
 
-        HibernateConexao.getSession();
+//        HibernateConexao.getSession();
+        HibernateConexao.createSchema();
         looks = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : looks) {
             jComboBoxLookAndFeel.addItem(lookAndFeelInfo.getClassName());

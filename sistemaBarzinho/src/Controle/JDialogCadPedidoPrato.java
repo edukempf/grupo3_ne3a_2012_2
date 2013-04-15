@@ -13,10 +13,13 @@ import Modelo.Mesa;
 import Modelo.PedidoPrato;
 import Modelo.Prato;
 import Utils.Data;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -302,10 +305,15 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        String aux=validaCampos();
+        if("".equals(aux)){
         dispose();
         JDialog dialog = new JDialogViewPedidoPrato(null, true, this.getDadosDosCampos());
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, aux);
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -382,4 +390,23 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTablePratos;
     // End of variables declaration//GEN-END:variables
+
+    private String validaCampos() {
+       StringBuilder aux=new StringBuilder();
+       aux.append("");
+       if(jComboBoxGarcon.getSelectedItem()==null){
+           aux.append("É preciso ter ao menos um funcionario cadastrado!\n");
+           jComboBoxGarcon.setBackground(Color.red);
+       }
+       if(jComboBoxMesa.getSelectedItem()==null){
+           aux.append("É preciso ter ao menos uma mesa cadastrada!\n");
+           jComboBoxMesa.setBackground(Color.red);
+       }
+       if(jTablePratos.getRowCount()==0){
+           aux.append("É preciso ter ao menos um prato selecionado!\n");
+           jTablePratos.setBackground(Color.red);
+       }
+       
+       return aux.toString();
+    }
 }

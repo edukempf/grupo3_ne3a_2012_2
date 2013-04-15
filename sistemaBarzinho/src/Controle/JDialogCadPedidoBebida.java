@@ -13,11 +13,13 @@ import Modelo.PedidoBebida;
 import Modelo.PedidoPrato;
 import Modelo.Prato;
 import Utils.Data;
+import java.awt.Color;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -149,6 +151,25 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
     }
     
     
+    private String validaCampos() {
+       StringBuilder aux=new StringBuilder();
+       aux.append("");
+       if(jComboBoxGarcon.getSelectedItem()==null){
+           aux.append("É preciso ter ao menos um funcionario cadastrado!\n");
+           jComboBoxGarcon.setBackground(Color.red);
+       }
+       if(jComboBoxMesa.getSelectedItem()==null){
+           aux.append("É preciso ter ao menos uma mesa cadastrada!\n");
+           jComboBoxMesa.setBackground(Color.red);
+       }
+       if(jTableBebidas.getRowCount()==0){
+           aux.append("É preciso ter ao menos um prato selecionado!\n");
+           jTableBebidas.setBackground(Color.red);
+       }
+       
+       return aux.toString();
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,7 +204,7 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
         jLabelMesa.setText("Número da Mesa:");
         jPanel3.add(jLabelMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 20));
 
-        jPanel3.add(jComboBoxGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 270, -1));
+        jPanel3.add(jComboBoxGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 270, -1));
 
         jLabelGarcon.setText("Garçon:");
         jPanel3.add(jLabelGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
@@ -225,10 +246,10 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 370, 220));
 
         jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 270, -1));
+        jPanel3.add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 270, -1));
 
         jButton1.setText("Nova Mesa");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
         jButtonPesquisar.setText("Pesquisar");
@@ -349,10 +370,15 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        String aux=validaCampos();
+        if("".equals(aux)){
         dispose();
         JDialog dialog = new JDialogViewPedidoBebida(null, true, this.getDadosDosCampos());
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, aux);
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
