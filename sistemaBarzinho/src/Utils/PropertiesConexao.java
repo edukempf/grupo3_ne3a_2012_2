@@ -40,7 +40,7 @@ public class PropertiesConexao {
         FileOutputStream file = null;
         boolean teste=false;
         try {
-            file = new FileOutputStream("./src/Utilitarios/conexao.properties");
+            file = new FileOutputStream("./src/Utils/conexao.properties");
             prop.store(file, null);
             teste=true;
         } catch (IOException ex) {
