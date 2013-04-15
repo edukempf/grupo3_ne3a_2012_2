@@ -89,13 +89,13 @@ public class JDialogCadMesa extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jRadioButtonO = new javax.swing.JRadioButton();
+        jRadioButtonL = new javax.swing.JRadioButton();
         jButtonPesquisar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonLimpar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
-        jRadioButtonL = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,7 +125,11 @@ public class JDialogCadMesa extends javax.swing.JDialog {
         jRadioButtonO.setText("Ocupada");
         jPanel3.add(jRadioButtonO, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, 411, 127));
+        buttonGroup1.add(jRadioButtonL);
+        jRadioButtonL.setText("Livre");
+        jPanel3.add(jRadioButtonL, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 127));
 
         jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
         jButtonPesquisar.setText("Pesquisar");
@@ -134,7 +138,7 @@ public class JDialogCadMesa extends javax.swing.JDialog {
                 jButtonPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 175, 130, -1));
+        getContentPane().add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 130, -1));
 
         jLabel6.setText("* Campo de Preenchimento Obrigatório");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
@@ -190,10 +194,6 @@ public class JDialogCadMesa extends javax.swing.JDialog {
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 223, -1, -1));
-
-        buttonGroup1.add(jRadioButtonL);
-        jRadioButtonL.setText("Livre");
-        getContentPane().add(jRadioButtonL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
