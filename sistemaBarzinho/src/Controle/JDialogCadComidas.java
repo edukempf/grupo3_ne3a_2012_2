@@ -350,7 +350,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConComidas(null, true);
+        JDialog dialog = new JDialogConComidas(null, true,false);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

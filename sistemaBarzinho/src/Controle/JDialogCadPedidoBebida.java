@@ -113,7 +113,7 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
     
     private void getBebida() {
 
-        new JDialogConBebidas(null, true).setVisible(true);
+        new JDialogConBebidas(null, true,true).setVisible(true);
         Bebida b = (Bebida) Data.hash.remove("bebida");
         if (b == null) {
             return;
@@ -339,7 +339,7 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonRemovePratoActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConComidas(null, true);
+        JDialog dialog = new JDialogConPedidoBebida(null, true);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

@@ -51,10 +51,11 @@ public class JDialogConComidas extends javax.swing.JDialog {
         }
     }
 
-    public JDialogConComidas(java.awt.Frame parent, boolean modal) {
+    public JDialogConComidas(java.awt.Frame parent, boolean modal,boolean jSelecionar) {
         super(parent, modal);
         initComponents();
         criaTabela();
+        jButtonSelecionar.setVisible(jSelecionar);
     }
     
     private void carregaDados() {
@@ -331,7 +332,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConComidas dialog = new JDialogConComidas(new javax.swing.JFrame(), true);
+                JDialogConComidas dialog = new JDialogConComidas(new javax.swing.JFrame(), true,false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -48,11 +48,11 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         }
     }
 
-    public JDialogConBebidas(java.awt.Frame parent, boolean modal) {
+    public JDialogConBebidas(java.awt.Frame parent, boolean modal, boolean jSelecionar) {
         super(parent, modal);
         initComponents();
         criaTabela();
-
+        jButtonSelecionar.setVisible(jSelecionar);
 
     }
 
@@ -330,7 +330,7 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConBebidas dialog = new JDialogConBebidas(new javax.swing.JFrame(), true);
+                JDialogConBebidas dialog = new JDialogConBebidas(new javax.swing.JFrame(), true,false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

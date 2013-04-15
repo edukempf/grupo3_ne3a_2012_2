@@ -4,7 +4,10 @@
  */
 package Controle;
 
+import DAO.FuncionarioDAO;
 import DAO.HibernateConexao;
+import Modelo.Funcionario;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -601,6 +604,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenuItem22.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mais.gif"))); // NOI18N
         jMenuItem22.setText("Inserções Válidas automaticamente");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem22);
         jMenu4.add(jSeparator1);
 
@@ -658,7 +666,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new JDialogConBebidas(this,true).setVisible(true);
+        new JDialogConBebidas(this,true,false).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -666,7 +674,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        new JDialogConComidas(this, true).setVisible(true);
+        new JDialogConComidas(this, true,false).setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
@@ -674,7 +682,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        new JDialogConPratos(this, true).setVisible(true);
+        new JDialogConPratos(this, true,false).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -818,6 +826,20 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        // TODO add your handling code here:
+        FuncionarioDAO dao=new FuncionarioDAO();
+        Funcionario func=new Funcionario();
+        func.setCpf("08654683970");
+        func.setDataNasc(new Date("27/04/1992"));
+        func.setEstadoCivil("Solteiro");
+        func.setFuncao("Garcom");
+        func.setNome("Eduardo Kempf");
+        func.setRg("10.538.191-3");
+        func.setSalario(1000);
+        dao.persisteObjeto(func);
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void mudarThema() {
         try {

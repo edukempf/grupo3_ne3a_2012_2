@@ -256,7 +256,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
     }
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConBebidas(null, true);
+        JDialog dialog = new JDialogConBebidas(null, true,false);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

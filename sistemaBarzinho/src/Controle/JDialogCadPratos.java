@@ -80,7 +80,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     
     private void getIngrediente() {
         
-        new JDialogConComidas(null, true).setVisible(true);
+        new JDialogConComidas(null, true,true).setVisible(true);
         Comida c = (Comida) Data.hash.remove("comida");
         if (c == null) {
             return;
@@ -293,7 +293,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldPrecoActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConComidas(null, true);
+        JDialog dialog = new JDialogConPratos(null, true,false);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

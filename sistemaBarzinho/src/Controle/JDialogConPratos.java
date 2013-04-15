@@ -61,10 +61,11 @@ public class JDialogConPratos extends javax.swing.JDialog {
         Data.hash.put("prato", getPratoSelecionado());
     }
     
-    public JDialogConPratos(java.awt.Frame parent, boolean modal) {
+    public JDialogConPratos(java.awt.Frame parent, boolean modal,boolean jSelecionar) {
         super(parent, modal);
         initComponents();
         criaTabela();
+        jButtonSelecionar.setVisible(jSelecionar);
     }
 
     /**
@@ -361,7 +362,7 @@ public class JDialogConPratos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConPratos dialog = new JDialogConPratos(new javax.swing.JFrame(), true);
+                JDialogConPratos dialog = new JDialogConPratos(new javax.swing.JFrame(), true,false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -86,7 +86,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 
     private void getPrato() {
 
-        new JDialogConPratos(null, true).setVisible(true);
+        new JDialogConPratos(null, true,true).setVisible(true);
         Prato p = (Prato) Data.hash.remove("prato");
         if (p == null) {
             return;
@@ -292,7 +292,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     }
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConComidas(null, true);
+        JDialog dialog = new JDialogConPedidoPrato(null, true);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
