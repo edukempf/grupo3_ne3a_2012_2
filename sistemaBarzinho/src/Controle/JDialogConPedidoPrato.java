@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import Modelo.PedidoPrato;
 import Modelo.Prato;
@@ -301,10 +302,14 @@ public class JDialogConPedidoPrato extends javax.swing.JDialog {
         if (pedido != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Pedido?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                    TransactionManager tmanager=new TransactionManager();
                 try {
-                    dao.delete(pedido);
+                    tmanager.beginTransaction();
+                    dao.delete(pedido,tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

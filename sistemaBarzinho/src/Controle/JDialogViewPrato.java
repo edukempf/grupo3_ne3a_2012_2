@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.PratoDAO;
+import DAO.TransactionManager;
 import Modelo.Comida;
 import Modelo.Prato;
 import Utils.Utilitarios;
@@ -22,14 +23,13 @@ public class JDialogViewPrato extends javax.swing.JDialog {
     /**
      * Creates new form JDialogViewPrato
      */
-    
     private Prato prato;
     private PratoDAO dao;
     private DefaultTableModel model;
     List<Comida> listaComida;
-    
+
     private void criaTabela() {
-        model = new DefaultTableModel(new String[]{"Nome","Validade"}, 0) {
+        model = new DefaultTableModel(new String[]{"Nome", "Validade"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -37,11 +37,11 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         };
         jTable1.setModel(model);
     }
-    
+
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            List<Comida> lista = this.listaComida ;
+            List<Comida> lista = this.listaComida;
             for (Comida c : lista) {
                 model.addRow(new Object[]{c.getNome(),
                     Utilitarios.dataISOtoBR(c.getDataValidade().toString())});
@@ -51,27 +51,29 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        
+
+
     }
-    
-    
-    public JDialogViewPrato(java.awt.Frame parent, boolean modal,Prato prato) {
+
+    public JDialogViewPrato(java.awt.Frame parent, boolean modal, Prato prato) {
         super(parent, modal);
         this.prato = prato;
         initComponents();
         criaTabela();
         jTextFieldNome.setText(prato.getNome());
-        jTextFieldPreco.setText(prato.getPreco()+"");
-        jTextFieldQtde.setText(prato.getQuantidadePorcoes()+"");
-        this.listaComida= prato.getIngredientes();
+        jTextFieldPreco.setText(prato.getPreco() + "");
+        jTextFieldQtde.setText(prato.getQuantidadePorcoes() + "");
+        this.listaComida = prato.getIngredientes();
         preenchetabela();
     }
 
-    private void inserePrato( Prato prato) {
+    private void inserePrato(Prato prato) {
         dao = new PratoDAO();
         try {
-            dao.persisteObjeto(prato);
+            TransactionManager tmanager = new TransactionManager();
+            tmanager.beginTransaction();
+            dao.persisteObjeto(prato,tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Prato cadastrado com sucesso");
 
         } catch (Exception ex) {
@@ -282,7 +284,7 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewPrato dialog = new JDialogViewPrato(new javax.swing.JFrame(), true,null);
+                JDialogViewPrato dialog = new JDialogViewPrato(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.PratoDAO;
+import DAO.TransactionManager;
 import Modelo.Prato;
 import Utils.Data;
 import java.util.ArrayList;
@@ -279,12 +280,16 @@ public class JDialogConPratos extends javax.swing.JDialog {
         if (prato != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Prato?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                    TransactionManager tmanager=new TransactionManager();
                 try {
-                    dao.delete(prato);
+                    tmanager.beginTransaction();
+                    dao.delete(prato,tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir prato!\n"
                             + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
+                    tmanager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

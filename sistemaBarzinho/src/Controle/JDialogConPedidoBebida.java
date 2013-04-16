@@ -6,6 +6,7 @@ package Controle;
 
 import DAO.PedidoBebidaDAO;
 import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import Modelo.PedidoBebida;
 import Modelo.PedidoPrato;
@@ -25,12 +26,10 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
     /**
      * Creates new form JDialogConPedidoBebida
      */
-    
     private List<PedidoBebida> lista;
     private DefaultTableModel model;
     private PedidoBebidaDAO dao = new PedidoBebidaDAO();
-    
-    
+
     public JDialogConPedidoBebida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -51,15 +50,14 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
     private void preenchetabela() {
         model.setNumRows(0);
         try {
-            
+
             if (!jTextFieldNome.getText().equals("")) {
                 lista = (ArrayList<PedidoBebida>) dao.buscaPorMesa(Integer.parseInt(jTextFieldNome.getText()));
 
-            }else{
-                lista= (ArrayList<PedidoBebida>)dao.buscaTodosPedidos();
+            } else {
+                lista = (ArrayList<PedidoBebida>) dao.buscaTodosPedidos();
             }
             double custoPedido = 0;
-            System.out.println(lista.size());
             for (PedidoBebida pedido : lista) {
                 for (Bebida p : pedido.getBebidas()) {
                     custoPedido += p.getPreco();
@@ -68,15 +66,15 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
                     pedido.getIdMesa().getId(),
                     pedido.getIdFuncionario().getNome(),
                     custoPedido});
-                custoPedido=0;
+                custoPedido = 0;
             }
-            
+
             jTable1.updateUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     private PedidoBebida getPedidoSelecionado() {
         PedidoBebida pedido = new PedidoBebida();
         int linha = jTable1.getSelectedRow();
@@ -89,7 +87,7 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
         }
         return pedido;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,10 +300,14 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
         if (pedido != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Pedido?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                TransactionManager tmanager = new TransactionManager();
                 try {
-                    dao.delete(pedido);
+                    tmanager.beginTransaction();
+                    dao.delete(pedido, tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

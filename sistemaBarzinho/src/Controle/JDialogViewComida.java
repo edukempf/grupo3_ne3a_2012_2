@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.ComidaDAO;
+import DAO.TransactionManager;
 import Modelo.Comida;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class JDialogViewComida extends javax.swing.JDialog {
      */
     private Comida comida;
     private ComidaDAO dao;
+
     public JDialogViewComida(java.awt.Frame parent, boolean modal, Comida comida) {
         super(parent, modal);
         this.comida = comida;
@@ -32,11 +34,15 @@ public class JDialogViewComida extends javax.swing.JDialog {
 
     private void insereComida(Comida comida) {
         dao = new ComidaDAO();
+        TransactionManager tmanager = new TransactionManager();
         try {
-            dao.persisteObjeto(comida);
+            tmanager.beginTransaction();
+            dao.persisteObjeto(comida, tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Comida cadastrada com sucesso");
 
         } catch (Exception ex) {
+            tmanager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Comida!");
             System.out.println(ex.toString());
         }
@@ -197,7 +203,7 @@ public class JDialogViewComida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewComida dialog = new JDialogViewComida(new javax.swing.JFrame(), true,null);
+                JDialogViewComida dialog = new JDialogViewComida(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

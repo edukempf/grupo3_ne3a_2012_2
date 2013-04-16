@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.MesaDAO;
+import DAO.TransactionManager;
 import Modelo.Mesa;
 import Utils.Data;
 import java.util.ArrayList;
@@ -38,12 +39,12 @@ public class JDialogConMesa extends javax.swing.JDialog {
 
         model.setNumRows(0);
         try {
-            ArrayList<Mesa> lista ;
+            ArrayList<Mesa> lista;
             if (!jTextFieldNome.getText().equals("")) {
                 lista = (ArrayList<Mesa>) dao.buscaMesa(Integer.parseInt(jTextFieldNome.getText()));
 
-            }else{
-                lista= (ArrayList<Mesa>)dao.lista();
+            } else {
+                lista = (ArrayList<Mesa>) dao.lista();
             }
             for (Mesa mesa : lista) {
                 String status;
@@ -53,8 +54,8 @@ public class JDialogConMesa extends javax.swing.JDialog {
                     status = "Livre";
                 }
                 model.addRow(new Object[]{mesa.getId(),
-                            mesa.getCapacidade(),
-                            status});
+                    mesa.getCapacidade(),
+                    status});
 
             }
             jTable1.updateUI();
@@ -302,10 +303,14 @@ public class JDialogConMesa extends javax.swing.JDialog {
         if (mesa != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Mesa?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                TransactionManager tmanager = new TransactionManager();
                 try {
-                    dao.delete(mesa);
+                    tmanager.beginTransaction();
+                    dao.delete(mesa, tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir Mesa!\n"
                             + "Certifique-se que a mesa não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();

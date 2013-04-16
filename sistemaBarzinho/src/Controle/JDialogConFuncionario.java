@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.FuncionarioDAO;
+import DAO.TransactionManager;
 import Modelo.Funcionario;
 import Utils.Utilitarios;
 import java.util.ArrayList;
@@ -234,10 +235,14 @@ public class JDialogConFuncionario extends javax.swing.JDialog {
         if (funcionario != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                    TransactionManager tmanager=new TransactionManager();
                 try {
-                    dao.delete(funcionario);
+                    tmanager.beginTransaction();
+                    dao.delete(funcionario,tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir funcionario!\n"
                             + "Certifique-se que o funcionário não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();

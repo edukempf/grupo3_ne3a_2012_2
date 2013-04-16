@@ -7,7 +7,6 @@ package DAO;
 
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 
 /**
@@ -30,20 +29,14 @@ public abstract class DaoBasic<T> {
         
     protected static Session session;
     
-    public void persisteObjeto(Object o){
-        session=HibernateConexao.getSession();
-        session.beginTransaction().begin();
+    public void persisteObjeto(Object o,TransactionManager tmanager){
+        session=tmanager.getCurrentSession();
         session.saveOrUpdate(o);
-        session.beginTransaction().commit();
-        session.close();
     }
     
-    public void delete(Object deletar){
-        session=HibernateConexao.getSession();
-        session.beginTransaction().begin();
+    public void delete(Object deletar,TransactionManager tmanager){
+        session=tmanager.getCurrentSession();
         session.delete(deletar);
-        session.beginTransaction().commit();
-        session.close();
     }
     
     public T get(int id){

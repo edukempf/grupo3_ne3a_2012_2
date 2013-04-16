@@ -1,6 +1,7 @@
 package Controle;
 
 import DAO.ComidaDAO;
+import DAO.TransactionManager;
 import Modelo.Comida;
 import Utils.Data;
 import Utils.Utilitarios;
@@ -21,8 +22,6 @@ public class JDialogConComidas extends javax.swing.JDialog {
     DefaultTableModel model;
     private ComidaDAO dao = new ComidaDAO();
 
-    
-
     private void criaTabela() {
         model = new DefaultTableModel(new String[]{"id", "nome", "quantidade", "tipo", "data_validade"}, 0) {
             @Override
@@ -39,10 +38,10 @@ public class JDialogConComidas extends javax.swing.JDialog {
             ArrayList<Comida> lista = (ArrayList<Comida>) dao.buscaPorNome(jTextFieldNome.getText());
             for (Comida comida : lista) {
                 model.addRow(new Object[]{comida.getId(),
-                            comida.getNome(),
-                            comida.getQuantidade(),
-                            comida.getTipo(),
-                            Utilitarios.dataISOtoBR(comida.getDataValidade().toString())});
+                    comida.getNome(),
+                    comida.getQuantidade(),
+                    comida.getTipo(),
+                    Utilitarios.dataISOtoBR(comida.getDataValidade().toString())});
 
             }
             jTable1.updateUI();
@@ -51,13 +50,13 @@ public class JDialogConComidas extends javax.swing.JDialog {
         }
     }
 
-    public JDialogConComidas(java.awt.Frame parent, boolean modal,boolean jSelecionar) {
+    public JDialogConComidas(java.awt.Frame parent, boolean modal, boolean jSelecionar) {
         super(parent, modal);
         initComponents();
         criaTabela();
         jButtonSelecionar.setVisible(jSelecionar);
     }
-    
+
     private void carregaDados() {
         int linha = jTable1.getSelectedRow();
         if (linha == -1) {
@@ -240,10 +239,14 @@ public class JDialogConComidas extends javax.swing.JDialog {
         if (comida != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Comida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                TransactionManager tmanager = new TransactionManager();
                 try {
-                    dao.delete(comida);
+                    tmanager.beginTransaction();
+                    dao.delete(comida, tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir comida!\n"
                             + "Certifique-se que o Comida não esteja em nenhum prato para poder excluir!");
                     ex.printStackTrace();
@@ -334,7 +337,7 @@ public class JDialogConComidas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogConComidas dialog = new JDialogConComidas(new javax.swing.JFrame(), true,false);
+                JDialogConComidas dialog = new JDialogConComidas(new javax.swing.JFrame(), true, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

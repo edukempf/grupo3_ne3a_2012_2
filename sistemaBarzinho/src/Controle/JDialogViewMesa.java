@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.MesaDAO;
+import DAO.TransactionManager;
 import Modelo.Mesa;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -20,31 +21,35 @@ public class JDialogViewMesa extends javax.swing.JDialog {
      */
     private Mesa mesa;
     private MesaDAO dao;
-    
-    public JDialogViewMesa(java.awt.Frame parent, boolean modal,Mesa mesa) {
+
+    public JDialogViewMesa(java.awt.Frame parent, boolean modal, Mesa mesa) {
         super(parent, modal);
         initComponents();
-        this.mesa=mesa;
+        this.mesa = mesa;
         jTextFieldCapacidade.setText(mesa.getCapacidade() + "");
-            if (mesa.isStatus()) {
-                jRadioButtonO.setSelected(true);
-            } else {
-                jRadioButtonL.setSelected(true);
-            }
+        if (mesa.isStatus()) {
+            jRadioButtonO.setSelected(true);
+        } else {
+            jRadioButtonL.setSelected(true);
+        }
     }
 
-     private void insereMesa(Mesa mesa) {
+    private void insereMesa(Mesa mesa) {
         dao = new MesaDAO();
+        TransactionManager tmanager = new TransactionManager();
         try {
-            dao.persisteObjeto(mesa);
+            tmanager.beginTransaction();
+            dao.persisteObjeto(mesa, tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
 
         } catch (Exception ex) {
+            tmanager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
             System.out.println(ex.toString());
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -241,7 +246,7 @@ public class JDialogViewMesa extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewMesa dialog = new JDialogViewMesa(new javax.swing.JFrame(), true,null);
+                JDialogViewMesa dialog = new JDialogViewMesa(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

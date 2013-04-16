@@ -8,6 +8,7 @@ import DAO.FuncionarioDAO;
 import DAO.MesaDAO;
 import DAO.PedidoBebidaDAO;
 import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import Modelo.Funcionario;
 import Modelo.Mesa;
@@ -29,30 +30,29 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
     /**
      * Creates new form JDialogViewPedidoBebida
      */
-    
     private PedidoBebida pedido;
     private PedidoBebidaDAO dao;
-    private DefaultTableModel modelPratos; 
+    private DefaultTableModel modelPratos;
     private DefaultComboBoxModel modelCombo;
     private List<Bebida> listaPratos;
     private FuncionarioDAO daoFunc;
     private MesaDAO daoMesa;
-    
+
     public JDialogViewPedidoBebida(java.awt.Frame parent, boolean modal, PedidoBebida pedido) {
         super(parent, modal);
         this.pedido = pedido;
-        this.listaPratos=pedido.getBebidas();
+        this.listaPratos = pedido.getBebidas();
         initComponents();
         criaTabelas();
         preenchetabelaPrato();
         preencheComboBoxMesa();
         preencheComboBoxFuncionario();
-        jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario()+" - "+pedido.getIdFuncionario().getNome());
-        jComboBoxMesa.setSelectedItem("Mesa - "+pedido.getIdMesa().getId());
+        jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario() + " - " + pedido.getIdFuncionario().getNome());
+        jComboBoxMesa.setSelectedItem("Mesa - " + pedido.getIdMesa().getId());
     }
-    
+
     private void criaTabelas() {
-        modelPratos = new DefaultTableModel(new String[]{"Nome","Preço"}, 0) {
+        modelPratos = new DefaultTableModel(new String[]{"Nome", "Preço"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -60,13 +60,14 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
         };
         jTablePratos.setModel(modelPratos);
     }
+
     private void preenchetabelaPrato() {
         modelPratos.setNumRows(0);
         try {
-            List<Bebida> lista2 = this.listaPratos ;
+            List<Bebida> lista2 = this.listaPratos;
             for (Bebida p : lista2) {
                 modelPratos.addRow(new Object[]{p.getNome(),
-                    p.getPreco()+""});
+                    p.getPreco() + ""});
 
             }
             jTablePratos.updateUI();
@@ -74,39 +75,43 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
             ex.printStackTrace();
         }
     }
-    
-    public void preencheComboBoxFuncionario(){
-        daoFunc=new FuncionarioDAO();
-        List<Funcionario> funcionarios=daoFunc.lista();
-        String[] nomeFunc=new String[funcionarios.size()];
-        for(int i=0;i<funcionarios.size();i++){
-            nomeFunc[i]=funcionarios.get(i).getCodFuncionario()+" - "+funcionarios.get(i).getNome();
+
+    public void preencheComboBoxFuncionario() {
+        daoFunc = new FuncionarioDAO();
+        List<Funcionario> funcionarios = daoFunc.lista();
+        String[] nomeFunc = new String[funcionarios.size()];
+        for (int i = 0; i < funcionarios.size(); i++) {
+            nomeFunc[i] = funcionarios.get(i).getCodFuncionario() + " - " + funcionarios.get(i).getNome();
         }
-        modelCombo= new DefaultComboBoxModel(nomeFunc);
+        modelCombo = new DefaultComboBoxModel(nomeFunc);
         jComboBoxGarcon.setModel(modelCombo);
         jComboBoxGarcon.updateUI();
     }
-    
-    public void preencheComboBoxMesa(){
-        daoMesa=new MesaDAO();
-        List<Mesa> mesas=daoMesa.lista();
-        String[] lista=new String[mesas.size()];
-        for(int i=0;i<mesas.size();i++){
-            lista[i]="Mesa - "+mesas.get(i).getId();
+
+    public void preencheComboBoxMesa() {
+        daoMesa = new MesaDAO();
+        List<Mesa> mesas = daoMesa.lista();
+        String[] lista = new String[mesas.size()];
+        for (int i = 0; i < mesas.size(); i++) {
+            lista[i] = "Mesa - " + mesas.get(i).getId();
         }
-        modelCombo= new DefaultComboBoxModel(lista);
+        modelCombo = new DefaultComboBoxModel(lista);
         jComboBoxMesa.setModel(modelCombo);
         jComboBoxMesa.updateUI();
     }
-    
+
     private void inserePedido(PedidoBebida pedido) {
         dao = new PedidoBebidaDAO();
+        TransactionManager tmanager = new TransactionManager();
         try {
-            dao.persisteObjeto(pedido);
+            tmanager.beginTransaction();
+            dao.persisteObjeto(pedido, tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Pedido!");
+            tmanager.rollbackTransaction();
             System.out.println(ex.toString());
         }
     }
@@ -307,7 +312,7 @@ public class JDialogViewPedidoBebida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewPedidoBebida dialog = new JDialogViewPedidoBebida(new javax.swing.JFrame(), true,null);
+                JDialogViewPedidoBebida dialog = new JDialogViewPedidoBebida(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

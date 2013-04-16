@@ -5,11 +5,12 @@
 package Controle;
 
 import DAO.FuncionarioDAO;
+import DAO.TransactionManager;
 import Modelo.Funcionario;
 import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
- 
+
 /**
  *
  * @author Juliana
@@ -21,10 +22,10 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
      */
     private Funcionario func;
     private FuncionarioDAO dao;
-    
-    public JDialogViewFuncionario(java.awt.Frame parent, boolean modal,Funcionario func) {
+
+    public JDialogViewFuncionario(java.awt.Frame parent, boolean modal, Funcionario func) {
         super(parent, modal);
-        this.func=func;
+        this.func = func;
         initComponents();
         jFormattedTextFieldCPF.setText(func.getCpf());
         jFormattedTextFieldDataNasc.setText(Utils.Utilitarios.formatDate(func.getDataNasc()));
@@ -32,21 +33,25 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         jComboBoxEstadoCivil.setSelectedItem(func.getEstadoCivil());
         jTextFieldNome.setText(func.getNome());
         jTextFieldRg.setText(func.getRg());
-        jFormattedTextFieldSalario.setText(func.getSalario()+"");
+        jFormattedTextFieldSalario.setText(func.getSalario() + "");
     }
 
-    private void insereFuncionario(Funcionario func){
-        dao=new FuncionarioDAO();
-        try{
-            dao.persisteObjeto(func);
+    private void insereFuncionario(Funcionario func) {
+        dao = new FuncionarioDAO();
+        TransactionManager tmanager = new TransactionManager();
+        try {
+            tmanager.beginTransaction();
+            dao.persisteObjeto(func, tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
+            tmanager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "erro ao inserir!");
             System.out.println(ex.toString());
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,7 +278,7 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         dispose();
-        JDialog dialog = new JDialogCadFuncionario(null, true,this.func);
+        JDialog dialog = new JDialogCadFuncionario(null, true, this.func);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
@@ -320,7 +325,7 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewFuncionario dialog = new JDialogViewFuncionario(new javax.swing.JFrame(), true,null);
+                JDialogViewFuncionario dialog = new JDialogViewFuncionario(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

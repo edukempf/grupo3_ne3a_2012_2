@@ -1,6 +1,7 @@
 package Controle;
 
 import DAO.BebidaDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import Utils.Data;
 import Utils.Utilitarios;
@@ -242,10 +243,14 @@ public class JDialogConBebidas extends javax.swing.JDialog {
         if (bebida != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Bebida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
+                    TransactionManager tmanager=new TransactionManager();
                 try {
-                    dao.delete(bebida);
+                    tmanager.beginTransaction();
+                    dao.delete(bebida,tmanager);
+                    tmanager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
+                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir bebida!\n"
                             + "Certifique-se que a bebida não esteja em nenhum pedido para poder excluir!");
                     ex.printStackTrace();

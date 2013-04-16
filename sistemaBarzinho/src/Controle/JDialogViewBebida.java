@@ -5,16 +5,15 @@
 package Controle;
 
 import DAO.BebidaDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author Juliana
  */
-
 public class JDialogViewBebida extends javax.swing.JDialog {
 
     /**
@@ -36,12 +35,16 @@ public class JDialogViewBebida extends javax.swing.JDialog {
 
     private void insereBebida(Bebida bebida) {
         dao = new BebidaDAO();
+        TransactionManager tmanager = new TransactionManager();
         try {
-            dao.persisteObjeto(bebida);
+            tmanager.beginTransaction();
+            dao.persisteObjeto(bebida, tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
+            tmanager.rollbackTransaction();
             System.out.println(ex.toString());
         }
     }
@@ -177,7 +180,7 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         JDialog dialog = new JDialogCadBebidas(null, true, this.bebida);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
@@ -210,8 +213,8 @@ public class JDialogViewBebida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                JDialogViewBebida dialog = new JDialogViewBebida(new javax.swing.JFrame(), true,null);
+
+                JDialogViewBebida dialog = new JDialogViewBebida(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

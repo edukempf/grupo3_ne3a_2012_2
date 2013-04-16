@@ -7,6 +7,7 @@ package Controle;
 import DAO.FuncionarioDAO;
 import DAO.MesaDAO;
 import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
 import Modelo.Funcionario;
 import Modelo.Mesa;
 import Modelo.PedidoPrato;
@@ -28,7 +29,7 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
      */
     private PedidoPrato pedido;
     private PedidoPratoDAO dao;
-    private DefaultTableModel modelPratos; 
+    private DefaultTableModel modelPratos;
     private DefaultComboBoxModel modelCombo;
     private List<Prato> listaPratos;
     private FuncionarioDAO daoFunc;
@@ -37,21 +38,24 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
     public JDialogViewPedidoPrato(java.awt.Frame parent, boolean modal, PedidoPrato pedido) {
         super(parent, modal);
         this.pedido = pedido;
-        this.listaPratos=pedido.getPratos();
+        this.listaPratos = pedido.getPratos();
         initComponents();
         criaTabelas();
         preenchetabelaPrato();
         preencheComboBoxMesa();
         preencheComboBoxFuncionario();
-        jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario()+" - "+pedido.getIdFuncionario().getNome());
-        jComboBoxMesa.setSelectedItem("Mesa - "+pedido.getIdMesa().getId());
-        
+        jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario() + " - " + pedido.getIdFuncionario().getNome());
+        jComboBoxMesa.setSelectedItem("Mesa - " + pedido.getIdMesa().getId());
+
     }
 
     private void inserePedido(PedidoPrato pedido) {
         dao = new PedidoPratoDAO();
         try {
-            dao.persisteObjeto(pedido);
+            TransactionManager tmanager = new TransactionManager();
+            tmanager.beginTransaction();
+            dao.persisteObjeto(pedido,tmanager);
+            tmanager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
 
         } catch (Exception ex) {
@@ -60,9 +64,8 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
         }
     }
 
-    
     private void criaTabelas() {
-        modelPratos = new DefaultTableModel(new String[]{"Nome","Preço"}, 0) {
+        modelPratos = new DefaultTableModel(new String[]{"Nome", "Preço"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -70,13 +73,14 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
         };
         jTablePratos.setModel(modelPratos);
     }
+
     private void preenchetabelaPrato() {
         modelPratos.setNumRows(0);
         try {
-            List<Prato> lista2 = this.listaPratos ;
+            List<Prato> lista2 = this.listaPratos;
             for (Prato p : lista2) {
                 modelPratos.addRow(new Object[]{p.getNome(),
-                    p.getPreco()+""});
+                    p.getPreco() + ""});
 
             }
             jTablePratos.updateUI();
@@ -84,32 +88,31 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
             ex.printStackTrace();
         }
     }
-    
-    public void preencheComboBoxFuncionario(){
-        daoFunc=new FuncionarioDAO();
-        List<Funcionario> funcionarios=daoFunc.lista();
-        String[] nomeFunc=new String[funcionarios.size()];
-        for(int i=0;i<funcionarios.size();i++){
-            nomeFunc[i]=funcionarios.get(i).getCodFuncionario()+" - "+funcionarios.get(i).getNome();
+
+    public void preencheComboBoxFuncionario() {
+        daoFunc = new FuncionarioDAO();
+        List<Funcionario> funcionarios = daoFunc.lista();
+        String[] nomeFunc = new String[funcionarios.size()];
+        for (int i = 0; i < funcionarios.size(); i++) {
+            nomeFunc[i] = funcionarios.get(i).getCodFuncionario() + " - " + funcionarios.get(i).getNome();
         }
-        modelCombo= new DefaultComboBoxModel(nomeFunc);
+        modelCombo = new DefaultComboBoxModel(nomeFunc);
         jComboBoxGarcon.setModel(modelCombo);
         jComboBoxGarcon.updateUI();
     }
-    
-    public void preencheComboBoxMesa(){
-        daoMesa=new MesaDAO();
-        List<Mesa> mesas=daoMesa.lista();
-        String[] lista=new String[mesas.size()];
-        for(int i=0;i<mesas.size();i++){
-            lista[i]="Mesa - "+mesas.get(i).getId();
+
+    public void preencheComboBoxMesa() {
+        daoMesa = new MesaDAO();
+        List<Mesa> mesas = daoMesa.lista();
+        String[] lista = new String[mesas.size()];
+        for (int i = 0; i < mesas.size(); i++) {
+            lista[i] = "Mesa - " + mesas.get(i).getId();
         }
-        modelCombo= new DefaultComboBoxModel(lista);
+        modelCombo = new DefaultComboBoxModel(lista);
         jComboBoxMesa.setModel(modelCombo);
         jComboBoxMesa.updateUI();
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -278,7 +281,7 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogViewPedidoPrato dialog = new JDialogViewPedidoPrato(new javax.swing.JFrame(), true,null);
+                JDialogViewPedidoPrato dialog = new JDialogViewPedidoPrato(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
