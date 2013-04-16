@@ -1,5 +1,5 @@
 body {
-        background-image: url("imagens/fundo.gif");
+        background-image: url("imagens/imagemTelaInicial.jpg");
 	font: normal 13px Georgia, "Times New Roman", Times, serif;
 }
 
@@ -32,7 +32,7 @@ body {
     border-width: 7px 0px;
     border-style: double solid ;
     border-color:#24130F;
-    background-image: url("imagens/fundo2.jpg");
+    background-image: url("imagens/1.jpg");
     background-repeat: repeat-x;
 }
 
@@ -114,8 +114,8 @@ body {
 #content{
    
     height: 700px;
-    background: #000000;
-    background-image: url("imagens/fundo3.jpg");
+    background: #FFFFFF;
+  background-image: url("imagens/fundo3.jpg");
     background-repeat: no-repeat;
     text-align: left;
     padding: 25px;
