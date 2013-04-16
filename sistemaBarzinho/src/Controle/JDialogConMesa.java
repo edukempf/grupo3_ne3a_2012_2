@@ -303,16 +303,15 @@ public class JDialogConMesa extends javax.swing.JDialog {
         if (mesa != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Mesa?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
-                TransactionManager tmanager = new TransactionManager();
                 try {
-                    tmanager.beginTransaction();
-                    dao.delete(mesa, tmanager);
-                    tmanager.comitTransaction();
+                    TransactionManager.beginTransaction();
+                    dao.delete(mesa);
+                    TransactionManager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
-                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir Mesa!\n"
                             + "Certifique-se que a mesa não esteja em nenhum pedido para poder excluir!");
+                    TransactionManager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

@@ -29,13 +29,13 @@ public abstract class DaoBasic<T> {
         
     protected static Session session;
     
-    public void persisteObjeto(Object o,TransactionManager tmanager){
-        session=tmanager.getCurrentSession();
+    public void persisteObjeto(Object o){
+        session=TransactionManager.getCurrentSession();
         session.saveOrUpdate(o);
     }
     
-    public void delete(Object deletar,TransactionManager tmanager){
-        session=tmanager.getCurrentSession();
+    public void delete(Object deletar){
+        session=TransactionManager.getCurrentSession();
         session.delete(deletar);
     }
     

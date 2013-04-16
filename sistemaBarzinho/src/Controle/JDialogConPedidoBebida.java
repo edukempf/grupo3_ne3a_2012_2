@@ -300,15 +300,14 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
         if (pedido != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Pedido?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
-                TransactionManager tmanager = new TransactionManager();
                 try {
-                    tmanager.beginTransaction();
-                    dao.delete(pedido, tmanager);
-                    tmanager.comitTransaction();
+                    TransactionManager.beginTransaction();
+                    dao.delete(pedido);
+                    TransactionManager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
-                    tmanager.rollbackTransaction();
                     ex.printStackTrace();
+                    TransactionManager.rollbackTransaction();
                 }
             }
         } else {

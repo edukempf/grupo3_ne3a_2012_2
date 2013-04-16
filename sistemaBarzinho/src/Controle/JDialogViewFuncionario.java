@@ -38,15 +38,14 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
 
     private void insereFuncionario(Funcionario func) {
         dao = new FuncionarioDAO();
-        TransactionManager tmanager = new TransactionManager();
         try {
-            tmanager.beginTransaction();
-            dao.persisteObjeto(func, tmanager);
-            tmanager.comitTransaction();
+            TransactionManager.beginTransaction();
+            dao.persisteObjeto(func);
+            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
 
         } catch (Exception ex) {
-            tmanager.rollbackTransaction();
+            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "erro ao inserir!");
             System.out.println(ex.toString());
         }

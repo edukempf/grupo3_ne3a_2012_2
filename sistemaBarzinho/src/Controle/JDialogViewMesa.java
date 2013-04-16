@@ -36,15 +36,14 @@ public class JDialogViewMesa extends javax.swing.JDialog {
 
     private void insereMesa(Mesa mesa) {
         dao = new MesaDAO();
-        TransactionManager tmanager = new TransactionManager();
         try {
-            tmanager.beginTransaction();
-            dao.persisteObjeto(mesa, tmanager);
-            tmanager.comitTransaction();
+            TransactionManager.beginTransaction();
+            dao.persisteObjeto(mesa);
+            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
 
         } catch (Exception ex) {
-            tmanager.rollbackTransaction();
+            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
             System.out.println(ex.toString());
         }

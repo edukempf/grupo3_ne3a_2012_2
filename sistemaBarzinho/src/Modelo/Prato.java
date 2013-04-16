@@ -13,12 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
 
 /**
  *
@@ -34,7 +29,7 @@ public class Prato implements Serializable {
     private String nome;
     @Column(length = 6, precision = 2)
     private double preco;
-    @ManyToMany(fetch = FetchType.EAGER)@Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Comida> ingredientes;
     @Column(length = 5)
     private int quantidadePorcoes;

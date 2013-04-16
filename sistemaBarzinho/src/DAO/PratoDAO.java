@@ -4,12 +4,9 @@
  */
 package DAO;
 import static DAO.DaoBasic.session;
-import Modelo.PedidoPrato;
 import Modelo.Prato;
 import java.util.List;
 import org.hibernate.Query;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 /**
  *
  * @author Ligue01

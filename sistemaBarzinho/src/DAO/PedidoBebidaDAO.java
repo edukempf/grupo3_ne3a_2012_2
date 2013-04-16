@@ -6,7 +6,6 @@ package DAO;
 
 import static DAO.DaoBasic.session;
 import Modelo.PedidoBebida;
-import Modelo.PedidoPrato;
 import java.util.List;
 import org.hibernate.Query;
 

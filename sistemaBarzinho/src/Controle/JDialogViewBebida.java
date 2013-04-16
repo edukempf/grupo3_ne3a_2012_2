@@ -35,16 +35,15 @@ public class JDialogViewBebida extends javax.swing.JDialog {
 
     private void insereBebida(Bebida bebida) {
         dao = new BebidaDAO();
-        TransactionManager tmanager = new TransactionManager();
         try {
-            tmanager.beginTransaction();
-            dao.persisteObjeto(bebida, tmanager);
-            tmanager.comitTransaction();
+            TransactionManager.beginTransaction();
+            dao.persisteObjeto(bebida);
+            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
-            tmanager.rollbackTransaction();
+            TransactionManager.rollbackTransaction();
             System.out.println(ex.toString());
         }
     }

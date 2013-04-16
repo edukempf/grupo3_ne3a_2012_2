@@ -950,8 +950,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
     private void inseredados() {
         // Insert Funcionários
-        TransactionManager tmanager = new TransactionManager();
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
 
         FuncionarioDAO daoF = new FuncionarioDAO();
         Funcionario func1 = new Funcionario();
@@ -962,10 +961,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         func1.setNome("Eduardo Kempf");
         func1.setRg("10.538.191-3");
         func1.setSalario(1000);
-        daoF.persisteObjeto(func1, tmanager);
-        tmanager.comitTransaction();
+        daoF.persisteObjeto(func1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Funcionario func2 = new Funcionario();
         func2.setCpf("08731628974");
         func2.setDataNasc(new Date("21/08/1992"));
@@ -974,10 +973,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         func2.setNome("Juliana Iora");
         func2.setRg("10.550.749-6");
         func2.setSalario(1200);
-        daoF.persisteObjeto(func2, tmanager);
-        tmanager.comitTransaction();
+        daoF.persisteObjeto(func2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Funcionario func3 = new Funcionario();
         func3.setCpf("08731628974");
         func3.setDataNasc(new Date("03/05/1989"));
@@ -986,10 +985,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         func3.setNome("joão da Silva");
         func3.setRg("05.480.749-2");
         func3.setSalario(3000);
-        daoF.persisteObjeto(func3, tmanager);
-        tmanager.comitTransaction();
+        daoF.persisteObjeto(func3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Funcionario func4 = new Funcionario();
         func4.setCpf("01048437990");
         func4.setDataNasc(new Date("13/04/1988"));
@@ -998,10 +997,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         func4.setNome("Luiz Fernandodos Santos");
         func4.setRg("9.777.688-1");
         func4.setSalario(1000);
-        daoF.persisteObjeto(func4, tmanager);
-        tmanager.comitTransaction();
+        daoF.persisteObjeto(func4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Funcionario func5 = new Funcionario();
         func5.setCpf("01048437990");
         func5.setDataNasc(new Date("13/04/1978"));
@@ -1010,11 +1009,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         func5.setNome("Sofia Gomes");
         func5.setRg("3.757.688-8");
         func5.setSalario(1500);
-        daoF.persisteObjeto(func5, tmanager);
-        tmanager.comitTransaction();
+        daoF.persisteObjeto(func5);
+        TransactionManager.comitTransaction();
 
         // Insert Bebidas
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         BebidaDAO daoB = new BebidaDAO();
         Bebida bebi1 = new Bebida();
         bebi1.setNome("Coca Cola");
@@ -1022,136 +1021,136 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         bebi1.setQtde(1000);
         bebi1.setTipo("Refrigerante");
         bebi1.setDataValidade(new Date("27/04/2014"));
-        daoB.persisteObjeto(bebi1, tmanager);
-        tmanager.comitTransaction();
+        daoB.persisteObjeto(bebi1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Bebida bebi2 = new Bebida();
         bebi2.setNome("Cerveja");
         bebi2.setPreco(4.80);
         bebi2.setQtde(1000);
         bebi2.setTipo("Alcoolica");
         bebi2.setDataValidade(new Date("27/11/2013"));
-        daoB.persisteObjeto(bebi2, tmanager);
-        tmanager.comitTransaction();
+        daoB.persisteObjeto(bebi2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Bebida bebi3 = new Bebida();
         bebi3.setNome("Guaraná Antatica");
         bebi3.setPreco(3.25);
         bebi3.setQtde(800);
         bebi3.setTipo("Refrigerante");
         bebi3.setDataValidade(new Date("27/02/2014"));
-        daoB.persisteObjeto(bebi3, tmanager);
-        tmanager.comitTransaction();
+        daoB.persisteObjeto(bebi3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Bebida bebi4 = new Bebida();
         bebi4.setNome("Água com gás");
         bebi4.setPreco(2.75);
         bebi4.setQtde(500);
         bebi4.setTipo("Refrigerante");
         bebi4.setDataValidade(new Date("27/08/2013"));
-        daoB.persisteObjeto(bebi4, tmanager);
-        tmanager.comitTransaction();
+        daoB.persisteObjeto(bebi4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Bebida bebi5 = new Bebida();
         bebi5.setNome("Whisky");
         bebi5.setPreco(3.25);
         bebi5.setQtde(1000);
         bebi5.setTipo("Alcoolica");
         bebi5.setDataValidade(new Date("03/05/2016"));
-        daoB.persisteObjeto(bebi5, tmanager);
-        tmanager.comitTransaction();
+        daoB.persisteObjeto(bebi5);
+        TransactionManager.comitTransaction();
 
         // Insert Comidas
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         ComidaDAO daoC = new ComidaDAO();
         Comida comi1 = new Comida();
         comi1.setNome("Batata");
         comi1.setQuantidade(30);
         comi1.setTipo("Kilograma");
         comi1.setDataValidade(new Date("27/04/2013"));
-        daoC.persisteObjeto(comi1, tmanager);
-        tmanager.comitTransaction();
+        daoC.persisteObjeto(comi1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Comida comi2 = new Comida();
         comi2.setNome("Frango");
         comi2.setQuantidade(15);
         comi2.setTipo("Kilograma");
         comi2.setDataValidade(new Date("22/04/2013"));
-        daoC.persisteObjeto(comi2, tmanager);
-        tmanager.comitTransaction();
+        daoC.persisteObjeto(comi2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Comida comi3 = new Comida();
         comi3.setNome("Mussarela");
         comi3.setQuantidade(15000);
         comi3.setTipo("Grama");
         comi3.setDataValidade(new Date("18/04/2013"));
-        daoC.persisteObjeto(comi3, tmanager);
-        tmanager.comitTransaction();
+        daoC.persisteObjeto(comi3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Comida comi4 = new Comida();
         comi4.setNome("Presunto");
         comi4.setQuantidade(10000);
         comi4.setTipo("Grama");
         comi4.setDataValidade(new Date("18/04/2013"));
-        daoC.persisteObjeto(comi4, tmanager);
-        tmanager.comitTransaction();
+        daoC.persisteObjeto(comi4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Comida comi5 = new Comida();
         comi5.setNome("Bife");
         comi5.setQuantidade(25);
         comi5.setTipo("Kilograma");
         comi5.setDataValidade(new Date("22/04/2013"));
-        daoC.persisteObjeto(comi5, tmanager);
-        tmanager.comitTransaction();
+        daoC.persisteObjeto(comi5);
+        TransactionManager.comitTransaction();
 
 
         // Insert Mesas
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         MesaDAO daoM = new MesaDAO();
         Mesa mes1 = new Mesa();
         mes1.setCapacidade(4);
         mes1.setStatus(true);
-        daoM.persisteObjeto(mes1, tmanager);
-        tmanager.comitTransaction();
+        daoM.persisteObjeto(mes1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Mesa mes2 = new Mesa();
         mes2.setCapacidade(4);
         mes2.setStatus(false);
-        daoM.persisteObjeto(mes2, tmanager);
-        tmanager.comitTransaction();
+        daoM.persisteObjeto(mes2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Mesa mes3 = new Mesa();
         mes3.setCapacidade(6);
         mes3.setStatus(true);
-        daoM.persisteObjeto(mes3, tmanager);
-        tmanager.comitTransaction();
+        daoM.persisteObjeto(mes3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Mesa mes4 = new Mesa();
         mes4.setCapacidade(6);
         mes4.setStatus(false);
-        daoM.persisteObjeto(mes4, tmanager);
-        tmanager.comitTransaction();
+        daoM.persisteObjeto(mes4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Mesa mes5 = new Mesa();
         mes5.setCapacidade(8);
         mes5.setStatus(false);
-        daoM.persisteObjeto(mes5, tmanager);
-        tmanager.comitTransaction();
+        daoM.persisteObjeto(mes5);
+        TransactionManager.comitTransaction();
 
         // Insert Pratos
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PratoDAO daoPr = new PratoDAO();
         Prato prat1 = new Prato();
         List<Comida> comI = new ArrayList<Comida>();
@@ -1160,10 +1159,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         prat1.setIngredientes(comI);
         prat1.setQuantidadePorcoes(3);
         prat1.setPreco(13.00);
-        daoPr.persisteObjeto(prat1, tmanager);
-        tmanager.comitTransaction();
+        daoPr.persisteObjeto(prat1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Prato prat2 = new Prato();
         List<Comida> comII = new ArrayList<Comida>();
         comII.add(comi2);
@@ -1171,10 +1170,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         prat2.setIngredientes(comII);
         prat2.setQuantidadePorcoes(5);
         prat2.setPreco(16.00);
-        daoPr.persisteObjeto(prat2, tmanager);
-        tmanager.comitTransaction();
+        daoPr.persisteObjeto(prat2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Prato prat3 = new Prato();
         List<Comida> comIII = new ArrayList<Comida>();
         comIII.add(comi1);
@@ -1184,10 +1183,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         prat3.setIngredientes(comIII);
         prat3.setQuantidadePorcoes(3);
         prat3.setPreco(13.00);
-        daoPr.persisteObjeto(prat3, tmanager);
-        tmanager.comitTransaction();
+        daoPr.persisteObjeto(prat3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Prato prat4 = new Prato();
         List<Comida> comIV = new ArrayList<Comida>();
         comIV.add(comi2);
@@ -1197,10 +1196,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         prat4.setIngredientes(comIV);
         prat4.setQuantidadePorcoes(3);
         prat4.setPreco(13.00);
-        daoPr.persisteObjeto(prat4, tmanager);
-        tmanager.comitTransaction();
+        daoPr.persisteObjeto(prat4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         Prato prat5 = new Prato();
         prat5.setNome("Porção especial");
         List<Comida> comV = new ArrayList<Comida>();
@@ -1210,11 +1209,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         prat5.setIngredientes(comV);
         prat5.setQuantidadePorcoes(3);
         prat5.setPreco(13.00);
-        daoPr.persisteObjeto(prat5, tmanager);
-        tmanager.comitTransaction();
+        daoPr.persisteObjeto(prat5);
+        TransactionManager.comitTransaction();
 
         // Insert Pedidos Bebidas
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoBebidaDAO daoPB = new PedidoBebidaDAO();
         PedidoBebida pb1 = new PedidoBebida();
         List<Bebida> bebI = new ArrayList<Bebida>();
@@ -1223,10 +1222,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pb1.setBebidas(bebI);
         pb1.setIdFuncionario(func5);
         pb1.setIdMesa(mes5);
-        daoPB.persisteObjeto(pb1, tmanager);
-        tmanager.comitTransaction();
+        daoPB.persisteObjeto(pb1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoBebida pb2 = new PedidoBebida();
         List<Bebida> bebII = new ArrayList<Bebida>();
         bebII.add(bebi1);
@@ -1234,10 +1233,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pb2.setBebidas(bebII);
         pb2.setIdFuncionario(func4);
         pb2.setIdMesa(mes4);
-        daoPB.persisteObjeto(pb2, tmanager);
-        tmanager.comitTransaction();
+        daoPB.persisteObjeto(pb2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoBebida pb3 = new PedidoBebida();
         List<Bebida> bebIII = new ArrayList<Bebida>();
         bebIII.add(bebi2);
@@ -1245,10 +1244,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pb3.setBebidas(bebIII);
         pb3.setIdFuncionario(func2);
         pb3.setIdMesa(mes2);
-        daoPB.persisteObjeto(pb3, tmanager);
-        tmanager.comitTransaction();
+        daoPB.persisteObjeto(pb3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoBebida pb4 = new PedidoBebida();
         List<Bebida> bebIV = new ArrayList<Bebida>();
         bebIII.add(bebi2);
@@ -1256,10 +1255,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pb4.setBebidas(bebIV);
         pb4.setIdFuncionario(func3);
         pb4.setIdMesa(mes3);
-        daoPB.persisteObjeto(pb4, tmanager);
-        tmanager.comitTransaction();
+        daoPB.persisteObjeto(pb4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoBebida pb5 = new PedidoBebida();
         List<Bebida> bebV = new ArrayList<Bebida>();
         bebV.add(bebi1);
@@ -1268,11 +1267,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pb5.setBebidas(bebV);
         pb5.setIdFuncionario(func1);
         pb5.setIdMesa(mes5);
-        daoPB.persisteObjeto(pb5, tmanager);
-        tmanager.comitTransaction();
+        daoPB.persisteObjeto(pb5);
+        TransactionManager.comitTransaction();
 
         // Insert Pedidos Pratos
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoPratoDAO daoPP = new PedidoPratoDAO();
         PedidoPrato pp1 = new PedidoPrato();
         List<Prato> praI = new ArrayList<Prato>();
@@ -1282,10 +1281,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pp1.setPratos(praI);
         pp1.setIdFuncionario(func5);
         pp1.setIdMesa(mes5);
-        daoPP.persisteObjeto(pp1, tmanager);
-        tmanager.comitTransaction();
+        daoPP.persisteObjeto(pp1);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoPrato pp2 = new PedidoPrato();
         List<Prato> praII = new ArrayList<Prato>();
         praII.add(prat1);
@@ -1293,10 +1292,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pp1.setPratos(praII);
         pp2.setIdFuncionario(func4);
         pp2.setIdMesa(mes4);
-        daoPP.persisteObjeto(pp2, tmanager);
-        tmanager.comitTransaction();
+        daoPP.persisteObjeto(pp2);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoPrato pp3 = new PedidoPrato();
         List<Prato> praIII = new ArrayList<Prato>();
         praIII.add(prat1);
@@ -1304,10 +1303,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pp1.setPratos(praIII);
         pp3.setIdFuncionario(func2);
         pp3.setIdMesa(mes2);
-        daoPP.persisteObjeto(pp3, tmanager);
-        tmanager.comitTransaction();
+        daoPP.persisteObjeto(pp3);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoPrato pp4 = new PedidoPrato();
         List<Prato> praIV = new ArrayList<Prato>();
         praIV.add(prat1);
@@ -1315,10 +1314,10 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pp1.setPratos(praIV);
         pp4.setIdFuncionario(func3);
         pp4.setIdMesa(mes3);
-        daoPP.persisteObjeto(pp4, tmanager);
-        tmanager.comitTransaction();
+        daoPP.persisteObjeto(pp4);
+        TransactionManager.comitTransaction();
 
-        tmanager.beginTransaction();
+        TransactionManager.beginTransaction();
         PedidoPrato pp5 = new PedidoPrato();
         List<Prato> praV = new ArrayList<Prato>();
         praV.add(prat1);
@@ -1328,8 +1327,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         pp1.setPratos(praV);
         pp5.setIdFuncionario(func1);
         pp5.setIdMesa(mes5);
-        daoPP.persisteObjeto(pp5, tmanager);
+        daoPP.persisteObjeto(pp5);
 
-        tmanager.comitTransaction();
+        TransactionManager.comitTransaction();
     }
 }

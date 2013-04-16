@@ -52,10 +52,9 @@ public class JDialogViewPedidoPrato extends javax.swing.JDialog {
     private void inserePedido(PedidoPrato pedido) {
         dao = new PedidoPratoDAO();
         try {
-            TransactionManager tmanager = new TransactionManager();
-            tmanager.beginTransaction();
-            dao.persisteObjeto(pedido,tmanager);
-            tmanager.comitTransaction();
+            TransactionManager.beginTransaction();
+            dao.persisteObjeto(pedido);
+            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
 
         } catch (Exception ex) {

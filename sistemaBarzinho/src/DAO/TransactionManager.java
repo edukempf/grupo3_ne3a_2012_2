@@ -13,19 +13,20 @@ import org.hibernate.Transaction;
  */
 public class TransactionManager {
 
-    private  Session session = null;
-    private  Transaction transaction = null;
+    private static Session session = null;
+    private static Transaction transaction = null;
 
-    public void beginTransaction() {
+    public static void beginTransaction() {
         if(transaction != null){
             throw new RuntimeException("Já existe uma transação iniciada.");
         }
         session = HibernateConexao.getSession();
         transaction = session.beginTransaction();
+        transaction.begin();
 
     }
 
-    public void comitTransaction() {
+    public static void comitTransaction() {
         if(transaction == null){
             throw new RuntimeException("Erro ao executar comit() sem antes executar beginTransaction()");
         }
@@ -33,12 +34,11 @@ public class TransactionManager {
         closeCurrentSession();
     }
 
-    public Session getCurrentSession() {
-        this.session=HibernateConexao.getSession();
+    public static Session getCurrentSession() {
         return session;
     }
     
-    public void rollbackTransaction() {
+    public static void rollbackTransaction() {
         if(transaction == null){
             throw new RuntimeException("Erro ao executar comit() sem antes executar beginTransaction()");
         }
@@ -46,7 +46,7 @@ public class TransactionManager {
         closeCurrentSession();
     }
     
-    private void closeCurrentSession(){
+    private static void closeCurrentSession(){
         session.close();
         transaction = null;
         session = null;

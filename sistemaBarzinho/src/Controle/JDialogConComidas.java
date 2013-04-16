@@ -239,16 +239,15 @@ public class JDialogConComidas extends javax.swing.JDialog {
         if (comida != null) {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Comida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
-                TransactionManager tmanager = new TransactionManager();
                 try {
-                    tmanager.beginTransaction();
-                    dao.delete(comida, tmanager);
-                    tmanager.comitTransaction();
+                    TransactionManager.beginTransaction();
+                    dao.delete(comida);
+                    TransactionManager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
-                    tmanager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao excluir comida!\n"
                             + "Certifique-se que o Comida não esteja em nenhum prato para poder excluir!");
+                    TransactionManager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

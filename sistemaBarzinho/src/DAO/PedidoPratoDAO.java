@@ -6,9 +6,7 @@ package DAO;
 import static DAO.DaoBasic.session;
 import Modelo.PedidoPrato;
 import java.util.List;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 /**
  *
  * @author Ligue01

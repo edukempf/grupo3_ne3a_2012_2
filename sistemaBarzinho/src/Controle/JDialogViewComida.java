@@ -34,15 +34,14 @@ public class JDialogViewComida extends javax.swing.JDialog {
 
     private void insereComida(Comida comida) {
         dao = new ComidaDAO();
-        TransactionManager tmanager = new TransactionManager();
         try {
-            tmanager.beginTransaction();
-            dao.persisteObjeto(comida, tmanager);
-            tmanager.comitTransaction();
+            TransactionManager.beginTransaction();
+            dao.persisteObjeto(comida);
+            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Comida cadastrada com sucesso");
 
         } catch (Exception ex) {
-            tmanager.rollbackTransaction();
+            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Comida!");
             System.out.println(ex.toString());
         }

@@ -23,7 +23,6 @@ public class HibernateConexao {
     private static AnnotationConfiguration getConfiguracaoHibernate() {
         if (cfg == null) {
             Properties prop = Utils.PropertiesConexao.getProp();
-
             cfg = new AnnotationConfiguration();
             cfg.addAnnotatedClass(Funcionario.class);
             cfg.addAnnotatedClass(Comida.class);
@@ -32,6 +31,7 @@ public class HibernateConexao {
             cfg.addAnnotatedClass(Prato.class);
             cfg.addAnnotatedClass(PedidoBebida.class);
             cfg.addAnnotatedClass(PedidoPrato.class);
+            cfg.addAnnotatedClass(Pedido.class);
             cfg.setProperty("hibernate.connection.driver", "com.mysql.jdbc.Driver");
             cfg.setProperty("hibernate.connection.url", "jdbc:mysql://" + prop.getProperty("host") + "/" + prop.getProperty("database"));
             cfg.setProperty("hibernate.connection.user", prop.getProperty("login"));
@@ -39,7 +39,7 @@ public class HibernateConexao {
             cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
             cfg.setProperty("hibernate.show_sql", "true");
             cfg.setProperty("hibernate.format_sql", "true");
-            cfg.setProperty("hibernate.hbm2ddl.auto", "create or update");
+            cfg.setProperty("hibernate.hbm2ddl.auto", "update");
         }
         return cfg;
     }

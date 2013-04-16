@@ -7,7 +7,6 @@ package DAO;
 import Modelo.Mesa;
 import java.util.List;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
