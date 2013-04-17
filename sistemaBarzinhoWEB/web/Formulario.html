@@ -13,31 +13,33 @@
             </div>
             <div id="menu">
                 <ul>
-                    <li class="itemAtual"><a href="home.html">Home</a></li>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="desenvolvedores.html">Desenvolvedores</a></li>
                     <li><a href="Screenshots.html">Screenshots do sistema</a></li>
                     <li><a href="contato.html">Contato</a></li>
                     <li><a href="Mapadosite.html">Mapa do Site</a></li>
-                    <li><a href="Formulario.html">Formul&aacute;rio</a></li>
+                    <li class="itemAtual"><a href="Formulario.html">Formul&aacute;rio</a></li>
                 </ul>
             </div>
             <form id="formulario" onsubmit="validarCampos()" action="mailto:contato@gmail.com">
                 <fieldset>
                     <legend> Formulário para Contato Com Desenvolvedor </legend>
                     <p>Nome:<input type="text" name="campo1" size="20" onblur="verifica(this.value)"></input> </p>
-                    <p> Sexo:<input type="Radio" name="sexo" value="Feminino">Feminino</input> <input type="Radio" name="sexo" value="Masculino"> Masculino</input> </p>
-                    <p>Data agora :<input type="text" name="data" onblur="mascara_data(this.value)" maxlength="10"> </input>dd/mm/aaaa</p>
-                    <p>CPF : <input type="text" size="12" id="cpfInput" onblur="validarCPF(this.value)"/> </p>
-                    <p>email : <input type="text" size="15" id="email"  onblur="checarEmail(this.value)" /></p>                 
+                    <p>Sexo:<input type="radio" name="sexo" value="Feminino"></input> Feminino
+                            <input type="radio" name="sexo" value="Masculino"></input>Masculino</p>
+                    <p>Data:<input type="text" name="data" onkeypress="mascaraData(data)" maxlength="10"></input>dd/mm/aaaa</p>
+                    <p>CPF: <input type="text" size="12" id="cpfInput" onblur="validarCPF(this.value)"/> </p>
+                    <p>E-mail: <input type="text" size="15" id="email"  onblur="checarEmail(this.value)" /></p>                 
                     <p>Telefone: <input type="text" name="tel" onkeypress="telefone(this)" maxlength="14"></input>Formato: (44)1111-1111</p>
                     <p>Deixe seus comentários sobre nosso sistema:</p>
                     <p><textarea rows="5" cols="50">Digite seu comentário aqui </textarea></p>
                     <p>As informacões serão enviadas para contato@gmail.com</p>  
                     <p><input type="submit" value="validar" onblur="validarCampos()" />
-                    <button name="enviar" value="insert" type="button">Enviar</button>
-                    <button name="limpar" value="limpar" type="button" >Limpar</button>
+                        <button name="enviar" value="insert" type="button">Enviar</button>
+                        <button name="limpar" value="limpar" type="button" >Limpar</button>
                     </p>
-               </fieldset>   
-       </form>
-   </body>
+                </fieldset>   
+            </form>
+        </div>
+    </body>
 </html>
