@@ -19,7 +19,7 @@ function verifica()
         formulario.campo1.value=nome;
     }
     
-    return false;  
+    return false;    
        
 }
 
