@@ -223,3 +223,7 @@ DIV.dcu:hover {
     text-indent: 20px;
     color: red;
 }
+#informacoesObrigatorias{
+    color: red;
+    font-size: 10px;
+}

@@ -21,25 +21,28 @@
                     <li class="itemAtual"><a href="Formulario.html">Formul&aacute;rio</a></li>
                 </ul>
             </div>
-            <form name="formulario" id="formulario" onsubmit="validarCampos()" action="mailto:contato@gmail.com">
-                <fieldset>
-                    <legend> Formulário para Contato Com Desenvolvedor </legend>
-                    <p>Nome:<input type="text" name="campo1" size="20" onblur="primeiraLetraMaiuscula()"></input> </p>
-                    <p>Sexo:<input type="radio" checked="true" name="sexo" value="Feminino"></input> Feminino
-                        <input type="radio" name="sexo" value="Masculino"></input>Masculino</p>
-                    <p>Data:<input type="text" name="data" onkeypress="mascara_data()" maxlength="10"></input>dd/mm/aaaa</p>
-                    <p>CPF: <input type="text" name="cpf" size="12" id="cpfInput" onkeypress="mascara_cpf()"/> </p>
-                    <p>E-mail: <input type="text" size="15" id="email"/></p>                 
-                    <p>Telefone: <input type="text" name="tel" onkeypress="telefone(this)" maxlength="14"></input>Formato: (44)1111-1111</p>
-                    <p>Deixe seus comentários sobre nosso sistema:</p>
-                    <p><textarea id="textarea" name="comentario" rows="5" cols="50"></textarea></p>
-                    <p>As informacões serão enviadas para contato@gmail.com</p>  
-                    <p><input type="submit" value="validar" onclick="validaCampos()" />
-                        <input name="enviar" value="insert" onclick="validaCampos()" type="button"/>
-                        <input name="limpar" value="limpar" onclick="confirmaLimparCampo()" type="button" />
-                    </p>
-                </fieldset>   
-            </form>
+            <div id="area">
+                <form name="formulario" id="formulario" onsubmit="validarCampos()" action="mailto:contato@gmail.com">
+                    <fieldset>
+                        <legend> Formulário para Contato Com Desenvolvedor </legend>
+                        <p>Nome:*<input type="text" name="campo1" size="20" onblur="primeiraLetraMaiuscula()"></input> </p>
+                        <p>Sexo:<input type="radio" checked="true" name="sexo" value="Feminino"></input> Feminino
+                            <input type="radio" name="sexo" value="Masculino"></input>Masculino</p>
+                        <p>Data:*<input type="text" name="data" onkeypress="mascara_data()" maxlength="10"></input>dd/mm/aaaa</p>
+                        <p>CPF:* <input type="text" name="cpf" size="12" id="cpfInput" onkeypress="mascara_cpf()"/> </p>
+                        <p>E-mail:* <input type="text" size="15" id="email"/></p>                 
+                        <p>Telefone: <input type="text" name="tel" onkeypress="telefone(this)" maxlength="14"></input>Formato: (44)1111-1111</p>
+                        <p>Deixe seus comentários sobre nosso sistema:*</p>
+                        <p><textarea id="textarea" name="comentario" rows="5" cols="50"></textarea></p>
+                        <p id="informacoesObrigatorias">(*)Campo obrigatório.</p>
+                        <p>As informacões serão enviadas para contato@gmail.com</p>  
+                        <p>
+                            <input name="enviar" value="enviar" onclick="validaCampos()" type="button"/>
+                            <input name="limpar" value="limpar" onclick="confirmaLimparCampo()" type="button" />
+                        </p>
+                    </fieldset>   
+                </form>
+            </div>
         </div>
     </body>
 </html>

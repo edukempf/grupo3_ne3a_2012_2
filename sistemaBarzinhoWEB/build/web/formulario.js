@@ -195,7 +195,8 @@ function telefone(campo) {
 function confirmaLimparCampo() {
     var conf = confirm("Deseja limpar seu formulário mesmo?");
     if (conf) {
-        document.formulario.reset()
+        document.formulario.reset();
+        zeraBorda();
     }
 }
 
@@ -210,8 +211,17 @@ function verificaComentario() {
 
 }
 
+function zeraBorda(){
+    document.formulario.campo1.style.border = '1px solid #D3D3D3';
+    document.formulario.data.style.border = '1px solid #D3D3D3';
+    document.formulario.cpf.style.border = '1px solid #D3D3D3';
+    document.formulario.email.style.border = '1px solid #D3D3D3';
+    document.formulario.textarea.style.border = '1px solid #D3D3D3';
+}
+
 function validaCampos() {
     var x = verificaNome();
+    zeraBorda();
     if (!x) {
         document.formulario.campo1.style.border = '2px solid red';
     }
