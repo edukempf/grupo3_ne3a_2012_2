@@ -2,7 +2,23 @@ function verifica()
 {
     if (formulario.campo1.value=="")
         alert("Por favor, Digite o nome!");
-
+    else{
+        var nome=formulario.campo1.value;
+        var nomes=nome.split(" ");
+        for(var i=0;i<nomes.length;i++){
+            nomes[i]=nomes[i].toLowerCase();
+            nomes[i]=nomes[i].replace(nomes[i].substr(0,1),nomes[i].charAt(0).toUpperCase());
+//            alert(nomes[i]);
+        }
+        nome="";
+        for(var i=0;i<nomes.length;i++){
+            nome=nome+nomes[i]+" "
+        }
+        nome = nome.substr(0,nome.length-1);
+        alert(nome);
+        formulario.campo1.value=nome;
+    }
+    
     return false;  
        
 }
