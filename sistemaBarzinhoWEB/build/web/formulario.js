@@ -4,14 +4,14 @@ function primeiraLetraMaiuscula() {
     for (var i = 0; i < nomes.length; i++) {
         nomes[i] = nomes[i].toLowerCase();
         nomes[i] = nomes[i].replace(nomes[i].substr(0, 1), nomes[i].charAt(0).toUpperCase());
-//            alert(nomes[i]);
+    //            alert(nomes[i]);
     }
     nome = "";
     for (var i = 0; i < nomes.length; i++) {
         nome = nome + nomes[i] + " "
     }
     nome = nome.substr(0, nome.length - 1);
-//    alert(nome);
+    //    alert(nome);
     formulario.campo1.value = nome;
 }
 
@@ -35,13 +35,10 @@ function verificaCarecteresInvalidos() {
 function verificaNome()
 {
     var conf = true;
-    if (formulario.campo1.value == "") {
-        alert("Por favor, Digite o nome!");
-        conf = false;
-    }
-    else {
+    
+    
         conf = verificaCarecteresInvalidos();
-    }
+    
 
     return conf;
 }
@@ -70,17 +67,13 @@ function mascara_data() {
 }
 
 function verifica_data() {
-    if (document.formulario.data.value == "") {
-        alert("Informe uma data!");
-        return false;
-    }
-
+    
     var dia = (document.formulario.data.value.substring(0, 2));
     var mes = (document.formulario.data.value.substring(3, 5));
     var ano = (document.formulario.data.value.substring(6, 10));
 
 
-//    alert(ano);
+    //    alert(ano);
 
     var situacao = true;
     // verifica o dia valido para cada mes 
@@ -145,11 +138,7 @@ function mascara_cpf() {
 // verifica se e um CFP valido 
 function validarCPF(cpf) {
     cpf = cpf.replace(/\.|\-/g, "");
-    if (cpf == " ") {
-        alert("Digite um CPF");
-        return false;
-    }
-
+//    alert(cpf);
     add = 0;
     for (i = 0; i < 9; i ++)
         add += parseInt(cpf.charAt(i)) * (10 - i);
@@ -175,6 +164,7 @@ function validarCPF(cpf) {
 }
 
 function checarEmail() {
+    
     if (document.forms[0].email.value == "" || document.forms[0].email.value.indexOf("@") == -1 || document.forms[0].email.value.indexOf(".") == -1) {
         alert("Por favor, informe um E-MAIL válido!");
         return false;
@@ -200,16 +190,6 @@ function confirmaLimparCampo() {
     }
 }
 
-function verificaComentario() {
-    var teste = true;
-    var textarea = document.getElementById('textarea');
-    if (textarea.value.length == 0) {
-         alert("Por favor, informe um comentário válido!");
-        teste = false;
-    }
-    return teste;
-
-}
 
 function zeraBorda(){
     document.formulario.campo1.style.border = '1px solid #D3D3D3';
@@ -219,7 +199,36 @@ function zeraBorda(){
     document.formulario.textarea.style.border = '1px solid #D3D3D3';
 }
 
+
+function campoVazios(){
+    if (formulario.campo1.value == "") {
+        document.formulario.campo1.value=prompt("Por favor, Digite o nome:");
+        campoVazios();
+    }
+    if (document.formulario.data.value == "") {
+        document.formulario.data.value=prompt("Por favor, Digite uma data:");
+        campoVazios();
+    }
+    if (document.formulario.cpf.value == "") {
+        document.formulario.cpf.value=prompt("Por favor, Digite um cpf:");
+        campoVazios();
+    }
+    if (document.formulario.email.value == "") {
+        document.formulario.email.value=prompt("Por favor, Digite um email:");
+        campoVazios();
+        
+    }
+    
+    var textarea = document.getElementById('textarea');
+    if (textarea.value.length == 0) {
+        document.formulario.textarea.value=prompt("Por favor, Digite um comentário:");
+        campoVazios();
+    }
+    
+}
+
 function validaCampos() {
+    campoVazios();
     var x = verificaNome();
     zeraBorda();
     if (!x) {
