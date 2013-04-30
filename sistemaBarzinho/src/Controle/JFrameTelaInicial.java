@@ -1124,7 +1124,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         TransactionManager.beginTransaction();
         Mesa mes2 = new Mesa();
         mes2.setCapacidade(4);
-        mes2.setStatus(false);
+        mes2.setStatus(true);
         daoM.persisteObjeto(mes2);
         TransactionManager.comitTransaction();
 
@@ -1138,14 +1138,14 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         TransactionManager.beginTransaction();
         Mesa mes4 = new Mesa();
         mes4.setCapacidade(6);
-        mes4.setStatus(false);
+        mes4.setStatus(true);
         daoM.persisteObjeto(mes4);
         TransactionManager.comitTransaction();
 
         TransactionManager.beginTransaction();
         Mesa mes5 = new Mesa();
         mes5.setCapacidade(8);
-        mes5.setStatus(false);
+        mes5.setStatus(true);
         daoM.persisteObjeto(mes5);
         TransactionManager.comitTransaction();
 
@@ -1216,6 +1216,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         TransactionManager.beginTransaction();
         PedidoBebidaDAO daoPB = new PedidoBebidaDAO();
         PedidoBebida pb1 = new PedidoBebida();
+        pb1.setPago(false);
         List<Bebida> bebI = new ArrayList<Bebida>();
         bebI.add(bebi1);
         bebI.add(bebi2);
@@ -1227,6 +1228,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoBebida pb2 = new PedidoBebida();
+        pb2.setPago(false);
         List<Bebida> bebII = new ArrayList<Bebida>();
         bebII.add(bebi1);
         bebII.add(bebi4);
@@ -1238,6 +1240,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoBebida pb3 = new PedidoBebida();
+        pb3.setPago(false);
         List<Bebida> bebIII = new ArrayList<Bebida>();
         bebIII.add(bebi2);
         bebIII.add(bebi3);
@@ -1249,6 +1252,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoBebida pb4 = new PedidoBebida();
+        pb4.setPago(false);
         List<Bebida> bebIV = new ArrayList<Bebida>();
         bebIII.add(bebi2);
         bebIII.add(bebi5);
@@ -1260,6 +1264,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoBebida pb5 = new PedidoBebida();
+        pb5.setPago(false);
         List<Bebida> bebV = new ArrayList<Bebida>();
         bebV.add(bebi1);
         bebV.add(bebi2);
@@ -1274,6 +1279,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         TransactionManager.beginTransaction();
         PedidoPratoDAO daoPP = new PedidoPratoDAO();
         PedidoPrato pp1 = new PedidoPrato();
+        pp1.setPago(false);
         List<Prato> praI = new ArrayList<Prato>();
         praI.add(prat1);
         praI.add(prat2);
@@ -1286,10 +1292,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoPrato pp2 = new PedidoPrato();
+        pp2.setPago(false);
         List<Prato> praII = new ArrayList<Prato>();
         praII.add(prat1);
         praII.add(prat3);
-        pp1.setPratos(praII);
+        pp2.setPratos(praII);
         pp2.setIdFuncionario(func4);
         pp2.setIdMesa(mes4);
         daoPP.persisteObjeto(pp2);
@@ -1297,10 +1304,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoPrato pp3 = new PedidoPrato();
+        pp3.setPago(false);
         List<Prato> praIII = new ArrayList<Prato>();
         praIII.add(prat1);
         praIII.add(prat2);
-        pp1.setPratos(praIII);
+        pp3.setPratos(praIII);
         pp3.setIdFuncionario(func2);
         pp3.setIdMesa(mes2);
         daoPP.persisteObjeto(pp3);
@@ -1308,10 +1316,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoPrato pp4 = new PedidoPrato();
+        pp4.setPago(false);
         List<Prato> praIV = new ArrayList<Prato>();
         praIV.add(prat1);
         praIV.add(prat3);
-        pp1.setPratos(praIV);
+        pp4.setPratos(praIV);
         pp4.setIdFuncionario(func3);
         pp4.setIdMesa(mes3);
         daoPP.persisteObjeto(pp4);
@@ -1319,12 +1328,13 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         TransactionManager.beginTransaction();
         PedidoPrato pp5 = new PedidoPrato();
+        pp5.setPago(false);
         List<Prato> praV = new ArrayList<Prato>();
         praV.add(prat1);
         praV.add(prat2);
         praV.add(prat3);
         praV.add(prat4);
-        pp1.setPratos(praV);
+        pp5.setPratos(praV);
         pp5.setIdFuncionario(func1);
         pp5.setIdMesa(mes5);
         daoPP.persisteObjeto(pp5);

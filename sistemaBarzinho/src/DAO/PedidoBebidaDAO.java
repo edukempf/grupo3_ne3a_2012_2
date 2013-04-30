@@ -38,4 +38,24 @@ public class PedidoBebidaDAO extends DaoBasic<PedidoBebida> {
         session.close();
         return list;
     }
+    
+    public List<PedidoBebida> buscaPedidoAbertoPorMesa(int nmesa){
+        session=HibernateConexao.getSession();
+        session.beginTransaction().begin();
+//        List list = session.createCriteria(classe).add(Restrictions.eq("idMesa", nmesa)).list();
+        Query query=session.createQuery("from PedidoBebida as p where p.pago=false and p.idMesa.id = :nmesa").setParameter("nmesa", nmesa);
+        List list=query.list();
+        session.close(); 
+        return list;
+    }
+    
+//    public List<String> valorDosPedidos(int nmesa) {
+//        session = HibernateConexao.getSession();
+//        session.beginTransaction().begin();
+////        List list = session.createCriteria(classe).add(Restrictions.eq("idMesa", nmesa)).list();
+//        Query query = session.createQuery("select sum(p.) from PedidoBebida as p where p.idMesa.id = :nmesa").setParameter("nmesa", nmesa);
+//        List list = query.list();
+//        session.close();
+//        return list;
+//    }
 }

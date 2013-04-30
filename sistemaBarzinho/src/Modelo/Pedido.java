@@ -24,12 +24,13 @@ public abstract class Pedido implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-     @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idMesa")
     private Mesa idMesa;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idFuncionario")
-    private Funcionario idFuncionario;
+    private Funcionario idFuncionario;    
+    private Boolean pago;
     
     public int getId() {
         return id;
@@ -53,6 +54,14 @@ public abstract class Pedido implements Serializable{
 
     public void setIdFuncionario(Funcionario idFuncionario) {
         this.idFuncionario = idFuncionario;
+    }
+
+    public Boolean isPago() {
+        return pago;
+    }
+
+    public void setPago(Boolean pago) {
+        this.pago = pago;
     }
     
 }

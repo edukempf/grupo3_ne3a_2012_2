@@ -35,5 +35,14 @@ public class PedidoPratoDAO extends DaoBasic<PedidoPrato>{
         session.close(); 
         return list;
     }
+       public List<PedidoPrato> buscaPedidoAbertoPorMesa(int nmesa){
+        session=HibernateConexao.getSession();
+        session.beginTransaction().begin();
+//        List list = session.createCriteria(classe).add(Restrictions.eq("idMesa", nmesa)).list();
+        Query query=session.createQuery("from PedidoPrato as p where p.pago=false and p.idMesa.id = :nmesa").setParameter("nmesa", nmesa);
+        List list=query.list();
+        session.close(); 
+        return list;
+    }
     
 }

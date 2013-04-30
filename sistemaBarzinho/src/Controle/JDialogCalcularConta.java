@@ -4,6 +4,22 @@
  */
 package Controle;
 
+import DAO.MesaDAO;
+import DAO.PedidoBebidaDAO;
+import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
+import Modelo.Bebida;
+import Modelo.Mesa;
+import Modelo.PedidoBebida;
+import Modelo.PedidoPrato;
+import Modelo.Prato;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author a899755
@@ -13,9 +29,31 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCalcularConta
      */
+    private MesaDAO daoMesa;
+    private PedidoBebidaDAO daoPedidoBebida;
+    private PedidoPratoDAO daoPedidoPrato;
+    private DefaultComboBoxModel modelCombo;
+    private List<PedidoPrato> listPedidosPratos;
+    private List<PedidoBebida> listPedidosBebidas;
+
+    public void preencheComboBoxMesa() {
+        daoMesa = new MesaDAO();
+        List<Mesa> mesas = daoMesa.lista();
+        List<String> mesasOcupadas = new ArrayList<String>();
+        for (Mesa mesa : mesas) {
+            if (mesa.isStatus()) {
+                mesasOcupadas.add("Mesa - " + mesa.getId());
+            }
+        }
+        modelCombo = new DefaultComboBoxModel(mesasOcupadas.toArray());
+        jComboBoxMesa.setModel(modelCombo);
+        jComboBoxMesa.updateUI();
+    }
+
     public JDialogCalcularConta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        preencheComboBoxMesa();
     }
 
     /**
@@ -27,21 +65,260 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton3 = new javax.swing.JButton();
+        jComboBoxMesa = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldTotalBebidas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldTotalPratos = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldTotalGeral = new javax.swing.JTextField();
+        jButtonConsultarPedidosBebidas = new javax.swing.JButton();
+        jButtonConsultarPedidosPratos = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonPagarConta = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonCalcularConta = new javax.swing.JButton();
+
+        jButton3.setText("jButton3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("Mesa a fechar conta:");
+
+        jTextFieldTotalBebidas.setEditable(false);
+        jTextFieldTotalBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTotalBebidasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Total em bebidas:");
+
+        jLabel3.setText("Total em pratos:");
+
+        jTextFieldTotalPratos.setEditable(false);
+
+        jLabel4.setText("Total geral:");
+
+        jTextFieldTotalGeral.setEditable(false);
+
+        jButtonConsultarPedidosBebidas.setText("Consultar Pedidos de Bebidas");
+        jButtonConsultarPedidosBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarPedidosBebidasActionPerformed(evt);
+            }
+        });
+
+        jButtonConsultarPedidosPratos.setText("Consultar Pedidos de Pratos");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Conta da Mesa");
+
+        jButtonPagarConta.setText("Pagar");
+        jButtonPagarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPagarContaActionPerformed(evt);
+            }
+        });
+
+        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+
+        jButtonCalcularConta.setText("Calcular Conta");
+        jButtonCalcularConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addComponent(jComboBoxMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCalcularConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(33, 33, 33)
+                        .addComponent(jTextFieldTotalPratos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonConsultarPedidosPratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(27, 27, 27)
+                                .addComponent(jTextFieldTotalBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonConsultarPedidosBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButtonPagarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextFieldTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(181, 181, 181))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCalcularConta)))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTotalBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonConsultarPedidosBebidas)))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTotalPratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonConsultarPedidosPratos)))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel4))
+                    .addComponent(jTextFieldTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jButtonPagarConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private double calculaValorBebida() {
+        double totalBebidas = 0;
+        daoPedidoBebida = new PedidoBebidaDAO();
+        listPedidosBebidas = (ArrayList<PedidoBebida>) daoPedidoBebida.buscaPedidoAbertoPorMesa(Integer.parseInt(jComboBoxMesa.getSelectedItem().toString().substring(jComboBoxMesa.getSelectedItem().toString().lastIndexOf(" ") + 1, jComboBoxMesa.getSelectedItem().toString().length())));
+        for (PedidoBebida pedidoBebida : listPedidosBebidas) {
+            for (Bebida b : pedidoBebida.getBebidas()) {
+                totalBebidas += b.getPreco();
+            }
+        }
+        return totalBebidas;
+    }
+
+    private double calculaValorPratos() {
+        daoPedidoPrato = new PedidoPratoDAO();
+        listPedidosPratos = (ArrayList<PedidoPrato>) daoPedidoPrato.buscaPedidoAbertoPorMesa(Integer.parseInt(jComboBoxMesa.getSelectedItem().toString().substring(jComboBoxMesa.getSelectedItem().toString().lastIndexOf(" ") + 1, jComboBoxMesa.getSelectedItem().toString().length())));
+        double totalPratos = 0;
+        for (PedidoPrato pedidoPrato : listPedidosPratos) {
+            for (Prato p : pedidoPrato.getPratos()) {
+                totalPratos += p.getPreco();
+            }
+        }
+        return totalPratos;
+    }
+
+    private void setValoresCalculados() {
+        double totalGeral = calculaValorBebida() + calculaValorPratos();
+        jTextFieldTotalBebidas.setText(calculaValorBebida() + "");
+        jTextFieldTotalGeral.setText(totalGeral + "");
+        jTextFieldTotalPratos.setText(calculaValorPratos() + "");
+    }
+
+    private void limpaCampos(){
+        jTextFieldTotalBebidas.setText("0,00");
+        jTextFieldTotalGeral.setText("0,00");
+        jTextFieldTotalPratos.setText("0,00");
+    }
+    
+    private void pagaPedido() {
+        if (listPedidosBebidas.isEmpty() && listPedidosPratos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Calcule o valor da conta primeiro!!");
+        } else {
+            int op = JOptionPane.showConfirmDialog(null, "Você que deseja pagar a conta da mesa: " + jComboBoxMesa.getSelectedItem().toString());
+            if (op == JOptionPane.YES_OPTION) {
+                try {
+                    daoPedidoBebida = new PedidoBebidaDAO();
+                    daoPedidoPrato = new PedidoPratoDAO();
+                    for (PedidoBebida pb : listPedidosBebidas) {
+                        pb.setPago(true);
+                        TransactionManager.beginTransaction();
+                        daoPedidoBebida.persisteObjeto(pb);
+                        TransactionManager.comitTransaction();
+                    }
+                    for (PedidoPrato pp : listPedidosPratos) {
+                        pp.setPago(true);
+                        TransactionManager.beginTransaction();
+                        daoPedidoBebida.persisteObjeto(pp);
+                        TransactionManager.comitTransaction();
+                    }
+                    JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
+                    limpaCampos();
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    TransactionManager.rollbackTransaction();
+                    JOptionPane.showMessageDialog(null, "Erro ao fazer o pagamento!!");
+                }
+            }
+        }
+    }
+
+    private void jTextFieldTotalBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalBebidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTotalBebidasActionPerformed
+
+    private void jButtonConsultarPedidosBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPedidosBebidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConsultarPedidosBebidasActionPerformed
+
+    private void jButtonPagarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPagarContaActionPerformed
+        // TODO add your handling code here:
+        pagaPedido();
+    }//GEN-LAST:event_jButtonPagarContaActionPerformed
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    private void jButtonCalcularContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularContaActionPerformed
+        // TODO add your handling code here:
+        setValoresCalculados();
+    }//GEN-LAST:event_jButtonCalcularContaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -85,5 +362,20 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonCalcularConta;
+    private javax.swing.JButton jButtonConsultarPedidosBebidas;
+    private javax.swing.JButton jButtonConsultarPedidosPratos;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonPagarConta;
+    private javax.swing.JComboBox jComboBoxMesa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextFieldTotalBebidas;
+    private javax.swing.JTextField jTextFieldTotalGeral;
+    private javax.swing.JTextField jTextFieldTotalPratos;
     // End of variables declaration//GEN-END:variables
 }
