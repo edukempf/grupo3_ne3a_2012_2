@@ -77,12 +77,10 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 
     public void preencheComboBoxMesa() {
         daoMesa = new MesaDAO();
-        List<Mesa> mesas = daoMesa.lista();
+        List<Mesa> mesas = daoMesa.buscaMesaOcupada();
         List<String> mesasOcupadas = new ArrayList<String>();
         for (Mesa mesa:mesas) {
-            if(mesa.isStatus()){
                 mesasOcupadas.add("Mesa - " + mesa.getId());
-            }
         }
         modelCombo = new DefaultComboBoxModel(mesasOcupadas.toArray());
         jComboBoxMesa.setModel(modelCombo);

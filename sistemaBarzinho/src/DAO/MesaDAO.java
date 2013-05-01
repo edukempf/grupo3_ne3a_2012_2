@@ -26,6 +26,23 @@ public class MesaDAO extends DaoBasic<Mesa>{
         session.close(); 
         return list;
     }
+     
+     public List<Mesa> buscaMesaVazia(){
+        session=HibernateConexao.getSession();
+        session.beginTransaction().begin();
+        Query query=session.createQuery("from Mesa as m where status=false");
+        List list=query.list();
+        session.close(); 
+        return list;
+    }
     
+     public List<Mesa> buscaMesaOcupada(){
+        session=HibernateConexao.getSession();
+        session.beginTransaction().begin();
+        Query query=session.createQuery("from Mesa as m where status=true");
+        List list=query.list();
+        session.close(); 
+        return list;
+    }
     
 }
