@@ -1,0 +1,67 @@
+body{
+	background-color: black;
+}
+
+#home{
+	width:40%;
+	height:50%;
+	text-align:right;
+}
+
+#menu{ 	
+	
+	background-color: black;
+	margin-left: 12%; 
+	margin-right: 5%;
+	position: fixed; 
+	
+}
+
+#content{
+	padding-top:5%;
+	background-color: black; 
+	color:white;	
+	margin-left: 12%; 
+	margin-right: 5%;
+	width:79.8%;
+	height: 60%;
+	border: 1px  solid rgb(85, 26, 139);
+	text-align: center;
+	min-height: 520px;
+	
+}
+
+table{
+	background-color: rgb(85, 26, 139); 
+	width:79%;
+	position : fixed;
+}
+
+td{
+	background-position: center;
+	color : blue;
+	text-align: center;
+	background-color: black;
+}
+
+#rodape{
+
+	background-color:rgb(85, 26, 139);
+	color: white;
+	text-align: center;
+	margin-left:12%;
+	margin-right: 5%;
+	width:80%;
+	
+}
+
+#radio{
+	float:left;
+
+}
+
+a:link{
+	text-decoration: none;
+		
+}
+
