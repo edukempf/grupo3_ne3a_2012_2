@@ -16,8 +16,7 @@ function setCookie(c_name,value,exdays)  // criar cookie
 	document.cookie=c_name + "=" + c_value;
 }
 
-function getCookie(c_name) // retorna o cookie
-{
+function getCookie(c_name){ // retorna o cookie
 	var i,x,y,ARRcookies=document.cookie.split(";");
 	for (i=0;i<ARRcookies.length;i++)
 	{
