@@ -1,3 +1,4 @@
+// Esta função deixa a primeira letra do campo nome em letra maiúcula
 function primeiraLetraMaiuscula() {
     var nome = formulario.campo1.value;
     var nomes = nome.split(" ");
@@ -15,6 +16,7 @@ function primeiraLetraMaiuscula() {
     formulario.campo1.value = nome;
 }
 
+// Esta função verifica a existencia de caracteres invalidos
 function verificaCarecteresInvalidos() {
     er = /[0-9]/;
     er2 = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
@@ -31,7 +33,7 @@ function verificaCarecteresInvalidos() {
     }
     return temp;
 }
-
+// Esta função verifica nome informado
 function verificaNome()
 {
     var conf = true;
@@ -42,7 +44,7 @@ function verificaNome()
 
     return conf;
 }
-
+//  Esta função aplica mascara ao campo data
 function mascara_data() {
     er = /[0-9]/;
     var digito = formulario.data.value;
@@ -65,7 +67,7 @@ function mascara_data() {
         document.formulario.data.value = dataInformada;
     }
 }
-
+// Esta função verifica data informada
 function verifica_data() {
     
     var dia = (document.formulario.data.value.substring(0, 2));
@@ -103,7 +105,7 @@ function verifica_data() {
     }
     return situacao;
 }
-
+//  Esta função aplica mascara ao CPF
 function mascara_cpf() {
     er = /[0-9]/;
     var digito = formulario.cpf.value;
@@ -162,7 +164,7 @@ function validarCPF(cpf) {
     }
     return true;
 }
-
+//  Esta função verifica e-mail
 function checarEmail() {
     
     if (document.forms[0].email.value == "" || document.forms[0].email.value.indexOf("@") == -1 || document.forms[0].email.value.indexOf(".") == -1) {
@@ -171,7 +173,7 @@ function checarEmail() {
     }
     return true;
 }
-
+//  Esta função aplica mascara em telefone
 function telefone(campo) {
     stop = "";
     campo.value = campo.value.replace(/[^\d]/g, "").replace(/^(\d\d)(\d)/, "($1) $2").replace(/(\d{4})(\d)/, "$1-$2");
@@ -181,7 +183,7 @@ function telefone(campo) {
         stop = campo.value;
 }
 
-
+//  Esta função limpa formulário
 function confirmaLimparCampo() {
     var conf = confirm("Deseja limpar seu formulário mesmo?");
     if (conf) {
@@ -190,7 +192,7 @@ function confirmaLimparCampo() {
     }
 }
 
-
+//  Esta função deixa bordas cinzas
 function zeraBorda(){
     document.formulario.campo1.style.border = '1px solid #D3D3D3';
     document.formulario.data.style.border = '1px solid #D3D3D3';
@@ -199,7 +201,7 @@ function zeraBorda(){
     document.formulario.textarea.style.border = '1px solid #D3D3D3';
 }
 
-
+//  Esta função verifica campos vazios
 function campoVazios(){
     if (formulario.campo1.value == "") {
         document.formulario.campo1.value=prompt("Por favor, Digite o nome:");
@@ -226,7 +228,7 @@ function campoVazios(){
     }
     
 }
-
+//  Esta função verifica campos
 function validaCampos() {
     campoVazios();
     var x = verificaNome();
@@ -254,7 +256,7 @@ function validaCampos() {
         document.formulario.submit();
     }
 }
-
+//  Esta função varia estilos
 function setActiveStyleSheet(estilo) {
     var i, a;
     for(i=0; (a = document.getElementsByTagName("link")[i]); i++)
