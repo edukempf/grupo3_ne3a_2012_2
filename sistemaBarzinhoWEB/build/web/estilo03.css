@@ -1,5 +1,5 @@
 body {
-        background-image: url("imagens/imagemTelaInicial.jpg");
+        background-image: url("imagens/fundo.gif");
 	font: normal 13px Georgia, "Times New Roman", Times, serif;
 }
 
@@ -19,8 +19,6 @@ body {
     color: #FFFFFF;
     
 }
-
-
 /*Menu*/
 #menu {
     width: 960px;
@@ -33,7 +31,7 @@ body {
     border-width: 7px 0px;
     border-style: double solid ;
     border-color:#24130F;
-    background-image: url("imagens/1.jpg");
+    background-image: url("imagens/fundo2.jpg");
     background-repeat: repeat-x;
 }
 
@@ -52,15 +50,15 @@ body {
 }
 
 #menu a:hover {
-	background:url(imagens/clave.gif) no-repeat 3px 50%;
-        background-color: #000000;
-	color: #CDCDE2;
+	
+        background-color: #7F9FBF;
+	color: #000000;
         text-decoration: none;
 }
 
 #menu .itemAtual a {
 	border: none;
-	background: #000000;
+	background: #7F9FBF;
 	
 }
 
@@ -96,7 +94,7 @@ body {
 
 #menu ul li a:hover {
     text-decoration: underline;
-    color: #FF5500;
+    color: #000000;
 
 }
 
@@ -143,15 +141,15 @@ a {
 
 h1 {
 	text-align: center;
-	color: #FF5500;
+        color: #666666;
 }
 h2 {
-	color: #FF5500;
+	color: #363636;
 	padding-top: 9px;
 }
 h3{
 	padding-bottom: 10px;
-	color:  #FF5500;
+	color:  #363636
 }
 
 p {

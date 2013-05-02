@@ -8,8 +8,7 @@ function setActiveStyleSheet(estilo) {
                 }
             }
 
-function setCookie(c_name,value,exdays)  // criar cookie
-{
+function setCookie(c_name,value,exdays){  // criar cookie
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate() + exdays);
 	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
