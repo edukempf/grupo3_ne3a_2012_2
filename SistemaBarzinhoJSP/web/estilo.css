@@ -1,0 +1,39 @@
+root { 
+    display: block;
+}
+
+body{
+
+    background-image: url(imagens/fundo.jpg);
+    background-repeat: no-repeat;
+    background-size:100% 1500%;
+    text-align: center;
+    text-decoration-color: white;
+    background-position: center;
+
+}
+
+#conteudo { 
+
+    background-image: url(imagens/images.jpg);
+    position: absolute;
+    margin-left: 30%;
+    width: 40%;
+    height: 50%;
+    border: 1px;
+}
+
+
+#quant{
+    margin-left: 20%;
+    width: 60%;
+
+}
+#h1{
+    text-align: left;   
+}
+
+p{
+    background-position: left;
+
+}
