@@ -13,12 +13,10 @@ import Modelo.Mesa;
 import Modelo.PedidoBebida;
 import Modelo.PedidoPrato;
 import Modelo.Prato;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -287,6 +285,10 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
                         TransactionManager.comitTransaction();
                     }
                     JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
+                    int op2=JOptionPane.showConfirmDialog(null, "Deseja fechar já fazer o fechamento da mesa?");
+                    if(op2== JOptionPane.YES_OPTION){
+                        new JDialogFecharMesa(null, true).setVisible(true);
+                    }
                     limpaCampos();
                     
                 } catch (Exception ex) {
