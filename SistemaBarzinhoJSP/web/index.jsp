@@ -11,11 +11,14 @@
             <h1 id="h1" >Consulta de Pedidos</h1>
             <form action="butoon" method="post">
 
-                <p id="p">Codigo do Cliente:
-                    <input maxlength="6" size="6"/> <input type="button" value="Verificar Cliente"></input></p>
-                <p id="p">Codigo da Mesa:
-                    <input maxlength="6" size="6"/> <input type="button" value="Verificar Mesa"></input></p>
-
+                <p id="p">C&oacute;digo do Pedido:
+                    <input type="text" name="pedido" maxlength="6" size="6"/> <input type="button" value="Verificar Pedido"></input></p>
+                <p id="p">N&uacute;mero da Mesa:
+                    <input type="text" name="mesa" maxlength="6" size="6"/> <input type="button" value="Verificar Mesa"></input></p>
+                <p id="p">Nome do Funcion&aacute;rio:
+                    <input type="text" name="funcionario" maxlength="6" size="40"/> </p>
+                <p id="p">Pratos Relacionados a este pedido:
+                  <textarea id="textarea" name="pratos" rows="5" cols="50"></textarea> </p>
                 <p>Data de Pedido:
                     <select>
                         <option>Dia</option> <option>01</option>
