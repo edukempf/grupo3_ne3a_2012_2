@@ -131,6 +131,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenuItem22 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem23 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
 
@@ -639,6 +641,18 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu3.setText("Relatórios");
+
+        jMenuItem23.setText("Gerar relatório de pedidos de bebidas em aberto");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem23);
+
+        jMenuBar1.add(jMenu3);
+
         jMenu6.setMnemonic('a');
         jMenu6.setText("Ajuda");
 
@@ -836,6 +850,20 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         this.inseredados();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        // TODO add your handling code here:
+        geraRelatorioPedidoBebida();
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void geraRelatorioPedidoBebida(){
+        try{
+            Utils.Jasper.generateReport("./rel/report1.jrxml");
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao gerar o relatório!!");
+        }
+    }
+    
     private void mudarThema() {
         try {
             UIManager.setLookAndFeel(looks[jComboBoxLookAndFeel.getSelectedIndex()].getClassName());
@@ -899,6 +927,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -918,6 +947,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

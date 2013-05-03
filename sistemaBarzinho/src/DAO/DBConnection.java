@@ -14,7 +14,7 @@ public abstract class DBConnection {
 
     private static String host = "localhost";
     private static String login = "root";
-    private static String password = "root";
+    private static String password = "aluno";
     private static String port = "3306";
     private static String database = "aluno";
 
