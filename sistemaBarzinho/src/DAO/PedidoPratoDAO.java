@@ -35,7 +35,7 @@ public class PedidoPratoDAO extends DaoBasic<PedidoPrato>{
         session.close(); 
         return list;
     }
-       public List<PedidoPrato> buscaPedidoAbertoPorMesa(int nmesa){
+    public List<PedidoPrato> buscaPedidoAbertoPorMesa(int nmesa){
         session=HibernateConexao.getSession();
         session.beginTransaction().begin();
 //        List list = session.createCriteria(classe).add(Restrictions.eq("idMesa", nmesa)).list();

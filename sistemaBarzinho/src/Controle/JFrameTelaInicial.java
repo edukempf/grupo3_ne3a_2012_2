@@ -1254,8 +1254,8 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         PedidoBebida pb4 = new PedidoBebida();
         pb4.setPago(false);
         List<Bebida> bebIV = new ArrayList<Bebida>();
-        bebIII.add(bebi2);
-        bebIII.add(bebi5);
+        bebIV.add(bebi2);
+        bebIV.add(bebi5);
         pb4.setBebidas(bebIV);
         pb4.setIdFuncionario(func3);
         pb4.setIdMesa(mes3);

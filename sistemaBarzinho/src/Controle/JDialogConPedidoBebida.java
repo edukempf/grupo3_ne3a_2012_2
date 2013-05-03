@@ -37,7 +37,7 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
     }
 
     private void criaTabela() {
-        model = new DefaultTableModel(new String[]{"Codigo", "Número Mesa", "Nome do Funcionário", "Total Pedido"}, 0) {
+        model = new DefaultTableModel(new String[]{"Codigo", "Número Mesa", "Nome do Funcionário","Estado", "Total Pedido"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -62,9 +62,16 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
                 for (Bebida p : pedido.getBebidas()) {
                     custoPedido += p.getPreco();
                 }
+                String estado;
+                if(pedido.isPago()){
+                    estado="Pago";
+                }else{
+                    estado="A pagar";
+                }
                 model.addRow(new Object[]{pedido.getId(),
                     pedido.getIdMesa().getId(),
                     pedido.getIdFuncionario().getNome(),
+                    estado,
                     custoPedido});
                 custoPedido = 0;
             }

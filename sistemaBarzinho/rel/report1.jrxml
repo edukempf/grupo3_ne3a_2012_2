@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PedidosBebidasAbertos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dd920dd1-48fa-4cb9-a7c4-ddc99eaac974">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="59"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     sum(bebida.`preco`) AS bebida_preco,
+     pedidobebida.`pago` AS pedidobebida_pago,
+     mesa.`id` AS mesa_id,
+     funcionario.`nome` AS funcionario_nome
+FROM
+     `mesa` mesa INNER JOIN `pedidobebida` pedidobebida ON mesa.`id` = pedidobebida.`idMesa`
+     INNER JOIN `funcionario` funcionario ON pedidobebida.`idFuncionario` = funcionario.`codFuncionario`
+     INNER JOIN `pedidobebida_bebida` pedidobebida_bebida ON pedidobebida.`id` = pedidobebida_bebida.`PedidoBebida_id`
+     INNER JOIN `bebida` bebida ON pedidobebida_bebida.`bebidas_id` = bebida.`id`
+WHERE
+     pedidobebida.pago = 0
+GROUP BY
+     pedidobebida.id
+ORDER BY
+     mesa.id]]>
+	</queryString>
+	<field name="bebida_preco" class="java.lang.Double"/>
+	<field name="pedidobebida_pago" class="java.lang.Boolean"/>
+	<field name="mesa_id" class="java.lang.Integer"/>
+	<field name="funcionario_nome" class="java.lang.String"/>
+	<variable name="estado" class="java.lang.String">
+		<variableExpression><![CDATA[($F{pedidobebida_pago}== false) ? "A pagar":"Pago"]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{bebida_preco}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dd5f68b4-39b5-4e6a-8de7-5c11b7854abd" x="68" y="15" width="419" height="44"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pedidos de Bebidas em Aberto]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2266c6a0-f40a-4cf3-bcab-9c30e1ae377a" x="223" y="0" width="123" height="24"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Pedidos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="722ff583-f2fa-4027-a882-9ea5239b3d89" x="27" y="2" width="125" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Funcionario responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f07c1116-a9de-4e5b-a20a-6ec2f3ad9315" x="209" y="2" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado do pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="27eb9c7f-dcb8-4eac-8d96-931fccc7de71" x="448" y="2" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total do pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9bc96679-347d-4c2d-933b-5bb58f344931" x="335" y="2" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº da mesa]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1874e4ce-81be-4676-8510-bbd4a71261c0" x="0" y="39" width="555" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement uuid="73bebbde-09f2-4bfc-8b14-490f4845ff09" x="31" y="18" width="121" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{funcionario_nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="1c649596-2c02-4b19-aa30-dec48d765c5c" x="448" y="19" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bebida_preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e3a83dfb-e63b-4581-b8c2-487674c2359a" x="209" y="18" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d79965cf-9904-466c-8c92-6df1ed511d4b" x="335" y="19" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{mesa_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="071d1a7f-d808-4619-86e1-11b82b818cf8" x="256" y="18" width="24" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="79fda5a0-1f85-4c37-9e13-1bdd70af4b0e" x="309" y="18" width="26" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="99721938-ca42-4de6-92fa-a5aab85f0235" x="210" y="18" width="34" height="20"/>
+				<textElement/>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="842e868a-46c7-483a-bfcb-d302fec4b054" x="280" y="18" width="19" height="20"/>
+				<textElement/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cf2ad2eb-90a6-4572-b1f9-631a1c0e2dd1" x="408" y="20" width="40" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="9169a62d-d1d6-497c-821d-b2f7098c71e5" x="448" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="46f874cc-ecdf-4dab-a4c2-d25e51d74405" x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
