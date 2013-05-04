@@ -12,10 +12,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Eduardo
- */
+
 public class JDialogAbrirMesa extends javax.swing.JDialog {
 
     /**
@@ -118,7 +115,7 @@ public class JDialogAbrirMesa extends javax.swing.JDialog {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
         jLabel1.setText("Mesa livre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 47, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jLabel2.setText("Capacidade da Mesa");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
