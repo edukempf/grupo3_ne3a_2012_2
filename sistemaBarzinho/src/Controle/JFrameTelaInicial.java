@@ -579,18 +579,33 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
                 jMenuItem4MousePressed(evt);
             }
         });
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem4);
         jMenu5.add(jSeparator12);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/emitirConta.png"))); // NOI18N
         jMenuItem1.setText("Emitir Conta");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem1);
         jMenu5.add(jSeparator13);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/mesa.png"))); // NOI18N
         jMenuItem3.setText("Liberar Mesa");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem3);
 
         jMenuBar1.add(jMenu5);
@@ -855,15 +870,27 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         geraRelatorioPedidoBebida();
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
-    private void geraRelatorioPedidoBebida(){
-        try{
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new JDialogCalcularConta(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new JDialogConMesa(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new JDialogFecharMesa(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void geraRelatorioPedidoBebida() {
+        try {
             Utils.Jasper.generateReport("./rel/report1.jrxml");
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao gerar o relatório!!");
         }
     }
-    
+
     private void mudarThema() {
         try {
             UIManager.setLookAndFeel(looks[jComboBoxLookAndFeel.getSelectedIndex()].getClassName());
