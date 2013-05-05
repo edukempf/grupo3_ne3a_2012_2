@@ -18,8 +18,8 @@ body{
     background-image: url(imagens/images.jpg);
     position: absolute;
     margin-left: 30%;
-    width: 40%;
-    height: 70%;
+    width: 650px;
+    height: 280px;
     border: 1px;
 }
 
@@ -32,3 +32,17 @@ p{
     background-position: left;
 
 }
+table{
+    margin: auto;
+    padding-bottom: 5px;
+    font-size:14px;
+    text-indent: 1cm;
+    width: 600px;
+    border-style: double;
+    border-color: #8B4513;
+}
+td{
+    border-style: dotted;
+    border-color: #8B4513;
+}
+
