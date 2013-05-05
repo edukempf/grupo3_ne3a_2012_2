@@ -861,7 +861,6 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-
         this.inseredados();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
