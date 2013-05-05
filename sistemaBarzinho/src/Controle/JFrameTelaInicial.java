@@ -856,17 +856,17 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+
         new JDialogConPedidoPrato(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        // TODO add your handling code here:
+
         this.inseredados();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        // TODO add your handling code here:
+
         geraRelatorioPedidoBebida();
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
