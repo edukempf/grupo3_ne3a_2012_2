@@ -65,30 +65,27 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jComboBoxMesa = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldTotalBebidas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldTotalPratos = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldTotalGeral = new javax.swing.JTextField();
+        jButtonConsultarPedidosBebidas = new javax.swing.JButton();
+        jButtonConsultarPedidosPratos = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButtonCalcularConta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jButtonPagarConta = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jButtonCalcularConta = new javax.swing.JButton();
-        jButtonConsultarPedidosBebidas = new javax.swing.JButton();
-        jButtonConsultarPedidosPratos = new javax.swing.JButton();
-        jTextFieldTotalGeral = new javax.swing.JTextField();
-        jTextFieldTotalPratos = new javax.swing.JTextField();
-        jTextFieldTotalBebidas = new javax.swing.JTextField();
-        jComboBoxMesa = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-<<<<<<< HEAD
-=======
         jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 200, -1));
 
@@ -136,10 +133,18 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
         });
         getContentPane().add(jButtonConsultarPedidosPratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 110, 190, -1));
 
->>>>>>> origin/master
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Calculo da Conta da Mesa");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+
+        jButtonCalcularConta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/calcular.png"))); // NOI18N
+        jButtonCalcularConta.setText("Calcular Conta");
+        jButtonCalcularConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularContaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCalcularConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 200, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -180,113 +185,7 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 550, -1));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jButtonCalcularConta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/calcular.png"))); // NOI18N
-        jButtonCalcularConta.setText("Calcular Conta");
-        jButtonCalcularConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCalcularContaActionPerformed(evt);
-            }
-        });
-
-        jButtonConsultarPedidosBebidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
-        jButtonConsultarPedidosBebidas.setText("Consultar Pedidos de Bebidas");
-        jButtonConsultarPedidosBebidas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarPedidosBebidasActionPerformed(evt);
-            }
-        });
-
-        jButtonConsultarPedidosPratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
-        jButtonConsultarPedidosPratos.setText("Consultar Pedidos de Pratos");
-
-        jTextFieldTotalGeral.setEditable(false);
-
-        jTextFieldTotalPratos.setEditable(false);
-
-        jTextFieldTotalBebidas.setEditable(false);
-        jTextFieldTotalBebidas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTotalBebidasActionPerformed(evt);
-            }
-        });
-
-        jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel1.setText("Mesa a fechar conta:");
-
-        jLabel2.setText("Total em bebidas:");
-
-        jLabel3.setText("Total em pratos:");
-
-        jLabel4.setText("Total geral:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(8, 8, 8)
-                            .addComponent(jComboBoxMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(jButtonCalcularConta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(25, 25, 25)
-                            .addComponent(jTextFieldTotalBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(jButtonConsultarPedidosBebidas))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(31, 31, 31)
-                            .addComponent(jTextFieldTotalPratos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(jButtonConsultarPedidosPratos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(55, 55, 55)
-                            .addComponent(jTextFieldTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 7, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 156, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 13, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jComboBoxMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonCalcularConta))
-                    .addGap(5, 5, 5)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel2))
-                        .addComponent(jTextFieldTotalBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonConsultarPedidosBebidas))
-                    .addGap(15, 15, 15)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextFieldTotalPratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonConsultarPedidosPratos))
-                    .addGap(15, 15, 15)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextFieldTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 13, Short.MAX_VALUE)))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 160));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 550, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -458,7 +357,6 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldTotalBebidas;
     private javax.swing.JTextField jTextFieldTotalGeral;

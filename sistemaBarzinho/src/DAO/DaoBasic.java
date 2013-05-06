@@ -31,7 +31,7 @@ public abstract class DaoBasic<T> {
     
     public T persisteObjeto(Object o){
         session=TransactionManager.getCurrentSession();
-        o=session.merge(o);
+        session.saveOrUpdate(o);
         return (T) o;
     }
     
