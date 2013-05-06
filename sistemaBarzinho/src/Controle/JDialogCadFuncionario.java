@@ -5,6 +5,7 @@
 package Controle;
 
 import DAO.FuncionarioDAO;
+import DAO.TransactionManager;
 import Modelo.Funcionario;
 import java.awt.Color;
 import java.util.Date;
@@ -257,8 +258,27 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Funcionario insereFuncionario(Funcionario func) {
+        dao = new FuncionarioDAO();
+        try {
+            TransactionManager.beginTransaction();
+            func = dao.persisteObjeto(func);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
+
+        } catch (Exception ex) {
+            TransactionManager.rollbackTransaction();
+            JOptionPane.showMessageDialog(null, "erro ao inserir!");
+            System.out.println(ex.toString());
+        }
+        return func;
+    }
+
     private Funcionario getDadosDosCampos() {
         Funcionario funcionario = new Funcionario();
+        if (func != null) {
+            funcionario = func;
+        }
         funcionario.setCpf(Utils.Utilitarios.tiraTudo(jFormattedTextFieldCPF.getText()));
         funcionario.setDataNasc(new Date(jFormattedTextFieldDataNasc.getText()));
         funcionario.setEstadoCivil(jComboBoxEstadoCivil.getSelectedItem().toString());
@@ -266,10 +286,7 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
         funcionario.setRg(Utils.Utilitarios.tiraTudo(jTextFieldRg.getText()));
         funcionario.setFuncao(jTextFieldFuncao.getText());
         funcionario.setSalario(Double.parseDouble(jFormattedTextFieldSalario.getText().replace(",", ".")));
-        if (this.func != null) {
-            funcionario.setCodFuncionario(func.getCodFuncionario());
 
-        }
         return funcionario;
     }
 
@@ -357,9 +374,9 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         String aux = this.validaCampos();
         if (aux.equals("")) {
-            dispose();
-            JDialog dialog = new JDialogViewFuncionario(null, true, this.getDadosDosCampos());
+            JDialog dialog = new JDialogViewFuncionario(null, true, insereFuncionario(this.getDadosDosCampos()));
             dialog.setLocation(getX() + 50, getY() + 50);
+            dispose();
             dialog.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, aux);

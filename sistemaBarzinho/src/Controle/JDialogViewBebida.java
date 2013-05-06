@@ -43,6 +43,7 @@ public class JDialogViewBebida extends javax.swing.JDialog {
                     TransactionManager.beginTransaction();
                     dao.delete(bebida);
                     TransactionManager.comitTransaction();
+                    dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir bebida!\n"
                         + "Certifique-se que a bebida não esteja em nenhum pedido para poder excluir!");

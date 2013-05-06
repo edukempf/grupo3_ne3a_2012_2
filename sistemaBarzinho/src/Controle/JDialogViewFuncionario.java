@@ -7,7 +7,6 @@ package Controle;
 import DAO.FuncionarioDAO;
 import DAO.TransactionManager;
 import Modelo.Funcionario;
-import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -36,19 +35,23 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldSalario.setText(func.getSalario() + "");
     }
 
-    private void insereFuncionario(Funcionario func) {
-        dao = new FuncionarioDAO();
-        try {
-            TransactionManager.beginTransaction();
-            dao.persisteObjeto(func);
-            TransactionManager.comitTransaction();
-            JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
-
-        } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
-            JOptionPane.showMessageDialog(null, "erro ao inserir!");
-            System.out.println(ex.toString());
-        }
+    private void apagaFuncionario(){
+        dao=new FuncionarioDAO();
+        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+                try {
+                    TransactionManager.beginTransaction();
+                    dao.delete(this.func);
+                    TransactionManager.comitTransaction();
+                    JOptionPane.showMessageDialog(null, "Funcionario apagado com sucesso");
+                    dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir funcionario!\n"
+                        + "Certifique-se que o funcionário não esteja em nenhum pedido para poder excluir!");
+                    TransactionManager.rollbackTransaction();
+                    ex.printStackTrace();
+                }
+            }
     }
 
     /**
@@ -63,9 +66,9 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -91,14 +94,6 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
-
         jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +110,14 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
             }
         });
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
+        jButton7.setText("Remover");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -122,21 +125,28 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(148, 148, 148)
                 .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(213, 213, 213)
+                    .addComponent(jButton7)
+                    .addContainerGap(214, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(25, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 520, -1));
@@ -267,10 +277,6 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        insereFuncionario(this.func);
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
@@ -293,6 +299,10 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
     private void jComboBoxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCivilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoCivilActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        apagaFuncionario();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,7 +346,7 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JComboBox jComboBoxEstadoCivil;

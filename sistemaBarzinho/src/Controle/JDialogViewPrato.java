@@ -67,17 +67,23 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         preenchetabela();
     }
 
-    private void inserePrato(Prato prato) {
-        dao = new PratoDAO();
-        try {
-            TransactionManager.beginTransaction();
-            dao.persisteObjeto(prato);
-            TransactionManager.comitTransaction();
-            JOptionPane.showMessageDialog(null, "Prato cadastrado com sucesso");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir Prato!");
-            System.out.println(ex.toString());
+    private void apagaPrato() {
+        dao=new PratoDAO();
+        prato.setIngredientes(null);
+        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Prato?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+        if (opcao == JOptionPane.YES_OPTION) {
+            try {
+                TransactionManager.beginTransaction();
+                dao.delete(prato);
+                TransactionManager.comitTransaction();
+                JOptionPane.showMessageDialog(null, "Apagado com sucesso!");
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir prato!\n"
+                        + "Certifique-se que o prato não esteja em nenhum pedido para poder excluir!");
+                TransactionManager.rollbackTransaction();
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -93,9 +99,9 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jButtonRemover = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelNome = new javax.swing.JLabel();
@@ -116,14 +122,6 @@ public class JDialogViewPrato extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
-
         jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +138,14 @@ public class JDialogViewPrato extends javax.swing.JDialog {
             }
         });
 
+        jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
+        jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -147,9 +153,9 @@ public class JDialogViewPrato extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(48, 48, 48)
+                .addComponent(jButtonRemover)
+                .addGap(39, 39, 39)
                 .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -158,9 +164,9 @@ public class JDialogViewPrato extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -226,10 +232,6 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        inserePrato(this.prato);
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
@@ -252,6 +254,11 @@ public class JDialogViewPrato extends javax.swing.JDialog {
     private void jTextFieldPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPrecoActionPerformed
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        apagaPrato();
+
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,9 +302,9 @@ public class JDialogViewPrato extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelNome;

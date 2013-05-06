@@ -4,6 +4,8 @@
  */
 package Controle;
 
+import DAO.MesaDAO;
+import DAO.TransactionManager;
 import Modelo.Mesa;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
@@ -20,6 +22,7 @@ public class JDialogCadMesa extends javax.swing.JDialog {
      * Creates new form JDialogCadMesa
      */
     private Mesa mes;
+    private MesaDAO dao;
 
     public JDialogCadMesa(java.awt.Frame parent, boolean modal, Mesa mesa) {
         super(parent, modal);
@@ -47,15 +50,15 @@ public class JDialogCadMesa extends javax.swing.JDialog {
     }
 
     private Mesa getDadosDosCampos() {
-        Mesa mes = new Mesa();
-        mes.setCapacidade(Integer.parseInt(jTextFieldCapacidade.getText()));
-
-        mes.setStatus(jRadioButtonO.isSelected());
+        Mesa mesa = new Mesa();
         if (this.mes != null) {
-            mes.setId(this.mes.getId());
+            mesa = this.mes;
         }
+        mesa.setCapacidade(Integer.parseInt(jTextFieldCapacidade.getText()));
+        mesa.setStatus(jRadioButtonO.isSelected());
 
-        return mes;
+
+        return mesa;
     }
 
     private void setColorBG() {
@@ -70,6 +73,22 @@ public class JDialogCadMesa extends javax.swing.JDialog {
             jTextFieldCapacidade.setBackground(Color.red);
         }
         return erros.toString();
+    }
+
+    private Mesa insereMesa(Mesa mesa) {
+        dao = new MesaDAO();
+        try {
+            TransactionManager.beginTransaction();
+            mesa = dao.persisteObjeto(mesa);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
+
+        } catch (Exception ex) {
+            TransactionManager.rollbackTransaction();
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
+            System.out.println(ex.toString());
+        }
+        return mesa;
     }
 
     /**
@@ -214,9 +233,9 @@ public class JDialogCadMesa extends javax.swing.JDialog {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         String aux = this.validaCampos();
         if (aux.equals("")) {
-            dispose();
-            JDialog dialog = new JDialogViewMesa(null, true, this.getDadosDosCampos());
+            JDialog dialog = new JDialogViewMesa(null, true, insereMesa(this.getDadosDosCampos()));
             dialog.setLocation(getX() + 50, getY() + 50);
+            dispose();
             dialog.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, aux);
@@ -257,7 +276,7 @@ public class JDialogCadMesa extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogCadMesa dialog = new JDialogCadMesa(new javax.swing.JFrame(), true,null);
+                JDialogCadMesa dialog = new JDialogCadMesa(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

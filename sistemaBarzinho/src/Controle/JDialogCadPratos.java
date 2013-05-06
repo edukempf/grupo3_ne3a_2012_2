@@ -4,13 +4,13 @@
  */
 package Controle;
 
+import DAO.PratoDAO;
+import DAO.TransactionManager;
 import Modelo.Comida;
-import Modelo.Funcionario;
 import Modelo.Prato;
 import Utils.Data;
 import Utils.Utilitarios;
 import java.awt.Color;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
@@ -29,6 +29,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     
     private DefaultTableModel model;
     private Prato prato;
+    private PratoDAO dao;
     
     
     private List<Comida> listaComida;
@@ -275,6 +276,21 @@ public class JDialogCadPratos extends javax.swing.JDialog {
 
     }
     
+    private Prato inserePrato(Prato prato) {
+        dao = new PratoDAO();
+        try {
+            TransactionManager.beginTransaction();
+            prato=dao.persisteObjeto(prato);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "Prato cadastrado com sucesso");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Prato!");
+            System.out.println(ex.toString());
+        }
+        return prato;
+    }
+    
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
@@ -293,7 +309,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
         String aux = this.validaCampos();
         if (aux.equals("")) {
         dispose();
-        JDialog dialog = new JDialogViewPrato(null, true, this.getDadosDosCampos());
+        JDialog dialog = new JDialogViewPrato(null, true, inserePrato(this.getDadosDosCampos()));
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
          } else {

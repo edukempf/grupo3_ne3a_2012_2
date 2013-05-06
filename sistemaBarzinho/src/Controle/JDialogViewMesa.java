@@ -34,19 +34,23 @@ public class JDialogViewMesa extends javax.swing.JDialog {
         }
     }
 
-    private void insereMesa(Mesa mesa) {
-        dao = new MesaDAO();
-        try {
-            TransactionManager.beginTransaction();
-            dao.persisteObjeto(mesa);
-            TransactionManager.comitTransaction();
-            JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
-
-        } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
-            JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
-            System.out.println(ex.toString());
-        }
+    private void apagaMesa(){
+        dao=new MesaDAO();
+        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Mesa?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+                try {
+                    TransactionManager.beginTransaction();
+                    dao.delete(mesa);
+                    TransactionManager.comitTransaction();
+                    JOptionPane.showMessageDialog(null, "Apagado com sucesso!");
+                    dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir Mesa!\n"
+                        + "Certifique-se que a mesa não esteja em nenhum pedido para poder excluir!");
+                    TransactionManager.rollbackTransaction();
+                    ex.printStackTrace();
+                }
+            }
     }
 
     /**
@@ -60,8 +64,8 @@ public class JDialogViewMesa extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jButtonEditar = new javax.swing.JButton();
-        jButtonSalvar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTextFieldCapacidade = new javax.swing.JTextField();
@@ -83,19 +87,19 @@ public class JDialogViewMesa extends javax.swing.JDialog {
             }
         });
 
-        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButtonSalvar.setText("Confirmar");
-        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarActionPerformed(evt);
-            }
-        });
-
         jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFecharActionPerformed(evt);
+            }
+        });
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
+        jButton9.setText("Remover");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
             }
         });
 
@@ -106,11 +110,14 @@ public class JDialogViewMesa extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(164, 164, 164)
                 .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(168, 168, 168)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(169, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,9 +125,13 @@ public class JDialogViewMesa extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(25, 25, 25)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(25, Short.MAX_VALUE)))
         );
 
         jLabel6.setText("Campo de Preenchimento Obrigatório");
@@ -203,10 +214,6 @@ public class JDialogViewMesa extends javax.swing.JDialog {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
-    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        this.insereMesa(this.mesa);
-    }//GEN-LAST:event_jButtonSalvarActionPerformed
-
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
@@ -214,6 +221,10 @@ public class JDialogViewMesa extends javax.swing.JDialog {
     private void jTextFieldCapacidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCapacidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCapacidadeActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        apagaMesa();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,9 +268,9 @@ public class JDialogViewMesa extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

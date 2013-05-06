@@ -7,6 +7,7 @@ package Controle;
 import DAO.FuncionarioDAO;
 import DAO.MesaDAO;
 import DAO.PedidoPratoDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import Modelo.Funcionario;
 import Modelo.Mesa;
@@ -37,6 +38,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     private List<Prato> listaPratos;
     private FuncionarioDAO daoFunc;
     private MesaDAO daoMesa;
+    private PedidoPratoDAO dao;
 
     private void criaTabelas() {
         modelPratos = new DefaultTableModel(new String[]{"Nome", "Preço"}, 0) {
@@ -54,7 +56,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
             List<Prato> lista = this.listaPratos;
             for (Prato p : lista) {
                 modelPratos.addRow(new Object[]{p.getNome(),
-                            p.getPreco() + ""});
+                    p.getPreco() + ""});
 
             }
             jTablePratos.updateUI();
@@ -79,8 +81,8 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
         daoMesa = new MesaDAO();
         List<Mesa> mesas = daoMesa.buscaMesaOcupada();
         List<String> mesasOcupadas = new ArrayList<String>();
-        for (Mesa mesa:mesas) {
-                mesasOcupadas.add("Mesa - " + mesa.getId());
+        for (Mesa mesa : mesas) {
+            mesasOcupadas.add("Mesa - " + mesa.getId());
         }
         modelCombo = new DefaultComboBoxModel(mesasOcupadas.toArray());
         jComboBoxMesa.setModel(modelCombo);
@@ -89,7 +91,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 
     private void getPrato() {
 
-        new JDialogConPratos(null, true,true).setVisible(true);
+        new JDialogConPratos(null, true, true).setVisible(true);
         Prato p = (Prato) Data.hash.remove("prato");
         if (p == null) {
             return;
@@ -108,7 +110,7 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     public JDialogCadPedidoPrato(java.awt.Frame parent, boolean modal, PedidoPrato pedido) {
         super(parent, modal);
         initComponents();
-        this.pedido=pedido;
+        this.pedido = pedido;
         criaTabelas();
         this.listaPratos = new ArrayList<Prato>();
         preencheComboBoxFuncionario();
@@ -116,12 +118,12 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
         if (pedido != null) {
             jComboBoxGarcon.setSelectedItem(pedido.getIdFuncionario().getCodFuncionario() + " - " + pedido.getIdFuncionario().getNome());
             jComboBoxMesa.setSelectedItem("Mesa - " + pedido.getIdMesa().getId());
-            this.listaPratos=pedido.getPratos();
+            this.listaPratos = pedido.getPratos();
             preenchetabelaPrato();
 
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,12 +284,13 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
 
     private PedidoPrato getDadosDosCampos() {
         PedidoPrato ped = new PedidoPrato();
+        if (this.pedido != null) {
+            ped=this.pedido;
+        }
         ped.setIdMesa(daoMesa.get(Integer.parseInt(jComboBoxMesa.getSelectedItem().toString().substring(jComboBoxMesa.getSelectedItem().toString().lastIndexOf(" ") + 1, jComboBoxMesa.getSelectedItem().toString().length()))));
         ped.setIdFuncionario(daoFunc.get(Integer.parseInt(jComboBoxGarcon.getSelectedItem().toString().substring(0, jComboBoxGarcon.getSelectedItem().toString().indexOf(" ")))));
         ped.setPratos(this.listaPratos);
-        if(this.pedido!=null){
-            ped.setId(this.pedido.getId());
-        }
+        
 
         return ped;
     }
@@ -297,6 +300,21 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
         jComboBoxGarcon.setSelectedIndex(0);
         listaPratos.removeAll(listaPratos);
         preenchetabelaPrato();
+    }
+
+    private PedidoPrato inserePedido(PedidoPrato pedido) {
+        dao = new PedidoPratoDAO();
+        try {
+            TransactionManager.beginTransaction();
+            pedido = dao.persisteObjeto(pedido);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Pedido!");
+            System.out.println(ex.toString());
+        }
+        return pedido;
     }
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -310,13 +328,13 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        String aux=validaCampos();
-        if("".equals(aux)){
-        dispose();
-        JDialog dialog = new JDialogViewPedidoPrato(null, true, this.getDadosDosCampos());
-        dialog.setLocation(getX() + 50, getY() + 50);
-        dialog.setVisible(true);
-        }else{
+        String aux = validaCampos();
+        if ("".equals(aux)) {
+            dispose();
+            JDialog dialog = new JDialogViewPedidoPrato(null, true, inserePedido(this.getDadosDosCampos()));
+            dialog.setLocation(getX() + 50, getY() + 50);
+            dialog.setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, aux);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -403,21 +421,21 @@ public class JDialogCadPedidoPrato extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private String validaCampos() {
-       StringBuilder aux=new StringBuilder();
-       aux.append("");
-       if(jComboBoxGarcon.getSelectedItem()==null){
-           aux.append("É preciso ter ao menos um funcionario cadastrado!\n");
-           jComboBoxGarcon.setBackground(Color.red);
-       }
-       if(jComboBoxMesa.getSelectedItem()==null){
-           aux.append("É preciso ter ao menos uma mesa cadastrada!\n");
-           jComboBoxMesa.setBackground(Color.red);
-       }
-       if(jTablePratos.getRowCount()==0){
-           aux.append("É preciso ter ao menos um prato selecionado!\n");
-           jTablePratos.setBackground(Color.red);
-       }
-       
-       return aux.toString();
+        StringBuilder aux = new StringBuilder();
+        aux.append("");
+        if (jComboBoxGarcon.getSelectedItem() == null) {
+            aux.append("É preciso ter ao menos um funcionario cadastrado!\n");
+            jComboBoxGarcon.setBackground(Color.red);
+        }
+        if (jComboBoxMesa.getSelectedItem() == null) {
+            aux.append("É preciso ter ao menos uma mesa cadastrada!\n");
+            jComboBoxMesa.setBackground(Color.red);
+        }
+        if (jTablePratos.getRowCount() == 0) {
+            aux.append("É preciso ter ao menos um prato selecionado!\n");
+            jTablePratos.setBackground(Color.red);
+        }
+
+        return aux.toString();
     }
 }
