@@ -33,6 +33,7 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     private DefaultComboBoxModel modelCombo;
     private List<PedidoPrato> listPedidosPratos;
     private List<PedidoBebida> listPedidosBebidas;
+    private boolean contaCalculada;
 
     public void preencheComboBoxMesa() {
         daoMesa = new MesaDAO();
@@ -86,6 +87,56 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+<<<<<<< HEAD
+=======
+        jComboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 200, -1));
+
+        jLabel1.setText("Mesa a fechar conta:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, -1, -1));
+
+        jTextFieldTotalBebidas.setEditable(false);
+        jTextFieldTotalBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTotalBebidasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldTotalBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 75, 190, -1));
+
+        jLabel2.setText("Total em bebidas:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 77, -1, -1));
+
+        jLabel3.setText("Total em pratos:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
+
+        jTextFieldTotalPratos.setEditable(false);
+        getContentPane().add(jTextFieldTotalPratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 113, 190, -1));
+
+        jLabel4.setText("Total geral:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 154, -1, -1));
+
+        jTextFieldTotalGeral.setEditable(false);
+        getContentPane().add(jTextFieldTotalGeral, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 151, 190, -1));
+
+        jButtonConsultarPedidosBebidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
+        jButtonConsultarPedidosBebidas.setText("Consultar Pedidos de Bebidas");
+        jButtonConsultarPedidosBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarPedidosBebidasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonConsultarPedidosBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 70, -1, -1));
+
+        jButtonConsultarPedidosPratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/zoom.png"))); // NOI18N
+        jButtonConsultarPedidosPratos.setText("Consultar Pedidos de Pratos");
+        jButtonConsultarPedidosPratos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarPedidosPratosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonConsultarPedidosPratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 110, 190, -1));
+
+>>>>>>> origin/master
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Calculo da Conta da Mesa");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
@@ -266,51 +317,62 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
 
     private void setValoresCalculados() {
         double totalGeral = calculaValorBebida() + calculaValorPratos();
+        this.contaCalculada = true;
         jTextFieldTotalBebidas.setText(calculaValorBebida() + "");
         jTextFieldTotalGeral.setText(totalGeral + "");
         jTextFieldTotalPratos.setText(calculaValorPratos() + "");
     }
 
-    private void limpaCampos(){
+    private void limpaCampos() {
         jTextFieldTotalBebidas.setText("0,00");
         jTextFieldTotalGeral.setText("0,00");
         jTextFieldTotalPratos.setText("0,00");
     }
-    
+
+    private void fechaMesa() {
+        int op2 = JOptionPane.showConfirmDialog(null, "Deseja fechar já fazer o fechamento da mesa?");
+        if (op2 == JOptionPane.YES_OPTION) {
+            new JDialogFecharMesa(null, true).setVisible(true);
+            dispose();
+        }
+    }
+
     private void pagaPedido() {
-        if (listPedidosBebidas.isEmpty() && listPedidosPratos.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Calcule o valor da conta primeiro!!");
-        } else {
-            int op = JOptionPane.showConfirmDialog(null, "Você que deseja pagar a conta da mesa: " + jComboBoxMesa.getSelectedItem().toString());
-            if (op == JOptionPane.YES_OPTION) {
-                try {
-                    daoPedidoBebida = new PedidoBebidaDAO();
-                    daoPedidoPrato = new PedidoPratoDAO();
-                    for (PedidoBebida pb : listPedidosBebidas) {
-                        pb.setPago(true);
-                        TransactionManager.beginTransaction();
-                        daoPedidoBebida.persisteObjeto(pb);
-                        TransactionManager.comitTransaction();
+        if (this.contaCalculada) {
+            if (listPedidosBebidas.isEmpty() && listPedidosPratos.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Mesa sem nenhum pedido!!");
+                fechaMesa();
+            } else {
+                int op = JOptionPane.showConfirmDialog(null, "Você que deseja pagar a conta da mesa: " + jComboBoxMesa.getSelectedItem().toString());
+                if (op == JOptionPane.YES_OPTION) {
+                    try {
+                        daoPedidoBebida = new PedidoBebidaDAO();
+                        daoPedidoPrato = new PedidoPratoDAO();
+                        for (PedidoBebida pb : listPedidosBebidas) {
+                            pb.setPago(true);
+                            TransactionManager.beginTransaction();
+                            daoPedidoBebida.persisteObjeto(pb);
+                            TransactionManager.comitTransaction();
+                        }
+                        for (PedidoPrato pp : listPedidosPratos) {
+                            pp.setPago(true);
+                            TransactionManager.beginTransaction();
+                            daoPedidoBebida.persisteObjeto(pp);
+                            TransactionManager.comitTransaction();
+                        }
+                        JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
+                        limpaCampos();
+                        fechaMesa();
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        TransactionManager.rollbackTransaction();
+                        JOptionPane.showMessageDialog(null, "Erro ao fazer o pagamento!!");
                     }
-                    for (PedidoPrato pp : listPedidosPratos) {
-                        pp.setPago(true);
-                        TransactionManager.beginTransaction();
-                        daoPedidoBebida.persisteObjeto(pp);
-                        TransactionManager.comitTransaction();
-                    }
-                    JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
-                    int op2=JOptionPane.showConfirmDialog(null, "Deseja fechar já fazer o fechamento da mesa?");
-                    if(op2== JOptionPane.YES_OPTION){
-                        new JDialogFecharMesa(null, true).setVisible(true);
-                    }
-                    limpaCampos();
-                    
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    TransactionManager.rollbackTransaction();
-                    JOptionPane.showMessageDialog(null, "Erro ao fazer o pagamento!!");
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Calcule o valor da conta primeiro!!");
         }
     }
 
@@ -320,6 +382,7 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
 
     private void jButtonConsultarPedidosBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPedidosBebidasActionPerformed
         // TODO add your handling code here:
+        new JDialogConPedidoBebida(null, true).setVisible(true);
     }//GEN-LAST:event_jButtonConsultarPedidosBebidasActionPerformed
 
     private void jButtonPagarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPagarContaActionPerformed
@@ -333,8 +396,13 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCalcularContaActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        dispose();
+        dispose(); 
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButtonConsultarPedidosPratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPedidosPratosActionPerformed
+        // TODO add your handling code here:
+         new JDialogConPedidoPrato(null, true).setVisible(true);
+    }//GEN-LAST:event_jButtonConsultarPedidosPratosActionPerformed
 
     /**
      * @param args the command line arguments

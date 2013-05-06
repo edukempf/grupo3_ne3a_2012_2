@@ -525,7 +525,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jMenuItem20.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pedidos.jpg"))); // NOI18N
-        jMenuItem20.setText("Pedidos de Bebbidas");
+        jMenuItem20.setText("Pedidos de Bebidas");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem20ActionPerformed(evt);
@@ -569,7 +569,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu5.setMnemonic('a');
-        jMenu5.setText("Conta");
+        jMenu5.setText("Opções Mesa");
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/calcular.png"))); // NOI18N
@@ -589,7 +589,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/emitirConta.png"))); // NOI18N
-        jMenuItem1.setText("Emitir Conta");
+        jMenuItem1.setText("Abrir Mesa");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -783,7 +783,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        jLabelStatus.setText("Barra de Status");
+        jLabelStatus.setText("Barra de Status"); 
     }//GEN-LAST:event_jButton4MouseExited
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -875,7 +875,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new JDialogConMesa(this, true).setVisible(true);
+        new JDialogAbrirMesa(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
