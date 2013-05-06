@@ -295,7 +295,7 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCalcularContaActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        dispose();
+        dispose(); 
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButtonConsultarPedidosPratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPedidosPratosActionPerformed

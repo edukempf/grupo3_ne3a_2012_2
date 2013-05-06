@@ -783,7 +783,7 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        jLabelStatus.setText("Barra de Status");
+        jLabelStatus.setText("Barra de Status"); 
     }//GEN-LAST:event_jButton4MouseExited
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
