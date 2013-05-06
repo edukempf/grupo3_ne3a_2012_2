@@ -27,7 +27,7 @@ public class BuscaPedidosServlet extends HttpServlet {
         int mesa;
         if (request.getParameter("mesa") == null) {
             response.sendRedirect("index.jsp");
-            System.out.println("AQUI+++++");
+
         } else {
             mesa = Integer.parseInt(request.getParameter("mesa"));
             try {
@@ -38,6 +38,9 @@ public class BuscaPedidosServlet extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Servlet Sistema Barzinho</title>");
+                out.println("<style type=\"text/css\">");
+                out.println("@import url(\"./estilo.css\");");
+                out.println("</style>");
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Pedidos de Bebidas</h1>");
@@ -67,7 +70,7 @@ public class BuscaPedidosServlet extends HttpServlet {
                 out.println("<th>Funcion&aacute;rio do Atendimento</th>");
                 out.println("<th>Total do Pedido</th>");
                 out.println("</tr>");
-                total=0;
+                total = 0;
                 for (PedidoPrato pedidoPrato : listaPedidosPratos) {
                     out.println("<tr>");
                     out.println("<td>" + pedidoPrato.getId() + "</td>");
@@ -99,5 +102,7 @@ public class BuscaPedidosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+
     }
 }
