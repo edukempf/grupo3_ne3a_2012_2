@@ -83,6 +83,7 @@ public class BuscaPedidosServlet extends HttpServlet {
                     out.println("</tr>");
                 }
                 out.println("</table>");
+                out.println("<a href=\"./index.jsp\">voltar ao inicio</a>");
                 out.println("</body>");
                 out.println("</html>");
             } finally {
