@@ -1,6 +1,7 @@
 package Controle;
 
 import DAO.BebidaDAO;
+import DAO.TransactionManager;
 import Modelo.Bebida;
 import java.awt.Color;
 import java.util.Date;
@@ -25,10 +26,11 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
             jComboBoxBebida.setSelectedItem(bebida.getTipo());
             jFormattedTextFieldPreco.setText(bebida.getPreco() + "");
             jFormattedTextFieldDataValidade.setText(Utils.Utilitarios.formatDate(bebida.getDataValidade()));
-
+            this.bebi = bebida;
 
         }
     }
+
     private void setColorBG() {
         jTextFieldNome.setBackground(Color.white);
         jTextFieldQtde.setBackground(Color.white);
@@ -47,7 +49,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         if (jTextFieldQtde.getText() == null || jTextFieldQtde.getText().equals("")) {
             erros.append("O campo Quantidade é Obrigatória!\n");
             jTextFieldQtde.setBackground(Color.red);
-        }else {
+        } else {
             if (Integer.parseInt(jTextFieldQtde.getText()) < 0) {
                 erros.append("O campo Quantidade não pode ser negativa!\n");
                 jTextFieldQtde.setBackground(Color.red);
@@ -233,16 +235,14 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
 
     private Bebida getDadosDosCampos() {
         Bebida bebida = new Bebida();
+        if (this.bebi != null) {
+            bebida = this.bebi;
+        }
         bebida.setNome(jTextFieldNome.getText());
         bebida.setQtde(Integer.parseInt(jTextFieldQtde.getText()));
         bebida.setTipo(jComboBoxBebida.getSelectedItem().toString());
         bebida.setPreco(Double.parseDouble(jFormattedTextFieldPreco.getText().replace(",", ".")));
         bebida.setDataValidade(new Date(jFormattedTextFieldDataValidade.getText()));
-
-        if (this.bebi != null) {
-            bebida.setId(bebi.getId());
-
-        }
 
         return bebida;
     }
@@ -255,8 +255,26 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         jFormattedTextFieldDataValidade.setText("");
     }
 
+    private Bebida insereBebida(Bebida bebida) {
+//        System.out.println(bebida.getId());
+        dao = new BebidaDAO();
+        try {
+            TransactionManager.beginTransaction();
+            bebida = dao.persisteObjeto(bebida);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
+            TransactionManager.rollbackTransaction();
+            System.out.println(ex.toString());
+        }
+        System.out.println(bebida.getId());
+        return bebida;
+    }
+
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConBebidas(null, true,false);
+        JDialog dialog = new JDialogConBebidas(null, true, false);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
@@ -273,7 +291,7 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
         String aux = this.validaCampos();
         if (aux.equals("")) {
             dispose();
-            JDialog dialog = new JDialogViewBebida(null, true, this.getDadosDosCampos());
+            JDialog dialog = new JDialogViewBebida(null, true, insereBebida(getDadosDosCampos()));
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {

@@ -1,6 +1,7 @@
 package Controle;
 
 import DAO.ComidaDAO;
+import DAO.TransactionManager;
 import Modelo.Comida;
 import java.awt.Color;
 import java.text.ParseException;
@@ -308,15 +309,32 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private Comida getDadosDosCampos() {
-        Comida comi = new Comida();
-        comi.setNome(jTextFieldNome.getText());
-        comi.setQuantidade(Integer.parseInt(jFormattedTextFieldQuant.getText()));
-        comi.setTipo(jComboBoxComida.getSelectedItem().toString());
-        comi.setDataValidade(new Date(jFormattedTextFieldDataValidade.getText()));
+        Comida comida = new Comida();
         if (this.comi != null) {
-            comi.setId(this.comi.getId());
+            comida = this.comi;
         }
+        comida.setNome(jTextFieldNome.getText());
+        comida.setQuantidade(Integer.parseInt(jFormattedTextFieldQuant.getText()));
+        comida.setTipo(jComboBoxComida.getSelectedItem().toString());
+        comida.setDataValidade(new Date(jFormattedTextFieldDataValidade.getText()));
 
+
+        return comida;
+    }
+
+    private Comida insereComida(Comida comida) {
+        dao = new ComidaDAO();
+        try {
+            TransactionManager.beginTransaction();
+            this.comi = dao.persisteObjeto(comida);
+            TransactionManager.comitTransaction();
+            JOptionPane.showMessageDialog(null, "Comida cadastrada com sucesso");
+
+        } catch (Exception ex) {
+            TransactionManager.rollbackTransaction();
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Comida!");
+            System.out.println(ex.toString());
+        }
         return comi;
     }
 
@@ -348,7 +366,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        JDialog dialog = new JDialogConComidas(null, true,false);
+        JDialog dialog = new JDialogConComidas(null, true, false);
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
@@ -357,7 +375,7 @@ public class JDialogCadComidas extends javax.swing.JDialog {
         String aux = this.validaCampos();
         if (aux.equals("")) {
             dispose();
-            JDialog dialog = new JDialogViewComida(null, true, this.getDadosDosCampos());
+            JDialog dialog = new JDialogViewComida(null, true, insereComida(getDadosDosCampos()));
             dialog.setLocation(getX() + 50, getY() + 50);
             dialog.setVisible(true);
         } else {

@@ -32,19 +32,23 @@ public class JDialogViewComida extends javax.swing.JDialog {
         jLDataValidade.setText(Utils.Utilitarios.formatDate(comida.getDataValidade()));
     }
 
-    private void insereComida(Comida comida) {
-        dao = new ComidaDAO();
-        try {
-            TransactionManager.beginTransaction();
-            dao.persisteObjeto(comida);
-            TransactionManager.comitTransaction();
-            JOptionPane.showMessageDialog(null, "Comida cadastrada com sucesso");
-
-        } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
-            JOptionPane.showMessageDialog(null, "Erro ao inserir Comida!");
-            System.out.println(ex.toString());
-        }
+    private void apagaComida(){
+        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover essa Comida?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+                try {
+                    dao=new ComidaDAO();
+                    TransactionManager.beginTransaction();
+                    dao.delete(comida);
+                    TransactionManager.comitTransaction();
+                    JOptionPane.showMessageDialog(null, "Apagado com sucesso!!");
+                    dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir comida!\n"
+                        + "Certifique-se que o Comida não esteja em nenhum prato para poder excluir!");
+                    TransactionManager.rollbackTransaction();
+                    ex.printStackTrace();
+                }
+            }
     }
 
     /**
@@ -65,9 +69,9 @@ public class JDialogViewComida extends javax.swing.JDialog {
         jLDataValidade = new javax.swing.JLabel();
         jLTipo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButtonConfirmar = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jButtonRemover = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
 
@@ -100,14 +104,6 @@ public class JDialogViewComida extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
-
         jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar.jpg"))); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +120,14 @@ public class JDialogViewComida extends javax.swing.JDialog {
             }
         });
 
+        jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/remover.png"))); // NOI18N
+        jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -131,9 +135,9 @@ public class JDialogViewComida extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(47, 47, 47)
+                .addComponent(jButtonRemover)
+                .addGap(40, 40, 40)
                 .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -142,9 +146,9 @@ public class JDialogViewComida extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -157,10 +161,6 @@ public class JDialogViewComida extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        insereComida(this.comida);
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
@@ -171,6 +171,10 @@ public class JDialogViewComida extends javax.swing.JDialog {
         dialog.setLocation(getX() + 50, getY() + 50);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        apagaComida();
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,9 +218,9 @@ public class JDialogViewComida extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLDataValidade;
     private javax.swing.JLabel jLNome;
     private javax.swing.JLabel jLQdte;

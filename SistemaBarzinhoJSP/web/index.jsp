@@ -8,7 +8,7 @@
         <h1 style="text-align: center; padding-top: 5%;"> Sistema para Barzinho</h1>
         <div id="conteudo" >
 
-            <h1 id="h1" >Consulta de Pedidos</h1>
+            <h1 id="h1" >Consulta de Pedidos</h1> 
             <form action="BuscaPedidosServlet" method="post">
 
                 <p id="p">N&uacute;mero da Mesa:
