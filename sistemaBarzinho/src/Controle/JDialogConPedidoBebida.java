@@ -59,6 +59,7 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
             }
             double custoPedido = 0;
             for (PedidoBebida pedido : lista) {
+                custoPedido = 0;
                 for (Bebida p : pedido.getBebidas()) {
                     custoPedido += p.getPreco();
                 }

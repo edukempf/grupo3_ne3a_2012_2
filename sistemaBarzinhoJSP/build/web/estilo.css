@@ -1,0 +1,48 @@
+root { 
+    display: block;
+}
+
+body{
+
+    background-image: url(imagens/fundo.jpg);
+    background-repeat: no-repeat;
+    background-size:100% 1500%;
+    text-align: center;
+    text-decoration-color: white;
+    background-position: center;
+
+}
+
+#conteudo { 
+
+    background-image: url(imagens/images.jpg);
+    position: absolute;
+    margin-left: 30%;
+    width: 650px;
+    height: 280px;
+    border: 1px;
+}
+
+
+#h1{
+    text-align: left;   
+}
+
+p{
+    background-position: left;
+
+}
+table{
+    margin: auto;
+    padding-bottom: 5px;
+    font-size:14px;
+    text-indent: 1cm;
+    width: 600px;
+    border-style: double;
+    border-color: #8B4513;
+}
+td{
+    border-style: dotted;
+    border-color: #8B4513;
+}
+

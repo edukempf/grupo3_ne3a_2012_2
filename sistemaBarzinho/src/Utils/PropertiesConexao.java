@@ -22,7 +22,7 @@ public class PropertiesConexao {
         Properties prop = new Properties();
         FileInputStream file = null;
         try {
-            file = new FileInputStream("./src/Utils/conexao.properties");
+            file = new FileInputStream("./conexao.properties");
             prop.load(file);
         } catch (IOException ex) {
             Logger.getLogger(PropertiesConexao.class.getName()).log(Level.SEVERE, null, ex);
@@ -40,7 +40,7 @@ public class PropertiesConexao {
         FileOutputStream file = null;
         boolean teste=false;
         try {
-            file = new FileOutputStream("./src/Utils/conexao.properties");
+            file = new FileOutputStream("./conexao.properties");
             prop.store(file, null);
             teste=true;
         } catch (IOException ex) {

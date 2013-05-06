@@ -9,26 +9,10 @@
         <div id="conteudo" >
 
             <h1 id="h1" >Consulta de Pedidos</h1>
-            <form action="butoon" method="post">
+            <form action="BuscaPedidosServlet" method="post">
 
                 <p id="p">N&uacute;mero da Mesa:
-                    <input type="text" name="mesa" maxlength="6" size="6"/> <input type="button" value="Verificar Mesa"></input></p>
-                <table>
-                    <tr>
-                        <th>C&oacute;digo do Pedido</th>
-                        <th>Funcion&aacute;rio do Atendimento</th>
-                        <th>Total Gasto pela Mesa</th>
-                    </tr>
-                    <tr>
-                        <td>======></td>
-                        <td>======></td>
-                        <td>======></td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-
-                <input type="button" id="submit"value="Verificar Exist&ecirc;ncia do Pedido"></input>
+                    <input type="text" name="mesa" maxlength="6" size="6"/> <input type="submit" value="Verificar Mesa"></input></p>
 
             </form>
         </div>
