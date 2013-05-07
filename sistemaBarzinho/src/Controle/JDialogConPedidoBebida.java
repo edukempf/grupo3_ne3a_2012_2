@@ -309,13 +309,10 @@ public class JDialogConPedidoBebida extends javax.swing.JDialog {
             int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Pedido?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    TransactionManager.beginTransaction();
                     dao.delete(pedido);
-                    TransactionManager.comitTransaction();
                     preenchetabela();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    TransactionManager.rollbackTransaction();
                 }
             }
         } else {

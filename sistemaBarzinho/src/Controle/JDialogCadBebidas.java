@@ -259,14 +259,11 @@ public class JDialogCadBebidas extends javax.swing.JDialog {
 //        System.out.println(bebida.getId());
         dao = new BebidaDAO();
         try {
-            TransactionManager.beginTransaction();
             bebida = dao.persisteObjeto(bebida);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Bebida cadastrada com sucesso");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir bebida!");
-            TransactionManager.rollbackTransaction();
             System.out.println(ex.toString());
         }
         System.out.println(bebida.getId());

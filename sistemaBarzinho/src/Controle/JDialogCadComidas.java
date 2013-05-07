@@ -325,13 +325,10 @@ public class JDialogCadComidas extends javax.swing.JDialog {
     private Comida insereComida(Comida comida) {
         dao = new ComidaDAO();
         try {
-            TransactionManager.beginTransaction();
             this.comi = dao.persisteObjeto(comida);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Comida cadastrada com sucesso");
 
         } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Comida!");
             System.out.println(ex.toString());
         }

@@ -137,7 +137,7 @@ public class JDialogFecharMesa extends javax.swing.JDialog {
 
     private void fechaMesa() {
         if (jComboBoxMesa.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione a mesa que deseja abrir!");
+            JOptionPane.showMessageDialog(null, "Selecione a mesa que deseja fechar!");
         } else {
             daoMesa = new MesaDAO();
             daoPBeb = new PedidoBebidaDAO();
@@ -149,18 +149,15 @@ public class JDialogFecharMesa extends javax.swing.JDialog {
             if ((listaPedidoBebidas.size() + listaPedidoPratos.size()) == 0) {
                 mesaSelecionada.setStatus(false);
                 try {
-                    TransactionManager.beginTransaction();
                     daoMesa.persisteObjeto(mesaSelecionada);
-                    TransactionManager.comitTransaction();
                     JOptionPane.showMessageDialog(null, "Mesa fechada com sucesso");
                     preencheComboBoxMesa();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    TransactionManager.rollbackTransaction();
                     JOptionPane.showMessageDialog(null, "Erro ao fechar mesa!");
                 }
             }else{
-                int op=JOptionPane.showConfirmDialog(null, "Existem pedidos que ainda não foram pagos nessa mesa, desejar realizar o pagamento agora?");
+                int op=JOptionPane.showConfirmDialog(null, "Existem pedidos que ainda não foram pagos nessa mesa, desejar realizar o pagamento agora?",null,JOptionPane.YES_NO_OPTION);
                 if(op==JOptionPane.YES_OPTION){ 
                     new JDialogCalcularConta(null, true).setVisible(true);
                 }

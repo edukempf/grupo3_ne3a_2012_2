@@ -261,13 +261,10 @@ public class JDialogCadFuncionario extends javax.swing.JDialog {
     private Funcionario insereFuncionario(Funcionario func) {
         dao = new FuncionarioDAO();
         try {
-            TransactionManager.beginTransaction();
             func = dao.persisteObjeto(func);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso");
 
         } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "erro ao inserir!");
             System.out.println(ex.toString());
         }

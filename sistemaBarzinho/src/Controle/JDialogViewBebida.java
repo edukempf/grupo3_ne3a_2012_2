@@ -40,14 +40,11 @@ public class JDialogViewBebida extends javax.swing.JDialog {
                 try {
                     dao=new BebidaDAO();
                     System.out.println(bebida.getId());
-                    TransactionManager.beginTransaction();
                     dao.delete(bebida);
-                    TransactionManager.comitTransaction();
                     dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir bebida!\n"
                         + "Certifique-se que a bebida não esteja em nenhum pedido para poder excluir!");
-                    TransactionManager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

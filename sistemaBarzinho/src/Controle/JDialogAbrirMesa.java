@@ -54,15 +54,12 @@ public class JDialogAbrirMesa extends javax.swing.JDialog {
             Mesa mesaSelecionada = pegaMesaSelecionada();
             mesaSelecionada.setStatus(true);
             try {
-                TransactionManager.beginTransaction();
                 daoMesa.persisteObjeto(mesaSelecionada);
-                TransactionManager.comitTransaction();
                 JOptionPane.showMessageDialog(null, "Mesa aberta com sucesso");
                 jTextFieldCapacidade.setText("0");
                 preencheComboBoxMesa();
             } catch (Exception ex) {
                 ex.printStackTrace();
-                TransactionManager.rollbackTransaction();
                 JOptionPane.showMessageDialog(null, "Erro ao abrir mesa!");
 
             }

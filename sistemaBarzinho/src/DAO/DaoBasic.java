@@ -29,15 +29,30 @@ public abstract class DaoBasic<T> {
         
     protected static Session session;
     
-    public T persisteObjeto(Object o){
-        session=TransactionManager.getCurrentSession();
+    public T persisteObjeto(Object o,TransactionManager.Transaction t){
+        session=t.getCurrentSession();
         session.saveOrUpdate(o);
+//        session.evict(o);
         return (T) o;
     }
     
-    public void delete(Object deletar){
-        session=TransactionManager.getCurrentSession();
+    public T persisteObjeto(Object o){
+        TransactionManager.Transaction t=TransactionManager.beginTransaction();
+        o=persisteObjeto(o,t);
+        t.commit();
+        t.getCurrentSession().close();
+        return (T) o;
+    }
+    
+    public void delete(Object deletar, TransactionManager.Transaction t){
+        session=t.getCurrentSession();
         session.delete(deletar);
+    }
+    
+    public void delete(Object deletar){
+        TransactionManager.Transaction t=TransactionManager.beginTransaction();
+        delete(deletar,t);
+        t.commit();
     }
     
     public T get(int id){

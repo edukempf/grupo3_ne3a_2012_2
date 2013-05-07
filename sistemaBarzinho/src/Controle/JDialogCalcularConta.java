@@ -229,7 +229,7 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     }
 
     private void fechaMesa() {
-        int op2 = JOptionPane.showConfirmDialog(null, "Deseja fechar já fazer o fechamento da mesa?");
+        int op2 = JOptionPane.showConfirmDialog(null, "Deseja fechar já fazer o fechamento da mesa?", null, JOptionPane.YES_NO_OPTION);
         if (op2 == JOptionPane.YES_OPTION) {
             new JDialogFecharMesa(null, true).setVisible(true);
             dispose();
@@ -244,33 +244,32 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
             } else {
                 int op = JOptionPane.showConfirmDialog(null, "Você que deseja pagar a conta da mesa: " + jComboBoxMesa.getSelectedItem().toString());
                 if (op == JOptionPane.YES_OPTION) {
+                    TransactionManager.Transaction t = TransactionManager.beginTransaction();
                     try {
                         daoPedidoBebida = new PedidoBebidaDAO();
                         daoPedidoPrato = new PedidoPratoDAO();
                         for (PedidoBebida pb : listPedidosBebidas) {
                             pb.setPago(true);
-                            TransactionManager.beginTransaction();
-                            daoPedidoBebida.persisteObjeto(pb);
-                            TransactionManager.comitTransaction();
+                            daoPedidoBebida.persisteObjeto(pb,t);
                         }
                         for (PedidoPrato pp : listPedidosPratos) {
                             pp.setPago(true);
-                            TransactionManager.beginTransaction();
-                            daoPedidoBebida.persisteObjeto(pp);
-                            TransactionManager.comitTransaction();
+                            daoPedidoBebida.persisteObjeto(pp,t);
                         }
+                        t.commit();
+                        t.getCurrentSession().close();
                         JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
                         limpaCampos();
                         fechaMesa();
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        TransactionManager.rollbackTransaction();
+                        t.rollback();
                         JOptionPane.showMessageDialog(null, "Erro ao fazer o pagamento!!");
                     }
                 }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Calcule o valor da conta primeiro!!");
         }
     }
@@ -295,12 +294,12 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCalcularContaActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        dispose(); 
+        dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButtonConsultarPedidosPratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPedidosPratosActionPerformed
         // TODO add your handling code here:
-         new JDialogConPedidoPrato(null, true).setVisible(true);
+        new JDialogConPedidoPrato(null, true).setVisible(true);
     }//GEN-LAST:event_jButtonConsultarPedidosPratosActionPerformed
 
     /**

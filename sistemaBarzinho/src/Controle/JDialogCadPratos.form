@@ -179,7 +179,7 @@
               <Format format="#0.00" subtype="-1" type="0"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de texto"/>
+              <Color id="Cursor Default"/>
             </Property>
           </Properties>
           <Constraints>

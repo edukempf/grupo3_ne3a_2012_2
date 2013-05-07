@@ -78,13 +78,10 @@ public class JDialogCadMesa extends javax.swing.JDialog {
     private Mesa insereMesa(Mesa mesa) {
         dao = new MesaDAO();
         try {
-            TransactionManager.beginTransaction();
             mesa = dao.persisteObjeto(mesa);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Mesa cadastrada com sucesso");
 
         } catch (Exception ex) {
-            TransactionManager.rollbackTransaction();
             JOptionPane.showMessageDialog(null, "Erro ao inserir Mesa!");
             System.out.println(ex.toString());
         }

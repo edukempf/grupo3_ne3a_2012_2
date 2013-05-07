@@ -279,9 +279,7 @@ public class JDialogCadPratos extends javax.swing.JDialog {
     private Prato inserePrato(Prato prato) {
         dao = new PratoDAO();
         try {
-            TransactionManager.beginTransaction();
             prato=dao.persisteObjeto(prato);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Prato cadastrado com sucesso");
 
         } catch (Exception ex) {

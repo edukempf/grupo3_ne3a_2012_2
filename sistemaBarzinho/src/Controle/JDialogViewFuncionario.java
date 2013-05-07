@@ -40,15 +40,12 @@ public class JDialogViewFuncionario extends javax.swing.JDialog {
         int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover esse Funcionário?", "Confirmação de exclusão", JOptionPane.OK_OPTION | JOptionPane.CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
-                    TransactionManager.beginTransaction();
                     dao.delete(this.func);
-                    TransactionManager.comitTransaction();
                     JOptionPane.showMessageDialog(null, "Funcionario apagado com sucesso");
                     dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir funcionario!\n"
                         + "Certifique-se que o funcionário não esteja em nenhum pedido para poder excluir!");
-                    TransactionManager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

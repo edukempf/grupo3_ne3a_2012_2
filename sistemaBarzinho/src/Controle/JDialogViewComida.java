@@ -37,15 +37,12 @@ public class JDialogViewComida extends javax.swing.JDialog {
             if (opcao == JOptionPane.YES_OPTION) {
                 try {
                     dao=new ComidaDAO();
-                    TransactionManager.beginTransaction();
                     dao.delete(comida);
-                    TransactionManager.comitTransaction();
                     JOptionPane.showMessageDialog(null, "Apagado com sucesso!!");
                     dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao excluir comida!\n"
                         + "Certifique-se que o Comida não esteja em nenhum prato para poder excluir!");
-                    TransactionManager.rollbackTransaction();
                     ex.printStackTrace();
                 }
             }

@@ -173,14 +173,11 @@ public class JDialogCadPedidoBebida extends javax.swing.JDialog {
     private PedidoBebida inserePedido(PedidoBebida pedido) {
         dao = new PedidoBebidaDAO();
         try {
-            TransactionManager.beginTransaction();
             pedido = dao.persisteObjeto(pedido);
-            TransactionManager.comitTransaction();
             JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Pedido!");
-            TransactionManager.rollbackTransaction();
             System.out.println(ex.toString());
         }
         return pedido;
