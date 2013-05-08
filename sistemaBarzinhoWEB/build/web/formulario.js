@@ -331,12 +331,6 @@ function mapaSiteDinamico() {
                 div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
             } else if (localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])) {
                 div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='descricaoSistema.html'> Descrição do Sistema</a>" + ">> " + window.parent.document.title;
-            } else if (localizacao.contains("/Screenshots/") && localizacao.contains(paginas[i])) {
-                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Screenshots.html'> Screenshots do Sistema</a>" + ">> " + window.parent.document.title;
-            } else if (localizacao.contains("/Mapadosite/") && localizacao.contains(paginas[i])) {
-                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Mapadosite.html'> Mapa do Site</a>" + ">> " + window.parent.document.title;
-            } else if (localizacao.contains("/Formulario/") && localizacao.contains(paginas[i])) {
-                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Formulario.html'> Formulario</a>" + ">> " + window.parent.document.title;
             }
         }
     }

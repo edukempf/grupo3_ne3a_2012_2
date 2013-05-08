@@ -7,7 +7,7 @@
         <script src="formulario.js" type="text/javascript"></script>
         <title>Formulário com Javascript- Sistema para Barzinhos</title>
     </head>
-    <body>
+    <body onload="setSelectedComCookie();mapaSiteDinamico();">
         <div id="page">
             <div id="header">
             </div>
@@ -23,6 +23,7 @@
             </div>
             <div id="area">
                 <form name="formulario" id="formulario" onsubmit="validarCampos()" action="mailto:contato@gmail.com">
+
                     <fieldset>
                         <legend> Formulário para Contato Com Desenvolvedor </legend>
                         <p>Nome:*<input type="text" name="campo1" size="20" onblur="primeiraLetraMaiuscula()"></input> </p>
