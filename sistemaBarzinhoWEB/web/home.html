@@ -4,27 +4,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
         <script type="text/javascript" src="formulario.js"></script>
-        <link href="estilo01.css" rel="stylesheet" type="text/css" />
 
-        <link href="estilo01.css" rel="stylesheet" type="text/css" media="screen"/> 
+        <link href="estilo01.css" rel="stylesheet" type="text/css" media="screen" title="estilo01"/> 
         <link href="estilo02.css" rel="alternate stylesheet" type="text/css" media="screen" title="estilo02"/>  
-        <link href="estilo03.css" rel="alternate stylesheet" type="text/css" media="screen" title="estilo03"/>  
+        <link href="estilo03.css" rel="alternate stylesheet" type="text/css" media="screen" title="estilo03"/>   
         <link />
 
 
         <title>Home- Sistema para Barzinhos</title>
     </head>
-    <body onload="mapaSiteDinamico();getCookie();">
+    <body onload="setSelectedComCookie();">
         <div id="page">
             <div id="header">
-                <FORM METHOD="POST" id="radio" action="null">
-
-                    <h3 style="color: #000000"> Escolha um Estilo</h3>
-                    <h5 style="color: #000000" title="Mudar tema para preto" onmouseover="setActiveStyleSheet('estilo01');">Estilo 01</h5>
-                    <h5 style="color: #000000"  title="Mudar tema para Azul" onmouseover="setActiveStyleSheet('estilo02'); ">Estilo 02</h5>
-                    <h5 style="color: #000000"  title="Mudar tema para verde" onmouseover="setActiveStyleSheet('estilo03'); ">Estilo 03</h5>
-                </FORM>    
-
+                <select id="escolheEstilo" name="escolheEstilo" onchange="setActiveStyleSheet();"> 
+                    <option value="estilo01">Estilo 01</option>
+                    <option value="estilo02">Estilo 02</option>
+                    <option value="estilo03">Estilo 03</option>
+                </select>
             </div>
             <div id="menu">
                 <ul>

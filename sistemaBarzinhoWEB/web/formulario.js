@@ -5,7 +5,7 @@ function primeiraLetraMaiuscula() {
     for (var i = 0; i < nomes.length; i++) {
         nomes[i] = nomes[i].toLowerCase();
         nomes[i] = nomes[i].replace(nomes[i].substr(0, 1), nomes[i].charAt(0).toUpperCase());
-    //            alert(nomes[i]);
+        //            alert(nomes[i]);
     }
     nome = "";
     for (var i = 0; i < nomes.length; i++) {
@@ -37,10 +37,10 @@ function verificaCarecteresInvalidos() {
 function verificaNome()
 {
     var conf = true;
-    
-    
-        conf = verificaCarecteresInvalidos();
-    
+
+
+    conf = verificaCarecteresInvalidos();
+
 
     return conf;
 }
@@ -69,7 +69,7 @@ function mascara_data() {
 }
 // Esta função verifica data informada
 function verifica_data() {
-    
+
     var dia = (document.formulario.data.value.substring(0, 2));
     var mes = (document.formulario.data.value.substring(3, 5));
     var ano = (document.formulario.data.value.substring(6, 10));
@@ -166,7 +166,7 @@ function validarCPF(cpf) {
 }
 //  Esta função verifica e-mail
 function checarEmail() {
-    
+
     if (document.forms[0].email.value == "" || document.forms[0].email.value.indexOf("@") == -1 || document.forms[0].email.value.indexOf(".") == -1) {
         alert("Por favor, informe um E-MAIL válido!");
         return false;
@@ -193,7 +193,7 @@ function confirmaLimparCampo() {
 }
 
 //  Esta função deixa bordas cinzas
-function zeraBorda(){
+function zeraBorda() {
     document.formulario.campo1.style.border = '1px solid #D3D3D3';
     document.formulario.data.style.border = '1px solid #D3D3D3';
     document.formulario.cpf.style.border = '1px solid #D3D3D3';
@@ -202,31 +202,31 @@ function zeraBorda(){
 }
 
 //  Esta função verifica campos vazios
-function campoVazios(){
+function campoVazios() {
     if (formulario.campo1.value == "") {
-        document.formulario.campo1.value=prompt("Por favor, Digite o nome:");
+        document.formulario.campo1.value = prompt("Por favor, Digite o nome:");
         campoVazios();
     }
     if (document.formulario.data.value == "") {
-        document.formulario.data.value=prompt("Por favor, Digite uma data:");
+        document.formulario.data.value = prompt("Por favor, Digite uma data:");
         campoVazios();
     }
     if (document.formulario.cpf.value == "") {
-        document.formulario.cpf.value=prompt("Por favor, Digite um cpf:");
+        document.formulario.cpf.value = prompt("Por favor, Digite um cpf:");
         campoVazios();
     }
     if (document.formulario.email.value == "") {
-        document.formulario.email.value=prompt("Por favor, Digite um email:");
+        document.formulario.email.value = prompt("Por favor, Digite um email:");
         campoVazios();
-        
+
     }
-    
+
     var textarea = document.getElementById('textarea');
     if (textarea.value.length == 0) {
-        document.formulario.textarea.value=prompt("Por favor, Digite um comentário:");
+        document.formulario.textarea.value = prompt("Por favor, Digite um comentário:");
         campoVazios();
     }
-    
+
 }
 //  Esta função verifica campos
 function validaCampos() {
@@ -257,43 +257,61 @@ function validaCampos() {
     }
 }
 //  Esta função varia estilos
-function setActiveStyleSheet(estilo) {
-    var i, a;
-    for(i=0; (a = document.getElementsByTagName("link")[i]); i++)
-    {
-        if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title"))
-
-        {
-            a.disabled = true;
-            if(a.getAttribute("title") == estilo) a.disabled = false;
+function setActiveStyleSheet() {
+    var i, nomeLinkCss, estiloSelecionadoCss;
+    estiloSelecionadoCss = document.getElementById("escolheEstilo").value;
+    for (i = 0; (nomeLinkCss = document.getElementsByTagName("link")[i]); i++) {
+        if (nomeLinkCss.getAttribute("rel").indexOf("style") != -1 && nomeLinkCss.getAttribute("title")) {
+            nomeLinkCss.disabled = true;
+            if (nomeLinkCss.getAttribute("title") == estiloSelecionadoCss) {
+                nomeLinkCss.disabled = false;
+                GerarCookie("estilo", estiloSelecionadoCss);
+            }
         }
     }
 }
 
-function setCookie(c_name,value,exdays){  // criar cookie
-    var exdate=new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-    document.cookie=c_name + "=" + c_value;
+function GerarCookie(strCookie, strValor) {
+//    alert(strCookie + "=" + strValor + strExpires + "; path=/");
+    var o_cookie = strCookie + "=" + strValor + ";";
+    document.cookie = o_cookie;
+    alert(LerCookie("estilo"));
+
 }
 
-function getCookie(c_name){ // retorna o cookie
-    var i,x,y,ARRcookies=document.cookie.split(";");
-    for (i=0;i<ARRcookies.length;i++)
-    {
-        x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-        y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-        x=x.replace(/^\s+|\s+$/g,"");
-        if (x==c_name)
+function LerCookie(strCookie)
+{
+    var strNomeIgual = strCookie + "=";
+    var arrCookies = document.cookie.split(';');
+    for (var i = 0; i < arrCookies.length; i++) {
+        var strValorCookie = arrCookies[i];
+        while (strValorCookie.charAt(0) === ' ')
         {
-            return unescape(y);
+            strValorCookie = strValorCookie.substring(1, strValorCookie.length);
+        }
+        if (strValorCookie.indexOf(strNomeIgual) == 0)
+        {
+//            alert("aaaaaa");
+            return strValorCookie.substring(strNomeIgual.length, strValorCookie.length);
         }
     }
-
+    return null;
 }
+
+function setSelectedComCookie() {
+    if (LerCookie("estilo" != null)) {
+        var estilo = LerCookie("estilo").substring(LerCookie("estilo").lastIndexOf("o") + 2, LerCookie("estilo").length);
+        alert(estilo);
+        var op = document.getElementById("escolheEstilo");
+        op.options[estilo - 1].selected = true;
+        setActiveStyleSheet();
+        alert(LerCookie("estilo"));
+    }
+}
+
 
 //função  para Mapa do Site Dinâmico
-function mapaSiteDinamico(){
+function mapaSiteDinamico() {
     var div = document.getElementById("div_navegacao");
     var localizacao = window.location.toString();
     var paginas = new Array();
@@ -303,22 +321,22 @@ function mapaSiteDinamico(){
     paginas[3] = "Screenshots.html";
     paginas[4] = "Mapadosite.html";
     paginas[5] = "Formulario.html";
-    
+
     var i;
-    for(i=0; i<paginas.length; i++){
-        if(localizacao.contains("home")){
+    for (i = 0; i < paginas.length; i++) {
+        if (localizacao.contains("home")) {
             div.innerHTML = window.parent.document.title;
-        }else{
-            if(!localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])){
-                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ window.parent.document.title;
-            }else if(localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])){
-                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='descricaoSistema.html'> Descrição do Sistema</a>"+">> "+ window.parent.document.title;
-            } else if(localizacao.contains("/Screenshots/") && localizacao.contains(paginas[i])){
-                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Screenshots.html'> Screenshots do Sistema</a>"+">> "+ window.parent.document.title;
-            } else if(localizacao.contains("/Mapadosite/") && localizacao.contains(paginas[i])){
-                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Mapadosite.html'> Mapa do Site</a>"+">> "+ window.parent.document.title;
-            } else if(localizacao.contains("/Formulario/") && localizacao.contains(paginas[i])){
-                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Formulario.html'> Formulario</a>"+">> "+ window.parent.document.title;
+        } else {
+            if (!localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='descricaoSistema.html'> Descrição do Sistema</a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains("/Screenshots/") && localizacao.contains(paginas[i])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Screenshots.html'> Screenshots do Sistema</a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains("/Mapadosite/") && localizacao.contains(paginas[i])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Mapadosite.html'> Mapa do Site</a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains("/Formulario/") && localizacao.contains(paginas[i])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='Formulario.html'> Formulario</a>" + ">> " + window.parent.document.title;
             }
         }
     }
