@@ -229,3 +229,19 @@ DIV.dcu:hover {
     color: red;
     font-size: 10px;
 }
+
+#navegacao{
+    width: 850px;	
+    margin:0 auto;
+}
+
+#navegacao a{
+	color:black;
+	text-decoration:none;
+}
+
+#navegacao a:hover{
+	color:#663399;
+	text-decoration:underline;
+}
+

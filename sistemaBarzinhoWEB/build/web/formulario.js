@@ -291,3 +291,35 @@ function getCookie(c_name){ // retorna o cookie
     }
 
 }
+
+//função  para Mapa do Site Dinâmico
+function mapaSiteDinamico(){
+    var div = document.getElementById("div_navegacao");
+    var localizacao = window.location.toString();
+    var paginas = new Array();
+    paginas[0] = "hone.html";
+    paginas[1] = "descricaoSistema.html";
+    paginas[2] = "desenvolvedores.html";
+    paginas[3] = "Screenshots.html";
+    paginas[4] = "Mapadosite.html";
+    paginas[5] = "Formulario.html";
+    
+    var i;
+    for(i=0; i<paginas.length; i++){
+        if(localizacao.contains("home")){
+            div.innerHTML = window.parent.document.title;
+        }else{
+            if(!localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])){
+                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ window.parent.document.title;
+            }else if(localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])){
+                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='descricaoSistema.html'> Descrição do Sistema</a>"+">> "+ window.parent.document.title;
+            } else if(localizacao.contains("/Screenshots/") && localizacao.contains(paginas[i])){
+                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Screenshots.html'> Screenshots do Sistema</a>"+">> "+ window.parent.document.title;
+            } else if(localizacao.contains("/Mapadosite/") && localizacao.contains(paginas[i])){
+                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Mapadosite.html'> Mapa do Site</a>"+">> "+ window.parent.document.title;
+            } else if(localizacao.contains("/Formulario/") && localizacao.contains(paginas[i])){
+                div.innerHTML = "<a href='home.html'>Home </a>"+">> "+ "<a href='Formulario.html'> Formulario</a>"+">> "+ window.parent.document.title;
+            }
+        }
+    }
+}
