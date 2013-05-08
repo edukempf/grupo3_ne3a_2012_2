@@ -257,7 +257,6 @@ public class JDialogCalcularConta extends javax.swing.JDialog {
                             daoPedidoBebida.persisteObjeto(pp,t);
                         }
                         t.commit();
-                        t.getCurrentSession().close();
                         JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!!");
                         limpaCampos();
                         fechaMesa();

@@ -7,6 +7,7 @@ package DAO;
 import static DAO.DaoBasic.session;
 import Modelo.Funcionario;
 import java.util.List;
+import org.hibernate.LockMode;
 import org.hibernate.criterion.Restrictions;
 
 /**

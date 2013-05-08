@@ -5,7 +5,6 @@
 package DAO;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -20,23 +19,28 @@ public class TransactionManager {
 
     public static class Transaction {
 
-        private  Session session = null;
+        private Session session = null;
 
         private Transaction(Session session) {
             this.session = session;
             this.session.beginTransaction();
         }
 
-        public  void commit() {
-            session.getTransaction().commit();
+        public void commit() {
+            if (session.isOpen()) {
+                session.getTransaction().commit();
+                this.session.close();
+            } else {
+            }
         }
 
-        public  Session getCurrentSession() {
+        public Session getCurrentSession() {
             return session;
         }
 
-        public  void rollback() {
+        public void rollback() {
             session.getTransaction().rollback();
+            this.session.close();
         }
     }
 }

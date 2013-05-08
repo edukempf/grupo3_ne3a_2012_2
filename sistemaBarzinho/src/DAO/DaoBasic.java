@@ -31,7 +31,7 @@ public abstract class DaoBasic<T> {
     
     public T persisteObjeto(Object o,TransactionManager.Transaction t){
         session=t.getCurrentSession();
-        session.saveOrUpdate(o);
+        session.merge(o);
 //        session.evict(o);
         return (T) o;
     }
@@ -39,35 +39,50 @@ public abstract class DaoBasic<T> {
     public T persisteObjeto(Object o){
         TransactionManager.Transaction t=TransactionManager.beginTransaction();
         o=persisteObjeto(o,t);
-        t.commit();
-        t.getCurrentSession().close();
+        try{
+            t.commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            t.rollback();
+        }
         return (T) o;
     }
     
     public void delete(Object deletar, TransactionManager.Transaction t){
         session=t.getCurrentSession();
         session.delete(deletar);
+        try{
+            t.commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            t.rollback();
+        }
     }
     
     public void delete(Object deletar){
         TransactionManager.Transaction t=TransactionManager.beginTransaction();
         delete(deletar,t);
-        t.commit();
+        try{
+            t.commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            t.rollback();
+        }
     }
     
     public T get(int id){
-        session=HibernateConexao.getSession();
-        session.beginTransaction().begin();
+        TransactionManager.Transaction t=TransactionManager.beginTransaction();
+        session=t.getCurrentSession();
         Object busca=session.get(this.classe, id);
-        session.close();
+        t.commit();
         return (T) busca;
     }
     
     public List<T> lista(){
-        session=HibernateConexao.getSession();
-        session.beginTransaction().begin();
+        TransactionManager.Transaction t=TransactionManager.beginTransaction();
+        session=t.getCurrentSession();
         List list = session.createCriteria(classe).list();
-        session.close(); 
+        t.commit();
         return list;
     }
       
