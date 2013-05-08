@@ -1,70 +1,199 @@
-/********Principal**********/
 body {
-    margin:0;
-    padding:0;
-    width:100%;
-    background:#dde3e1 url(imagens/main_bg.gif) top center repeat-x fixed;
-    font-family: Verdana,sans-serif,Arial;
-    font-size: 13px;
-    color: #363636;
+        background-image: url("imagens/fundo02.jpg");
+	font: normal 13px Georgia, "Times New Roman", Times, serif;
 }
-.principal {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
-    width: 798px;
+
+#page {
+    width: 980px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
 }
-.principal h2 {
-    background:url(imagens/background_h2.jpg) -32px no-repeat;
+
+#header{
+    border-top: 3px solid #FFFFFF;
+    height: 158px;
+    width: 980px;
+    background-image: url("imagens/logo02.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #FFFFFF;
+    
+}
+/*Menu*/
+#menu {
+    width: 960px;
+    height: 40px;
+    margin: 0 auto;
     text-align: center;
+    border-width: 7px 0px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-width: 7px 0px;
+    border-style: double solid ;
+    border-color:#24130F;
+    background-image: url("imagens/menu02.jpg");
+    background-repeat: repeat-x;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	height: 34px;
+	padding: 16px 12px 0 22px;
+	margin: 0px 1px;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+        font-family: 'Comic Sans MS', cursive;
+	letter-spacing: -1px;
+	color: #0066ff;
+        
+}
+
+#menu a:hover {
+	background:url(imagens/clave.gif) no-repeat 3px 50%;
+        background-color: #99ccff;
+	color: #0066ff;
+        text-decoration: none;
+}
+
+#menu .itemAtual a {
+	border: none;
+        background: #99ccff;
+        color: #0066ff;
+	
+}
+
+#menu ul{
+    margin: 0;
+    list-style: none;
+    background: #000000 ;
+    color: #0066ff;
+    font-size: 16px;
+
+}
+
+#menu ul li{
+    border-right: 1px solid #000000;
+    border-left: 1px solid #24130F;
+    float: left;
+}
+
+#menu ul li a {
+
+    display: block;
+    float: left;
+    height: 34px;
+    padding: 16px 12px 0 22px;
+    margin: 0px 1px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #000000;
+
+}
+
+#menu ul li a:hover {
     text-decoration: underline;
-    color: #1E90FF;
-    text-transform: capitalize;
-    font-family: sans-serif;
-    font-size: xx-large;
-}
-p.paginas {
-    text-align: right;
-    border:solid 1px #7F9FBF;
-    width: 798px;;
-}
-p.paginas img{
-    width: 20px;
-}
-#index h4 {
-    margin-bottom: 0;
-}
-#index p {
-    text-indent: 30px;
+    color: #000000;
+
 }
 
-/******Descricao******/
-
-#descricao p {
-    margin-top: 0;
-    margin-bottom: 0;
+.menuLateral{
+    float: right;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #000000;
 }
 
-/******Indice******/
-#indice a {
-    color: #363636;
+.menuLateral a{
     text-decoration: none;
 }
-#indice li {
-    list-style:url('imagens/marcador.png');
-    font-size: 15px;
-}
-#indice li:hover {
-    list-style:url('imagens/marcador_hover.png');
-    background-color: #CDCDC1;
-    font-size: 18px;
-}
-#indice ul {
-    border: 1px;
-    margin-left:10%;
+
+/*Conteudo*/
+#content{
+   
+    height: 700px;
+    background: #FFFFFF;
+    background-image: url("imagens/fundo3.jpg");
+    background-repeat: no-repeat;
+    text-align: left;
+    padding: 25px;
+    text-align: center;
+
 }
 
-/********Casos de uso********/
+#conteudo {
+    overflow:hidden;
+    width:600px;
+    margin:0 auto;
+    padding:10px 10px 10px;
+    border:0px ;
+    text-align:center;
+}
+
+select {
+    width: 200px;
+}
+
+a {
+    font-size: 14px;
+}
+
+h1 {
+	text-align: center;
+        color: #0066ff;
+}
+h2 {
+	color: #0033cc;
+	padding-top: 9px;
+}
+h3{
+	padding-bottom: 10px;
+	color:  #1E90FF;
+}
+
+p {
+	padding-bottom: 5px;
+	font-size:16px;
+	text-indent: 1cm;
+        text-align: justify;
+}
+
+li {
+	padding-bottom: 5px;
+	font-size:14px;
+        text-align: justify;
+}
+
+p + h3 {
+	padding: 8px;
+}
+
+ol {
+	font-size: 8px;
+	line-height: 2;
+	padding-left: 15px;
+        font-size: 14px;
+}
+
+
+table {
+	padding-bottom: 5px;
+	font-size:14px;
+	text-indent: 1cm;
+        width: 600px;
+        border-style: solid;
+        border-color: #FF5500;
+}
+
+img{
+    float: left;
+    width: 500px;
+    height: 350px;
+}
+
 DIV.dcu {
     border:solid 1px #7F9FBF;
     background:url(imagens/background_dcu.png);
@@ -96,44 +225,7 @@ DIV.dcu:hover {
     text-indent: 20px;
     color: red;
 }
-
-/****Contato*****/
-.text {
-    font:normal 11px Verdana,sans-serif,Arial;
-    color: #363636;
-    line-height:1.5em;
-    padding:5px;
-    margin:0;
-}
-.red {
+#informacoesObrigatorias{
     color: red;
-}
-.paginas a, img {
-    border: 0;
-}
-
-.paginas a:hover, img:hover {
-    background-color: #CDCDC1;
-}
-div#formulario-contato, div#sobre-desenvolvedor {
-    margin-left: auto;
-    margin-right: auto;
-    width: 450px;
-}
-
-/*****Sobre Desenvolvedor*****/
-
-p#img-desenvolvedor, p#email-contato{
-    text-align: center;
-
-}
-p#img-desenvolvedor img{
-    border: 3px solid #1E90FF;
-
-}
-
-/*****Rodape*****/
-p.rodape ,a {
-    text-align: center;
-    text-decoration: none;
+    font-size: 10px;
 }

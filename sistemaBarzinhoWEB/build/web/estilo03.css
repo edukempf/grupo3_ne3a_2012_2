@@ -1,5 +1,5 @@
 body {
-        background-image: url("imagens/fundo.gif");
+        background-image: url("imagens/fundo03.gif");
 	font: normal 13px Georgia, "Times New Roman", Times, serif;
 }
 
@@ -13,7 +13,7 @@ body {
     border-top: 3px solid #FFFFFF;
     height: 158px;
     width: 980px;
-    background-image: url("imagens/header.gif");
+    background-image: url("imagens/logo03.PNG");
     background-repeat: no-repeat;
     background-position: center;
     color: #FFFFFF;
@@ -31,7 +31,7 @@ body {
     border-width: 7px 0px;
     border-style: double solid ;
     border-color:#24130F;
-    background-image: url("imagens/fundo2.jpg");
+    background-image: url("imagens/menu03.jpg");
     background-repeat: repeat-x;
 }
 
@@ -46,19 +46,19 @@ body {
 	font-weight: bold;
         font-family: 'Comic Sans MS', cursive;
 	letter-spacing: -1px;
-	color: #FFFFFF;
+	color: #363636;
 }
 
 #menu a:hover {
-	
-        background-color: #7F9FBF;
+	background:url(imagens/clave.gif) no-repeat 3px 50%;
+        background-color: #999999;
 	color: #000000;
         text-decoration: none;
 }
 
 #menu .itemAtual a {
 	border: none;
-	background: #7F9FBF;
+        background: #999999;
 	
 }
 
@@ -88,7 +88,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     letter-spacing: -1px;
-    color: #FFFFFF;
+    color: #363636;
 
 }
 
@@ -141,7 +141,7 @@ a {
 
 h1 {
 	text-align: center;
-        color: #666666;
+        color: #363636
 }
 h2 {
 	color: #363636;
