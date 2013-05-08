@@ -2,14 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link href="estilo01.css" rel="stylesheet" type="text/css" />
-        <title>Home- Sistema para Barzinhos</title>
+        <script type="text/javascript" src="formulario.js"></script>
+        <link href="estilo01.css" rel="stylesheet" type="text/css" media="screen" title="estilo01"/> 
+        <link href="estilo02.css" rel="alternate stylesheet" type="text/css" media="screen" title="estilo02"/>  
+        <link href="estilo03.css" rel="alternate stylesheet" type="text/css" media="screen" title="estilo03"/>  
+        <title>Descrição do Sistema</title>
     </head>
-    <body onload="setSelectedComCookie(); mapaSiteDinamico();">
+    <body onload="setSelectedComCookie();mapaSiteDinamico();">
         <div id="page">
             <div id="header">
-
-
+                <select id="escolheEstilo" name="escolheEstilo" onchange="setActiveStyleSheet();"> 
+                    <option value="estilo01">Estilo 01</option>
+                    <option value="estilo02">Estilo 02</option>
+                    <option value="estilo03">Estilo 03</option>
+                </select>
             </div>
             <div id="menu">
                 <ul>
@@ -21,6 +27,7 @@
                     <li><a href="Formulario.html">Formul&aacute;rio</a></li>
                 </ul>
             </div>
+            <div id="navegacao"></div>
             <div id="content">
                 <div id="conteudo">
                     <h1>Descrição do Sistema</h1>

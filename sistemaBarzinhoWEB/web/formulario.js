@@ -234,23 +234,28 @@ function validaCampos() {
     var x = verificaNome();
     zeraBorda();
     if (!x) {
-        document.formulario.campo1.style.border = '2px solid red';
+        document.formulario.campo1.style.border = '2px solid #FF0000';
+        document.formulario.campo1.style.color='#FF0000';
     }
     var y = verifica_data();
     if (!y) {
-        document.formulario.data.style.border = '2px solid red';
+        document.formulario.data.style.border = '2px solid #FF0000';
+        document.formulario.data.style.color='#FF0000';
     }
     var z = validarCPF(document.formulario.cpf.value);
     if (!z) {
-        document.formulario.cpf.style.border = '2px solid red';
+        document.formulario.cpf.style.border = '2px solid #FF0000';
+        document.formulario.cpf.style.color='#FF0000';
     }
     var q = checarEmail();
     if (!q) {
-        document.formulario.email.style.border = '2px solid red';
+        document.formulario.email.style.border = '2px solid #FF0000';
+        document.formulario.email.style.color='#FF0000';
     }
     var u = verificaComentario();
     if (!u) {
-        document.formulario.textarea.style.border = '2px solid red';
+        document.formulario.textarea.style.border = '2px solid #FF0000';
+        document.formulario.textarea.style.color='#FF0000';
     }
     if (x && y && z && q && u) {
         document.formulario.submit();
@@ -271,11 +276,26 @@ function setActiveStyleSheet() {
     }
 }
 
+function mudaEstilo(estilo) {
+    var i, nomeLinkCss, estiloSelecionadoCss;
+    estiloSelecionadoCss = estilo;
+//    alert(estiloSelecionadoCss)
+    for (i = 0; (nomeLinkCss = document.getElementsByTagName("link")[i]); i++) {
+        if (nomeLinkCss.getAttribute("rel").indexOf("style") != -1 && nomeLinkCss.getAttribute("title")) {
+            nomeLinkCss.disabled = true;
+            if (nomeLinkCss.getAttribute("title") == estiloSelecionadoCss) {
+                nomeLinkCss.disabled = false;
+                GerarCookie("estilo", estiloSelecionadoCss);
+            }
+        }
+    }
+}
+
 function GerarCookie(strCookie, strValor) {
 //    alert(strCookie + "=" + strValor + strExpires + "; path=/");
     var o_cookie = strCookie + "=" + strValor + ";";
     document.cookie = o_cookie;
-    alert(LerCookie("estilo"));
+//    alert(LerCookie("estilo"));
 
 }
 
@@ -299,23 +319,27 @@ function LerCookie(strCookie)
 }
 
 function setSelectedComCookie() {
-    if (LerCookie("estilo" != null)) {
+//    alert("aa")
+    if (LerCookie("estilo") != null) {
+//        alert("bb")
         var estilo = LerCookie("estilo").substring(LerCookie("estilo").lastIndexOf("o") + 2, LerCookie("estilo").length);
-        alert(estilo);
+//        alert(estilo);
         var op = document.getElementById("escolheEstilo");
         op.options[estilo - 1].selected = true;
-        setActiveStyleSheet();
-        alert(LerCookie("estilo"));
+//        alert(op.options[estilo - 1].value);
+        mudaEstilo(LerCookie("estilo"));
+//        alert(LerCookie("estilo"));
     }
 }
 
 
 //função  para Mapa do Site Dinâmico
 function mapaSiteDinamico() {
-    var div = document.getElementById("div_navegacao");
+    var div = document.getElementById("navegacao");
     var localizacao = window.location.toString();
+//    alert(localizacao);
     var paginas = new Array();
-    paginas[0] = "hone.html";
+    paginas[0] = "home.html";
     paginas[1] = "descricaoSistema.html";
     paginas[2] = "desenvolvedores.html";
     paginas[3] = "Screenshots.html";
@@ -327,10 +351,17 @@ function mapaSiteDinamico() {
         if (localizacao.contains("home")) {
             div.innerHTML = window.parent.document.title;
         } else {
-            if (!localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])) {
+//            alert("bbv")
+            if (localizacao.contains(paginas[1])) {
                 div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
-            } else if (localizacao.contains("/descricaoSistema/") && localizacao.contains(paginas[i])) {
-                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + "<a href='descricaoSistema.html'> Descrição do Sistema</a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains(paginas[2])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains(paginas[3])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains(paginas[4])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
+            } else if (localizacao.contains(paginas[5])) {
+                div.innerHTML = "<a href='home.html'>Home </a>" + ">> " + window.parent.document.title;
             }
         }
     }
